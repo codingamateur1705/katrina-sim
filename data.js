@@ -191,7 +191,7 @@ mayor: {
           c: 'People get a full extra day. Plaquemines and St. Charles did this a day earlier, on Saturday. But your 100,000 residents without cars still have no way out of the city.' },
         { id: 'm1_vol', t: 'Voluntary today, mandatory tomorrow, buses to the Superdome', img: 'dome', legacy: 'Your order came when landfall was less than a day away.',
           c: 'Many leave, many do not take it seriously. When the order comes, landfall is less than a day away.' },
-        { id: 'm1_buses_out', pull: { lens: 'structural', t: 'The city plan sent carless residents to the Superdome, not out of the region. No shelter outside had agreed to take them, so the buses have nowhere to go.', kind: 'game' }, t: 'Mandatory today, buses out of the city', img: 'busEvac', legacy: 'A few bus trips left. Most people without cars were still in the city.',
+        { id: 'm1_buses_out', surprise: { t: 'Half of the drivers you call have already left the city with their families.', kind: 'game', strength: -1 }, pull: { lens: 'structural', t: 'The city plan sent carless residents to the Superdome, not out of the region. No shelter outside had agreed to take them, so the buses have nowhere to go.', kind: 'game' }, t: 'Mandatory today, buses out of the city', img: 'busEvac', legacy: 'A few bus trips left. Most people without cars were still in the city.',
           c: 'About 100 drivers means about 4,000 seats per trip, and no shelter outside will take people. A few trips leave before the wind closes the roads.' },
         { id: 'm1_wait', pull: { t: 'By Sunday morning the hurricane center is forecasting an 18 to 22 foot surge and the President is pressing for a mandatory order. Waiting any longer is not an option anyone will accept.', kind: 'real' }, t: 'Wait for the next forecast', legacy: 'You lost a whole day the city never got back.',
           c: 'By Sunday morning Katrina is a Category 5. You have lost a whole day.' }
@@ -204,7 +204,7 @@ mayor: {
       choices: [
         { id: 'm2_rescue', pull: { lens: 'structural', t: 'Without boats and with a third of your radios dead, your officers can only reach a few streets. Only the state and FEMA can send boats, buses and troops in numbers.', kind: 'game' }, t: 'Send police and firefighters to rescue people', img: 'helicopter',
           c: 'Many of your own officers have lost their homes, and radios are down. Rescue is slow and patchy.' },
-        { id: 'm2_fema', t: 'Ask the state and FEMA for buses, boats and troops', img: 'sandbags',
+        { id: 'm2_fema', surprise: { t: 'The phone and fax lines to the state go dead for hours. Your request waits in a queue.', kind: 'game' }, t: 'Ask the state and FEMA for buses, boats and troops', img: 'sandbags',
           c: 'Your request goes into a system that waits for formal paperwork. Help is days away.' },
         { id: 'm2_cc', pull: { lens: 'structural', t: 'The Convention Center has no food, water or staff. Only the state and FEMA can change that, so asking them is where this path ends up anyway.', kind: 'game' }, t: 'Tell people to go to the Convention Center', img: 'cc',
           c: 'Thousands go. But you have no food, water or staff to send there.' }
@@ -219,7 +219,7 @@ mayor: {
           c: 'Stores are guarded, but fewer boats are out rescuing people.' },
         { id: 'm3_rescue', pull: { lens: 'structural', t: 'Rescue continues, but the crowds still need buses, and only FEMA can send them. Your calls go unanswered, so the demand ends up in public.', kind: 'game' }, t: 'Keep everyone on rescue', img: 'rescue',
           c: 'More people are pulled off roofs, but the rumours keep spreading.' },
-        { id: 'm3_demand', t: 'Publicly demand federal buses', img: 'buses',
+        { id: 'm3_demand', surprise: { t: 'Every time you call, the buses are “on their way”.', kind: 'game', strength: -1 }, t: 'Publicly demand federal buses', img: 'buses',
           c: 'Federal officials promise 500 buses. They do not come for days.' }
       ]
     } },
@@ -290,7 +290,7 @@ herbert: {
         { id: 'h1_amb', t: 'Hire a private ambulance', cost: 1200, loc: 'out', c: 'An ambulance takes you both out of the city.' },
         { id: 'h1_dome', pull: { lens: 'structural', t: 'The Superdome opens as a shelter of last resort. You were told to bring your own food and medicine, and there is no power for Ethel’s pump.', kind: 'game' }, t: 'Take her to the Superdome on Sunday', loc: 'dome', ethel: -1, strength: -1, wait: 6, img: 'domeLine',
           c: 'Hours in line in the heat. Inside there is almost no medical care for someone who is tube-fed.' },
-        { id: 'h1_stay', t: 'Buy food and supplies, stay with her', cost: 80, food: 3, loc: 'home',
+        { id: 'h1_stay', surprise: { t: 'The pharmacy has sold out of Ethel’s feeding formula. You find a smaller supply at a second store across town.', kind: 'game', strength: -1 }, t: 'Buy food and supplies, stay with her', cost: 80, food: 3, loc: 'home',
           c: 'You buy food, water and feeding supplies for several days. {money} is left.' }
       ]
     } },
@@ -301,7 +301,7 @@ herbert: {
         hear: ['Battery radio: “Levee breaks reported”'],
         choices: [
           { id: 'h2_up', pull: { lens: 'class', t: 'On Tuesday a neighbour with a boat comes by. In reality he took Herbert and Ethel to the Convention Center.', kind: 'real' }, t: 'Move Ethel upstairs and wait', loc: 'upstairs', strength: -1, c: 'The water keeps rising. Nobody knows you are there.' },
-          { id: 'h2_boat', t: 'Ask the neighbour with a boat to take you to dry ground', loc: 'cc', ethel: -1, wait: 20, img: 'cc',
+          { id: 'h2_boat', surprise: { t: 'The boat is full on the first trip. The neighbour comes back for you hours later.', kind: 'game', wait: 6 }, t: 'Ask the neighbour with a boat to take you to dry ground', loc: 'cc', ethel: -1, wait: 20, img: 'cc',
             c: 'He can only go once the wind drops. On Tuesday he takes you to the Convention Center. An officer tells you to wait outside, help will come in an hour or two.' },
           { id: 'h2_911', pull: { lens: 'structural', t: 'Nobody answers. On Tuesday a neighbour with a boat comes by. In reality he took Herbert and Ethel to the Convention Center.', kind: 'real' }, t: 'Call 911', loc: 'upstairs', strength: -1, c: 'The lines are dead. Phones and power are down across the city. As the water rises, you carry Ethel upstairs.' }
         ]
@@ -350,7 +350,7 @@ herbert: {
         choices: [
           { id: 'h4_wait', t: 'Wait for the buses', ethel: -1, wait: 48, end: 'h_wait' },
           { id: 'h4_bridge', pull: { lens: 'intentional', t: 'Gretna police really did close the bridge on Thursday night and turned evacuees back.', kind: 'real' }, t: 'Push her toward the bridge out of the city', ethel: -1, strength: -1, minStrength: 2, weakLock: 'You are too exhausted to push her wheelchair that far', end: 'bridge' },
-          { id: 'h4_ride', pull: { lens: 'class', t: 'Few drivers are willing to take a wheelchair and a tube-fed patient. Those who are charge more than you have.', kind: 'game' }, t: 'Pay a stranger with a car to drive you out', cost: 100, loc: 'out', end: 'paid_ride' }
+          { id: 'h4_ride', surprise: { t: 'At the last minute the driver doubles the price. You hand over almost everything you have left.', kind: 'game', cost: 40 }, pull: { lens: 'class', t: 'Few drivers are willing to take a wheelchair and a tube-fed patient. Those who are charge more than you have.', kind: 'game' }, t: 'Pay a stranger with a car to drive you out', cost: 100, loc: 'out', end: 'paid_ride' }
         ]
       },
       roof: {
@@ -365,7 +365,7 @@ herbert: {
         sit: 'Buses finally take people to Houston.',
         hear: [],
         choices: [
-          { id: 'h4_bus', t: 'Get Ethel on a bus to Houston', ethel: -1, loc: 'out', end: 'houston' }
+          { id: 'h4_bus', surprise: { t: 'The first buses fill up before you reach the front. Wheelchairs go last. You wait another night.', kind: 'game', wait: 12, ethel: -1 }, t: 'Get Ethel on a bus to Houston', ethel: -1, loc: 'out', end: 'houston' }
         ]
       }
     }
@@ -423,8 +423,8 @@ kim: {
       choices: [
         { id: 'k1_rent', t: 'Rent a car', lock: 'The rental company refuses. No credit card, no car', lockKind: 'real' },
         { id: 'k1_bus', pull: { lens: 'class', t: 'Intercity buses sell out quickly. With $60 and no card you can reach the last seats, but you arrive with almost nothing and no way to call home.', kind: 'game' }, t: 'Buy bus tickets out for you and Scott (2 × $45)', cost: 90, loc: 'out', img: 'busEvac', c: 'You get two of the last seats. You arrive in a strange city with {money} and nowhere to stay.' },
-        { id: 'k1_dome', pull: { lens: 'class', t: 'Carless residents of the Ninth Ward live miles from the Superdome, and there is no shuttle from every street.', kind: 'game' }, t: 'Walk to the Superdome on Sunday', loc: 'dome', strength: -1, wait: 6, img: 'dome', c: 'Hours in line in the heat, searched at the door. Bring your own food.' },
-        { id: 'k1_stay', t: 'Buy food and water, stay with Scott', cost: 30, food: 3, loc: 'home', c: 'You stock up on food and water and stay with Scott.' }
+        { id: 'k1_dome', surprise: { t: 'The line stops moving for hours. The doors on your side close for a while: that hall is full.', kind: 'game', wait: 3 }, pull: { lens: 'class', t: 'Carless residents of the Ninth Ward live miles from the Superdome, and there is no shuttle from every street.', kind: 'game' }, t: 'Walk to the Superdome on Sunday', loc: 'dome', strength: -1, wait: 6, img: 'dome', c: 'Hours in line in the heat, searched at the door. Bring your own food.' },
+        { id: 'k1_stay', surprise: { t: 'The corner store has sold out of bottled water. You fill pots and the bathtub instead.', kind: 'game' }, t: 'Buy food and water, stay with Scott', cost: 30, food: 3, loc: 'home', c: 'You stock up on food and water and stay with Scott.' }
       ]
     } },
     {
@@ -504,7 +504,7 @@ kim: {
         choices: [
           { id: 'k4_navy', t: 'Walk to the Navy base', strength: -1, end: 'k_navy' },
           { id: 'k4_wait', pull: { lens: 'structural', t: 'Buses reach the Convention Center only on Friday. Waiting in the heat costs more than it gains.', kind: 'game' }, t: 'Wait for the buses', wait: 48, end: 'k_wait' },
-          { id: 'k4_bus', pull: { lens: 'class', t: 'This really happened, once. Almost everyone else waited. One man, Jabbar Gibson, had the nerve and the keys.', kind: 'real' }, t: 'Take an abandoned school bus and drive out', minStrength: 2, weakLock: 'You are too exhausted to drive a heavy bus through flooded streets', loc: 'out', end: 'k_vehicle' }
+          { id: 'k4_bus', surprise: { t: 'The first bus you try has no keys. The second has half a tank.', kind: 'game', wait: 2 }, pull: { lens: 'class', t: 'This really happened, once. Almost everyone else waited. One man, Jabbar Gibson, had the nerve and the keys.', kind: 'real' }, t: 'Take an abandoned school bus and drive out', minStrength: 2, weakLock: 'You are too exhausted to drive a heavy bus through flooded streets', loc: 'out', end: 'k_vehicle' }
         ]
       },
       roof: {
@@ -521,7 +521,7 @@ kim: {
         sit: 'Buses finally take people to Houston.',
         hear: [],
         choices: [
-          { id: 'k4_hbus', t: 'Get on a bus to Houston', loc: 'out', end: 'houston' }
+          { id: 'k4_hbus', surprise: { t: 'The first buses are full. You wait another night on the ramp outside.', kind: 'game', wait: 12, strength: -1 }, t: 'Get on a bus to Houston', loc: 'out', end: 'houston' }
         ]
       },
       out: {
@@ -583,7 +583,7 @@ lake: {
       hear: ['TV: “Traffic is already heavy on I-10”', 'Boss: “See you Monday”', 'Neighbour: “Ivan was a false alarm, I’m staying”'],
       card: { t: 'The highway out takes eight hours instead of one.', kind: 'game' },
       choices: [
-        { id: 'l1_drive', t: 'Drive to your sister in Baton Rouge', cost: 40, loc: 'out', strength: -1, wait: 8, c: 'Eight hours in traffic, but you get out.' },
+        { id: 'l1_drive', surprise: { t: 'The first two gas stations on the highway are sold out. You wait an hour in line for fuel.', kind: 'game', wait: 1 }, t: 'Drive to your sister in Baton Rouge', cost: 40, loc: 'out', strength: -1, wait: 8, c: 'Eight hours in traffic, but you get out.' },
         { id: 'l1_wait', pull: { lens: 'class', t: 'Around 1.2 million people left the region before landfall, mostly by car, so those who leave late meet the worst traffic.', kind: 'real' }, t: 'Wait for an official order', loc: 'home', c: 'When the order comes, the roads out are jammed. You decide to stay one more night. You still have your car.' },
         { id: 'l1_board', pull: { lens: 'class', t: 'Most households with a car left before the storm. Staying was a minority choice, and a risky one.', kind: 'real' }, t: 'Board up and stay', cost: 200, food: 3, loc: 'home', c: 'Plywood on the windows, food for days.' }
       ]
@@ -595,7 +595,7 @@ lake: {
         hear: [{ t: 'TV: “New Orleans dodged the bullet”', false: 'Misleading. Levees and floodwalls were already breaking. By Tuesday 80 % of the city was under water.' }, 'Your boss: “The office is closed until further notice.”'],
         choices: [
           { id: 'l2_sister', t: 'Stay with your sister', cost: 60, loc: 'out', c: 'Crowded, but safe. You pay for gas, food and dog food.' },
-          { id: 'l2_motel', pull: { lens: 'class', t: 'A motel gives you privacy, but it costs money that most people did not have.', kind: 'game' }, t: 'Book a motel to give your sister space', cost: 420, loc: 'out', c: 'A week in a motel that takes dogs. You can afford it.' }
+          { id: 'l2_motel', surprise: { t: 'The first motels are booked out. The one that takes dogs is an hour further away.', kind: 'game', strength: -1 }, pull: { lens: 'class', t: 'A motel gives you privacy, but it costs money that most people did not have.', kind: 'game' }, t: 'Book a motel to give your sister space', cost: 420, loc: 'out', c: 'A week in a motel that takes dogs. You can afford it.' }
         ]
       },
       home: {

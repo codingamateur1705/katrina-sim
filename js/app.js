@@ -86,11 +86,19 @@ function pick(id) {
   var c = effChoices().filter(function (x) { return x.id === id; })[0];
   if (!c || c.lock) return;
   push();
-  var log = [];
+  var log = [], prevLoc = st.loc;
   if (P().track.money && c.cost) { st.money = Math.max(0, st.money - c.cost); log.push('−' + usd(c.cost)); }
   applyEffects(c, log);
-  var leaving = null;
-  if (c.loc && c.loc !== st.loc) { if (c.loc === 'out' && P().leaving) { leaving = P().leaving; } st.loc = c.loc; log.push(locLabel(c.loc)); }
+  if (c.loc && c.loc !== st.loc) { st.loc = c.loc; log.push(locLabel(c.loc)); }
+  var sp = c.surprise || null;
+  if (sp) {
+    if (P().track.money && sp.cost) { st.money = Math.max(0, st.money - sp.cost); log.push('−' + usd(sp.cost)); }
+    applyEffects(sp, log);
+    if (sp.loc && sp.loc !== st.loc) { st.loc = sp.loc; log.push(locLabel(sp.loc)); }
+    if (sp.wait) st.stats.wait += sp.wait;
+    addBurden(sp.t);
+  }
+  var leaving = (st.loc === 'out' && prevLoc !== 'out' && P().leaving) ? P().leaving : null;
   if (leaving) leaving.forEach(function (x) { addBurden(x.t); });
   if (c.wait) st.stats.wait += c.wait;
   var pl = null;
@@ -101,7 +109,7 @@ function pick(id) {
   }
   if (c.end) st.end = c.end;
   st.picks.push(c.id); st.labels.push(c.t);
-  st.log.push({ c: c.c ? fill(c.c) : (c.end ? 'Your choice is made. You will see your fate at the end.' : ''), img: c.img || null, pull: pl, delta: log, leaving: !!leaving });
+  st.log.push({ c: c.c ? fill(c.c) : (c.end ? 'Your choice is made. You will see your fate at the end.' : ''), img: c.img || null, pull: pl, delta: log, leaving: !!leaving, surprise: sp ? sp.t : null });
   stopTimer();
   render();
 }
@@ -231,6 +239,7 @@ function renderRound() {
   }).join('');
   var timer = done ? '' : '<div class="timer" id="timer"><div class="bar"><i></i></div><span class="s"></span><button class="iconbtn" id="pause" aria-pressed="false">Pause</button></div><div class="timeup" id="timeup" hidden>' + esc(D.meta.timeUp) + '</div>';
   var cons = done ? '<div class="cons"><span class="what">What happens to you</span>' + lg.c +
+    (lg.surprise ? '<div class="surprise"><span class="what">Sudden change · nobody could plan for this</span>' + fill(lg.surprise) + '</div>' : '') +
     (lg.delta.length ? '<div class="delta">' + lg.delta.map(function (d) { return '<span' + (/^\+/.test(d) ? ' class="up"' : '') + '>' + esc(d) + '</span>'; }).join('') + '</div>' : '') +
     (lg.pull ? '<div class="pull"><span class="what">Reality check' + (lg.pull.lens ? ' · ' + esc(D.lens[lg.pull.lens]) : '') + '</span>' + fill(lg.pull.t) + '</div>' : '') +
     (lg.leaving ? leaveHtml() : '') + (lg.img ? figure(lg.img) : '') + '</div><div class="wait">' + esc(D.meta.waitBox) + '</div>' : '';

@@ -120,3 +120,23 @@ Every choice that is not on the real path can now carry a "pull". After the play
   - Kimberly: street gutted or gone · funding gap about $31,000 larger per home in the Lower Ninth (real, deck slide 36) · family spread over several states · no insurance payout. Fact line: about 37 % of Lower Ninth households back after ten years (deck slide 35).
   - Lakeview: city keeps residents out for weeks · adjusters weeks behind · grant based on higher pre-storm value (real) · months of mould removal while the mortgage is due. Fact line: about 90 % citywide back vs about 37 % in the Lower Ninth.
 - **Lakeview extra costs:** staying with the sister now costs $60 (gas, food, dog food). Boss says the office is closed. The mortgage is still due (round 4 card). Rebuilding "still takes months of mould removal, adjusters and paperwork".
+
+## 5. Update: sudden changes nobody could plan for (game details)
+
+After some choices, a black "Sudden change" box appears. It is fixed per choice, not random, so every group gets the same story. Each one also goes into "Your difficulties so far".
+
+| Person | Choice | Sudden change | Effect |
+|---|---|---|---|
+| Mayor | Mandatory today, buses out of the city | Half of the drivers you call have already left the city with their families. | Strength −1 |
+| Mayor | Ask the state and FEMA for help | The phone and fax lines to the state go dead for hours. | none |
+| Mayor | Publicly demand federal buses | Every time you call, the buses are "on their way". | Strength −1 |
+| Herbert | Buy food and supplies, stay | The pharmacy has sold out of Ethel's feeding formula; a smaller supply across town. | Strength −1 |
+| Herbert | Neighbour's boat | The boat is full on the first trip; he comes back hours later. | +6 h waiting |
+| Herbert | Pay a stranger with a car | The driver doubles the price at the last minute. | +$40 |
+| Herbert | Bus to Houston | The first buses fill up; wheelchairs go last; another night. | +12 h, Ethel worse |
+| Kimberly | Walk to the Superdome | The line stops; the doors on your side close for a while. | +3 h |
+| Kimberly | Buy food and water, stay | The corner store has sold out of bottled water. | none |
+| Kimberly | Bus to Houston | The first buses are full; another night on the ramp. | +12 h, Strength −1 |
+| Kimberly | Abandoned school bus | The first bus has no keys; the second has half a tank. | +2 h |
+| Lakeview | Drive to Baton Rouge | The first two gas stations are sold out; an hour in line. | +1 h |
+| Lakeview | Book a motel | The first motels are booked out; the one that takes dogs is an hour further. | Strength −1 |
