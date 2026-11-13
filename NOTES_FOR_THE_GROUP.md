@@ -105,3 +105,18 @@ Every choice that is not on the real path can now carry a "pull". After the play
 4. **The four stops.** The deck has Stop 1 Saturday, Stop 2 Sunday, Stop 3 Monday and Tuesday, Stop 4 Thursday (slides 14 to 17, hidden backups). The game has Round 1 Saturday and Sunday, Round 2 Monday, Round 3 Tuesday and Wednesday, Round 4 Thursday and Friday. The backup slides also offer different options. Either keep them as backups only or relabel them.
 5. **Slide 13 link.** Still the old claude.ai artifact address. Replace with the new site and QR code.
 6. **Slide 13 and 12 notes.** "20 seconds" now matches the game.
+
+## 4. Update: Lakeview without "Composite" label, difficulties, leaving and returning
+
+- **Lakeview** is no longer labelled "Composite" on screen. To stay honest, one short note remains in "What really happened" and in the sources: "This story follows Lakeview neighbourhood data". If you find a documented real Lakeview resident, replace the text in `data.js` (`lake`) and delete that note.
+- **Kimberly cannot leave in round 1:** the bus option is now two tickets, for her and Scott (2 × $45 = $90). With $60 it shows "Not enough money" (game value). Herbert already cannot leave: no suitable car (real) and an ambulance costs $1,200 (game value). Leaving becomes possible only late in the disaster (buses to Houston, the school bus).
+- **"Your difficulties so far"** (red panel in every round, full list on the fate screen) collects every complication card, every locked option and its reason, running out of food, near collapse, Ethel critical, and the leaving constraints.
+- **Leaving constraints** (shown when a person leaves the city, all game details except where marked):
+  - Herbert: no relatives outside the city (real) · every night away costs money · Ethel needs a hospital bed, not a cot
+  - Kimberly: you arrive with your last dollars and nowhere to stay · family scattered, no phone credit · papers left in the flooded house
+  - Lakeview: sister's room is for a few nights, not weeks · office closed, no paycheck · every week away costs gas, food, the dog
+- **Returning constraints** ("Can you come back?" on the fate screen):
+  - Herbert: house stood in floodwater · grants were the lower of repair cost or pre-storm value (real, deck slide 36) · no relatives to stay with (real) · money left. Fact line: 119,076 fewer Black residents in 2010 than in 2000 (deck slide 35).
+  - Kimberly: street gutted or gone · funding gap about $31,000 larger per home in the Lower Ninth (real, deck slide 36) · family spread over several states · no insurance payout. Fact line: about 37 % of Lower Ninth households back after ten years (deck slide 35).
+  - Lakeview: city keeps residents out for weeks · adjusters weeks behind · grant based on higher pre-storm value (real) · months of mould removal while the mortgage is due. Fact line: about 90 % citywide back vs about 37 % in the Lower Ninth.
+- **Lakeview extra costs:** staying with the sister now costs $60 (gas, food, dog food). Boss says the office is closed. The mortgage is still due (round 4 card). Rebuilding "still takes months of mould removal, adjusters and paperwork".

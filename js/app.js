@@ -45,8 +45,13 @@ function push() { hist.push(clone(S)); }
 function applyEffects(o, log) {
   var st = S.st, p = P();
   if (o.food && p.track.food) { st.food = Math.max(0, st.food + o.food); log && log.push((o.food > 0 ? '+' : '') + o.food + ' days of food'); }
-  if (o.ethel && p.track.ethel) { var b = st.ethel; st.ethel = clamp(st.ethel + o.ethel, 0, 3); if (st.ethel < b && log) log.push('Ethel: ' + D.ethelLabels[st.ethel]); }
+  if (o.ethel && p.track.ethel) { var b = st.ethel; st.ethel = clamp(st.ethel + o.ethel, 0, 3); if (st.ethel < b && log) log.push('Ethel: ' + D.ethelLabels[st.ethel]); if (st.ethel === 0 && b > 0) addBurden('Ethel is in critical condition'); }
   if (o.strength) { var s0 = st.strength; st.strength = clamp(st.strength + o.strength, 0, 5); if (st.strength !== s0 && log) log.push('Strength: ' + D.strengthLabels[st.strength]); }
+}
+function addBurden(t) {
+  var b = S.st.burdens; if (!b) b = S.st.burdens = [];
+  t = String(t).replace(/\{money\}/g, usd(S.st.money || 0));
+  if (b.indexOf(t) < 0) b.push(t);
 }
 function seeRumours(list) {
   (list || []).forEach(function (h) { if (typeof h === 'object' && h.false) S.st.seenFalse[h.t] = h.false; });
@@ -55,11 +60,12 @@ function roundEnd(i) {
   var st = S.st, p = P(), L = D.locations[st.loc] || {}, R = D.rounds[i];
   if (L.inCity && p.track.food) {
     st.food = Math.max(0, st.food - 1);
-    if (st.food <= 0) { st.stats.hungry += R.days; st.strength = clamp(st.strength - 1, 0, 5); }
+    if (st.food <= 0) { st.stats.hungry += R.days; st.strength = clamp(st.strength - 1, 0, 5); addBurden('No food or clean water left'); }
   }
   if (L.strain) st.strength = clamp(st.strength - L.strain, 0, 5);
   if (L.inCity && st.loc !== 'home') st.stats.nights += R.nights;
   if (S.who === 'mayor') st.stats.nights += R.nights;
+  if (st.strength <= 1) addBurden('Your body is close to collapse');
 }
 function enterRound(i) {
   push();
@@ -68,7 +74,8 @@ function enterRound(i) {
   S.st.sceneLoc = S.st.loc;
   var sc = scene();
   S.st.cardLog = [];
-  if (sc.card) applyEffects(sc.card, S.st.cardLog);
+  if (sc.card) { applyEffects(sc.card, S.st.cardLog); addBurden(sc.card.t); }
+  effChoices().forEach(function (c) { if (c.lock) addBurden(c.poor ? 'Could not afford: ' + c.t + ' (' + usd(c.cost) + ')' : 'Not possible: ' + c.t + '. ' + c.lock); });
   seeRumours(D.rounds[i].ticker); seeRumours(sc.s.hear);
   timers[i] = D.meta.timerSeconds;
   go();
@@ -82,7 +89,9 @@ function pick(id) {
   var log = [];
   if (P().track.money && c.cost) { st.money = Math.max(0, st.money - c.cost); log.push('−' + usd(c.cost)); }
   applyEffects(c, log);
-  if (c.loc && c.loc !== st.loc) { st.loc = c.loc; log.push(locLabel(c.loc)); }
+  var leaving = null;
+  if (c.loc && c.loc !== st.loc) { if (c.loc === 'out' && P().leaving) { leaving = P().leaving; } st.loc = c.loc; log.push(locLabel(c.loc)); }
+  if (leaving) leaving.forEach(function (x) { addBurden(x.t); });
   if (c.wait) st.stats.wait += c.wait;
   var pl = null;
   if (c.pull && c.id !== P().realPath[S.r]) {
@@ -92,7 +101,7 @@ function pick(id) {
   }
   if (c.end) st.end = c.end;
   st.picks.push(c.id); st.labels.push(c.t);
-  st.log.push({ c: c.c ? fill(c.c) : (c.end ? 'Your choice is made. You will see your fate at the end.' : ''), img: c.img || null, pull: pl, delta: log });
+  st.log.push({ c: c.c ? fill(c.c) : (c.end ? 'Your choice is made. You will see your fate at the end.' : ''), img: c.img || null, pull: pl, delta: log, leaving: !!leaving });
   stopTimer();
   render();
 }
@@ -105,7 +114,7 @@ function finish() { push(); roundEnd(D.rounds.length - 1); S.phase = 'end'; go()
 function choose(k) {
   var p = D.people[k];
   hist = []; timers = {};
-  S = { who: k, phase: 'intro', r: -1, st: Object.assign({ money: 0, food: 0, ethel: 3, strength: 5, picks: [], labels: [], log: [], pulls: [], end: null, seenFalse: {}, stats: { hungry: 0, nights: 0, wait: 0 } }, clone(p.start)) };
+  S = { who: k, phase: 'intro', r: -1, st: Object.assign({ money: 0, food: 0, ethel: 3, strength: 5, picks: [], labels: [], log: [], pulls: [], burdens: [], end: null, seenFalse: {}, stats: { hungry: 0, nights: 0, wait: 0 } }, clone(p.start)) };
   S.st.sceneLoc = S.st.loc;
   go();
 }
@@ -170,6 +179,17 @@ function figure(key) {
   var m = media(key); if (!m) return '';
   return '<figure><img src="' + esc(m.src) + '" alt="" loading="lazy"><span class="credit">' + esc(m.credit) + '</span></figure>';
 }
+function burdenHtml(open) {
+  var b = (S.st && S.st.burdens) || [];
+  if (!b.length) return '';
+  var items = b.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
+  if (open) return '<div class="pad"><h4>Everything you had to deal with · ' + b.length + '</h4><ul class="burdens">' + items + '</ul></div>';
+  return '<details class="burden"><summary>Your difficulties so far <b>' + b.length + '</b></summary><ul class="burdens">' + items + '</ul></details>';
+}
+function leaveHtml() {
+  var p = P(); if (!p.leaving) return '';
+  return '<div class="leave"><span class="what">Leaving is not the end</span><ul>' + p.leaving.map(function (x) { return '<li>' + fill(x.t) + '</li>'; }).join('') + '</ul></div>';
+}
 function nav(left, right) { return '<nav class="nav"><div class="row">' + left + right + '</div></nav>'; }
 
 /* ---------- screens ---------- */
@@ -181,7 +201,7 @@ function renderChoose() {
   var m = media('title');
   app.innerHTML = '<div class="start"><div class="pic" style="background-image:url(\'' + esc(m.src) + '\')"><span class="credit">' + esc(m.credit) + '</span></div>' +
     '<div class="txt"><div class="eyebrow">' + esc(D.meta.eyebrow) + '</div><h1>Who are you?</h1><p>' + esc(D.meta.instruction) + '</p>' +
-    '<div class="people">' + btns + '</div><p class="small">' + esc(D.meta.gameValues) + ' The Lakeview homeowner is a composite based on neighbourhood data.</p></div></div>';
+    '<div class="people">' + btns + '</div><p class="small">' + esc(D.meta.gameValues) + '</p></div></div>';
 }
 function renderIntro() {
   var p = P();
@@ -213,10 +233,10 @@ function renderRound() {
   var cons = done ? '<div class="cons"><span class="what">What happens to you</span>' + lg.c +
     (lg.delta.length ? '<div class="delta">' + lg.delta.map(function (d) { return '<span' + (/^\+/.test(d) ? ' class="up"' : '') + '>' + esc(d) + '</span>'; }).join('') + '</div>' : '') +
     (lg.pull ? '<div class="pull"><span class="what">Reality check' + (lg.pull.lens ? ' · ' + esc(D.lens[lg.pull.lens]) : '') + '</span>' + fill(lg.pull.t) + '</div>' : '') +
-    (lg.img ? figure(lg.img) : '') + '</div><div class="wait">' + esc(D.meta.waitBox) + '</div>' : '';
+    (lg.leaving ? leaveHtml() : '') + (lg.img ? figure(lg.img) : '') + '</div><div class="wait">' + esc(D.meta.waitBox) + '</div>' : '';
   var last = S.r === D.rounds.length - 1;
   app.innerHTML = topbar(p.name, 'Round ' + R.n + ' of ' + D.rounds.length + (p.composite ? ' · Composite' : '')) + tickerHtml(R) + heroHtml(R) +
-    '<div class="wrap"><div class="card">' + chips() + '<div class="sit">' + fill(sc.s.sit) + '</div>' + hear + card + timer +
+    '<div class="wrap"><div class="card">' + chips() + burdenHtml(false) + '<div class="sit">' + fill(sc.s.sit) + '</div>' + hear + card + timer +
     '<div class="choices" role="group" aria-label="Your choices">' + opts + '</div>' + cons + '</div></div>' +
     nav('<button class="btn ghost" id="b-back">‹ Back</button>', '<button class="btn grow" id="b-next"' + (done ? '' : ' disabled') + '>' + (last ? 'See your fate ›' : 'Start round ' + (S.r + 2) + ' ›') + '</button>');
   if (!done) startTimer();
@@ -268,6 +288,7 @@ function renderEnd() {
     '<div class="pad"><h4>Your ending</h4><div class="end">' + endingText() + '</div>' +
     (e.img ? '<div class="endimg">' + figure(e.img) + '</div>' : '') +
     '<span class="match ' + (same ? 'yes' : 'no') + '">' + (same ? 'Your path matches what really happened' : 'Your path differs from what really happened' + (hits ? ' (same in ' + hits + ' of 4 rounds)' : '')) + '</span></div>' +
+    burdenHtml(true) + (p.returning ? '<div class="pad"><h4>Can you come back?</h4><ul class="burdens back">' + p.returning.map(function (x) { return '<li>' + fill(x.t) + '</li>'; }).join('') + '</ul>' + (p.returnFact ? '<p class="retfact">' + esc(p.returnFact) + '</p>' : '') + '</div>' : '') +
     (pulls ? '<div class="pad"><h4>What pushed against your choices</h4><ul class="pulls">' + pulls + '</ul></div>' : '') +
     lensBox +
     '<div class="pad"><h4>How hard was it?</h4><div class="hard"><div class="col"><h4>In your game</h4><dl>' + mine + '</dl></div><div class="col"><h4>In reality' + (p.composite ? ' (composite)' : '') + '</h4><dl>' + real + '</dl></div></div></div>' +

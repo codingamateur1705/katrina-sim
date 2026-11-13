@@ -28,7 +28,7 @@ meta: {
   question: 'Who really had a choice? Was it money, health, a car, or the colour of their skin?',
   // Put the final public address here after deployment (used on the projector title slide)
   publicUrl: 'https://codingamateur1705.github.io/katrina-sim/',
-  sources: 'Sources. U.S. House of Representatives (2006), A Failure of Initiative, pp. 106 to 114. U.S. Senate (2006), A Nation Still Unprepared, pp. 249 to 250. Associated Press via NBC News (2005, 2006) on Ethel Freeman. Lessin and Deal (2008), Trouble the Water. Horowitz (2020), Katrina, A History, chapters 4 and 5. USACE IPET (2006). Houston Chronicle (2005) on Jabbar Gibson. Money, food and strength are game values. The Lakeview homeowner is a composite.'
+  sources: 'Sources. U.S. House of Representatives (2006), A Failure of Initiative, pp. 106 to 114. U.S. Senate (2006), A Nation Still Unprepared, pp. 249 to 250. Associated Press via NBC News (2005, 2006) on Ethel Freeman. Lessin and Deal (2008), Trouble the Water. Horowitz (2020), Katrina, A History, chapters 4 and 5. USACE IPET (2006). Houston Chronicle (2005) on Jabbar Gibson. Money, food and strength are game values. The Lakeview story is based on neighbourhood data.'
 },
 
 /* Labels for tags shown next to constraints, cards and locked reasons */
@@ -259,6 +259,19 @@ herbert: {
   ],
   real: 'He judged it too dangerous to move his mother and stayed. On Tuesday a neighbour’s boat took them to the Convention Center, where a police officer told him to wait outside, help would come in an hour or two. Ethel Freeman died in her wheelchair on 1 September. When the buses finally came, he had to leave her body behind.',
   lensNote: 'In our lens this is mostly class and structure. No car, no transport for a wheelchair, and a plan that relied on cars. If you tried the bridge, you met the intentional part.',
+  /* Shown when Herbert leaves the city, and on the fate screen under "Can you come back?" */
+  leaving: [
+    { t: 'No relatives outside the city, so nobody is waiting for you', kind: 'real' },
+    { t: 'Every night away costs money you do not have', kind: 'game' },
+    { t: 'Ethel needs a hospital bed, not a cot in a shelter', kind: 'game' }
+  ],
+  returning: [
+    { t: 'Your house stood in floodwater for days. Walls and floors must be torn out', kind: 'game' },
+    { t: 'Rebuilding grants were the lower of repair cost or pre-storm value, so cheaper houses got less', kind: 'real' },
+    { t: 'No relatives to stay with while you rebuild', kind: 'real' },
+    { t: 'You have {money} left', kind: 'game' }
+  ],
+  returnFact: '119,076 fewer Black residents lived in New Orleans in 2010 than in 2000.',
   realPath: ['h1_stay', 'h2_boat', 'h3_wait', 'h4_wait'],
   realRows: ['Stays home, moving Ethel seems too risky', 'Water rises around the house', 'Neighbour’s boat to the Convention Center, told to wait outside', 'Ethel dies in her wheelchair, waiting'],
   realStats: [
@@ -381,6 +394,19 @@ kim: {
   ],
   real: 'The rental company refused her a car, so she stayed with Scott and filmed her street on a 20 dollar camcorder. When the Industrial Canal broke they fled to the attic, then swam to a neighbour’s two-storey house and waited two days with no help. When they walked to the Navy base for food and water, armed guards turned them away at gunpoint. They were evacuated days later. Her film became the documentary “Trouble the Water” (2008).',
   lensNote: 'In our lens this is mostly class (no car, no money), but a class divide that racism built, see Part 1. The intentional part was Gretna and Algiers Point.',
+  /* Shown when Kimberly leaves the city, and on the fate screen under "Can you come back?" */
+  leaving: [
+    { t: 'You arrive with {money} and nowhere to stay', kind: 'game' },
+    { t: 'Your family is scattered and your phone has no credit', kind: 'game' },
+    { t: 'Your papers stayed in the flooded house', kind: 'game' }
+  ],
+  returning: [
+    { t: 'Your street in the Lower Ninth is gutted or gone', kind: 'game' },
+    { t: 'Grants followed pre-storm house value. The funding gap per home was about $31,000 larger in the Lower Ninth', kind: 'real' },
+    { t: 'Your family is spread over several states', kind: 'game' },
+    { t: 'You have {money} left and no insurance payout coming', kind: 'game' }
+  ],
+  returnFact: 'About 37 % of Lower Ninth households were back after ten years.',
   realPath: ['k1_stay', 'k2_attic', 'k3_swim', 'k4_navy'],
   realRows: ['Rental car refused, stays and films', 'Canal breaks, flees to the attic', 'Swims to a neighbour’s house, no help for two days', 'Turned away at gunpoint at the Navy base'],
   realStats: [
@@ -396,7 +422,7 @@ kim: {
       card: { t: 'Scott wants to stay to protect the house.', kind: 'game' },
       choices: [
         { id: 'k1_rent', t: 'Rent a car', lock: 'The rental company refuses. No credit card, no car', lockKind: 'real' },
-        { id: 'k1_bus', pull: { lens: 'class', t: 'Intercity buses sell out quickly. With $60 and no card you can reach the last seats, but you arrive with almost nothing and no way to call home.', kind: 'game' }, t: 'Buy a bus ticket out', cost: 45, loc: 'out', img: 'busEvac', c: 'You get one of the last seats. You arrive in a strange city with {money} and nowhere to stay.' },
+        { id: 'k1_bus', pull: { lens: 'class', t: 'Intercity buses sell out quickly. With $60 and no card you can reach the last seats, but you arrive with almost nothing and no way to call home.', kind: 'game' }, t: 'Buy bus tickets out for you and Scott (2 × $45)', cost: 90, loc: 'out', img: 'busEvac', c: 'You get two of the last seats. You arrive in a strange city with {money} and nowhere to stay.' },
         { id: 'k1_dome', pull: { lens: 'class', t: 'Carless residents of the Ninth Ward live miles from the Superdome, and there is no shuttle from every street.', kind: 'game' }, t: 'Walk to the Superdome on Sunday', loc: 'dome', strength: -1, wait: 6, img: 'dome', c: 'Hours in line in the heat, searched at the door. Bring your own food.' },
         { id: 'k1_stay', t: 'Buy food and water, stay with Scott', cost: 30, food: 3, loc: 'home', c: 'You stock up on food and water and stay with Scott.' }
       ]
@@ -511,29 +537,41 @@ kim: {
 },
 
 /* =====================================================================
-   4. LAKEVIEW HOMEOWNER (COMPOSITE)
+   4. LAKEVIEW HOMEOWNER (story built from Lakeview neighbourhood data)
    ===================================================================== */
 lake: {
-  name: 'Lakeview homeowner', firstName: 'the Lakeview family', sub: 'White, own car, insured. Composite',
-  color: '#696969', seat: 'Back right', composite: true,
-  intro: 'You are a composite family in Lakeview, a mostly white neighbourhood near the 17th Street Canal. You own your house and have a car with a full tank, savings, a credit card and flood insurance.',
+  name: 'Lakeview homeowner', firstName: 'the Lakeview family', sub: 'White, own car, insured',
+  color: '#696969', seat: 'Back right', composite: false,
+  intro: 'You live with your family in Lakeview, a mostly white neighbourhood near the 17th Street Canal. You own your house and have a car with a full tank, savings, a credit card and flood insurance.',
   carChip: { t: 'Car, full tank' },
   start: { loc: 'home', money: 3000, food: 3, strength: 5 },
   track: { money: true, food: true, ethel: false },
   constraints: [
-    { t: 'Your boss expects you at work on Monday', kind: 'composite' },
-    { t: 'Your neighbour says Ivan was a false alarm and is staying', kind: 'composite' },
-    { t: 'Your sister in Baton Rouge has a spare room', kind: 'composite' },
+    { t: 'Your boss expects you at work on Monday', kind: 'game' },
+    { t: 'Your neighbour says Ivan was a false alarm and is staying', kind: 'game' },
+    { t: 'Your sister in Baton Rouge has a spare room', kind: 'game' },
     { t: 'You have a dog', kind: 'game' },
     { t: 'Lakeview lies even lower than the Lower Ninth Ward, behind the 17th Street Canal wall', kind: 'real' },
-    { t: 'Your house is worth far more on paper than a house in the Lower Ninth', kind: 'composite' }
+    { t: 'Your house is worth far more on paper than a house in the Lower Ninth', kind: 'game' }
   ],
-  real: 'Composite based on neighbourhood data. Like most households with a car, the family drove out before the storm. Their house flooded when the 17th Street Canal broke. Insured, and with a rebuilding grant based on a higher home value, they rebuilt. About 90 % of households citywide came back.',
+  real: 'Like most households with a car in Lakeview, the family drove out before the storm. Their house flooded when the 17th Street Canal broke. Insured, and with a rebuilding grant based on a higher home value, they rebuilt. About 90 % of households citywide came back. (This story follows Lakeview neighbourhood data.)',
   lensNote: 'In our lens you were protected by a car, savings and insurance (class). The Road Home formula, based on house value, favoured Lakeview over the Lower Ninth (structural).',
+  /* Shown when the family leaves the city, and on the fate screen under "Can you come back?" */
+  leaving: [
+    { t: 'Your sister’s spare room is meant for a few nights, not weeks', kind: 'game' },
+    { t: 'Your office is closed. No paycheck until it reopens', kind: 'game' },
+    { t: 'Every week away costs money: gas, food, the dog', kind: 'game' }
+  ],
+  returning: [
+    { t: 'The city keeps residents out for weeks. You cannot even see the house', kind: 'game' },
+    { t: 'Flood insurance pays, but adjusters are weeks behind', kind: 'game' },
+    { t: 'Your grant is based on your house’s higher pre-storm value', kind: 'real' },
+    { t: 'Months of mould removal and contractors, while the mortgage is still due', kind: 'game' }
+  ],
+  returnFact: 'About 90 % of households citywide came back, against about 37 % in the Lower Ninth.',
   realPath: ['l1_drive', 'l2_sister', 'l3_insurer', 'l4_rebuild'],
   realRows: ['Drives out to relatives', 'Safe inland', 'House floods, insurance claim', 'Insured, rebuilds'],
   realStats: [
-    { label: 'This person', value: 'A composite, based on neighbourhood data' },
     { label: 'Left before the storm', value: 'Like most households with a car' },
     { label: 'Rebuilding', value: 'Insurance, and a grant based on a higher home value' },
     { label: 'Households back, citywide', value: 'About 90 %' },
@@ -554,9 +592,9 @@ lake: {
       _card: { t: 'Your dog is with you. Many motels and shelters do not take pets.', kind: 'game', mods: [{ choice: 'l2_motel', cost: 60, note: 'Pet fee' }] },
       out: {
         sit: 'You watch the storm on TV at your sister’s house.',
-        hear: [{ t: 'TV: “New Orleans dodged the bullet”', false: 'Misleading. Levees and floodwalls were already breaking. By Tuesday 80 % of the city was under water.' }],
+        hear: [{ t: 'TV: “New Orleans dodged the bullet”', false: 'Misleading. Levees and floodwalls were already breaking. By Tuesday 80 % of the city was under water.' }, 'Your boss: “The office is closed until further notice.”'],
         choices: [
-          { id: 'l2_sister', t: 'Stay with your sister', loc: 'out', c: 'Crowded, but safe.' },
+          { id: 'l2_sister', t: 'Stay with your sister', cost: 60, loc: 'out', c: 'Crowded, but safe. You pay for gas, food and dog food.' },
           { id: 'l2_motel', pull: { lens: 'class', t: 'A motel gives you privacy, but it costs money that most people did not have.', kind: 'game' }, t: 'Book a motel to give your sister space', cost: 420, loc: 'out', c: 'A week in a motel that takes dogs. You can afford it.' }
         ]
       },
@@ -590,7 +628,7 @@ lake: {
     },
     {
       out: {
-        card: { t: 'You see your street under water on national TV.', kind: 'game' },
+        card: { t: 'You see your street under water on national TV. The mortgage on the house is still due.', kind: 'game' },
         sit: 'You are safe and insured. What now?',
         hear: [],
         choices: [
@@ -628,7 +666,7 @@ endings: {
   k_wait:    { t: 'The buses only come days later.', where: 'Still in the city' },
   k_vehicle: { t: 'You drive out. One young man, Jabbar Gibson, really did this: he took a school bus with about 70 people to Houston. Officials at first hesitated to let him in.', where: 'Houston, about 560 km from home', img: 'buses' },
   k_out:     { t: 'You are safe, but your home is gone. Only about 37 % of Lower Ninth households came back within ten years.', where: 'Another city, far from home' },
-  l_rebuild: { t: 'Insurance and a grant based on your home’s value help you rebuild. About 90 % of households citywide came back. In the Lower Ninth the funding gap was about $31,000 larger per home.', where: 'Baton Rouge, about 130 km from home' },
+  l_rebuild: { t: 'Insurance and a grant based on your home’s value help you rebuild. About 90 % of households citywide came back. It still takes months of mould removal, adjusters and paperwork. In the Lower Ninth the funding gap was about $31,000 larger per home.', where: 'Baton Rouge, about 130 km from home' },
   l_move:    { t: 'You start over somewhere else, with insurance money to do it.', where: 'A new city' },
   l_rescued: { t: 'A helicopter crew lifts you off the roof. Your insurance still pays for the house.', where: 'Lifted out by helicopter', img: 'rescue' }
 },
