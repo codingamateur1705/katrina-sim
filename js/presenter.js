@@ -35,7 +35,7 @@ var rows = D.order.map(function (k) {
 slides.push({ cls: 'tab', notes: 'Groups now open “Your fate” on their phones and compare.', html:
   '<div class="content"><h2>What our four people really did</h2><table><thead><tr><th style="width:17%"></th>' +
   D.rounds.map(function (R) { return '<th>Round ' + R.n + ' · ' + esc(R.short) + '</th>'; }).join('') + '</tr></thead><tbody>' + rows + '</tbody></table>' +
-  '<div class="src">Sources. House (2006), pp. 109 to 113; Senate (2006), p. 250; WWL (2005); AP via NBC News (2005, 2006); Lessin and Deal (2008); Horowitz (2020), ch. 4 and 5. The Lakeview story is based on neighbourhood data.</div></div>' });
+  '<div class="src">Sources. House (2006), pp. 109 to 113; Senate (2006), p. 250; WWL (2005); AP via NBC News (2005, 2006); Lessin and Deal (2008); Horowitz (2020), ch. 4 and 5. Webster, Adelson, Hammer and Chou (2022), ProPublica, on Rita Legrand.</div></div>' });
 
 /* closing */
 slides.push({ cls: 'close', notes: '', html: '<div class="content"><div class="eyebrow" style="color:#f6d3d5">Same storm, four fates</div><h1>' + esc(D.meta.question) + '</h1><div class="src">' + esc(D.meta.sources) + '</div></div>' });

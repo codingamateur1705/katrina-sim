@@ -140,3 +140,20 @@ After some choices, a black "Sudden change" box appears. It is fixed per choice,
 | Kimberly | Abandoned school bus | The first bus has no keys; the second has half a tank. | +2 h |
 | Lakeview | Drive to Baton Rouge | The first two gas stations are sold out; an hour in line. | +1 h |
 | Lakeview | Book a motel | The first motels are booked out; the one that takes dogs is an hour further. | Strength −1 |
+
+## 6. Update: Lakeview is now a real, documented person, Rita Legrand
+
+Source: Richard A. Webster, Jeff Adelson, David Hammer and Sophie Chou (12 December 2022), "The Federal Program to Rebuild After Hurricane Katrina Shortchanged the Poor. New Data Proves It", ProPublica with The Times-Picayune | The Advocate and WWL-TV. Read here: https://www.route-fifty.com/management/2022/12/federal-program-rebuild-after-hurricane-katrina-shortchanged-poor-new-data-proves-it/380785/ . Please also read the original on propublica.org and add it to the deck's references.
+
+**Documented, used as "From the real story":** Lakeview retiree. She had to gut her modest ranch home. $53,000 from insurance. Applied for a Road Home grant in fall 2006. Road Home valued the house at $320,000 and repairs at $188,000, and granted $135,000 (repairs minus insurance). Completely rebuilt by April 2007. Quote: "The program worked great for me." Lakeview context from the same article: almost entirely white, water reached the eaves of many homes, the average Lakeview owner got about 83 % of what rebuilding needed.
+
+**Not documented, so labelled or left out:**
+- How and where she evacuated is not reported. Rounds 1 to 3 have no "real" choice, and the badge says "Your path matches what is documented" (round 4 only). The presenter table says "Not reported" for round 1.
+- Her race is not stated in the article (only that Lakeview was almost entirely white), so her subtitle no longer says "White".
+- Her age: the article calls her 86 at the time of writing (2022). The game does not state an age.
+- Car, savings ($3,000), dog, sister in Baton Rouge and the neighbour are game details.
+- Removed: "your boss expects you on Monday" and the office-closed line, because she is retired.
+
+**Other documented Lakeview voice in the same article (not used):** William Stoudt, Rebuilding Together New Orleans, whose parents climbed in through a second-storey window and rebuilt within a year with flood insurance.
+
+**Searched but not readable:** NPR (22 Nov 2005), "Residents Say Levee Leaked Months Before Katrina" (names Lakeview residents), and an LSU oral history with Lakeview resident Patsy Ashton (2012).

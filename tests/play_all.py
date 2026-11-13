@@ -46,9 +46,12 @@ def play(page, who, strategy, tag, shots=False):
         if not ids:
             problems.append('%s r%d: no available choice' % (tag, r + 1)); return
         if strategy == 'real':
-            if real[r] not in ids:
+            if real[r] is None:
+                pick = ids[0]
+            elif real[r] not in ids:
                 problems.append('%s r%d: real choice %s not available (have %s)' % (tag, r + 1, real[r], ids)); return
-            pick = real[r]
+            else:
+                pick = real[r]
         elif isinstance(strategy, int):
             pick = ids[min(strategy, len(ids) - 1)] if r == 0 else random.choice(ids)
         else:
@@ -74,7 +77,7 @@ def play(page, who, strategy, tag, shots=False):
         st = json.loads(page.evaluate(STATE))['st']
         died = 'dies' in end
         if died != (st['end'] == 'h_wait'): problems.append('%s: Ethel death mismatch (%s)' % (tag, st['end']))
-    if strategy == 'real' and 'matches what really happened' not in page.inner_text('.match'):
+    if strategy == 'real' and 'matches what' not in page.inner_text('.match'):
         problems.append('%s: real path not recognised' % tag)
     if shots: page.screenshot(path='%s/%s-5-fate.png' % (OUT, tag), full_page=True)
     # Back from fate to round 4 and forward again

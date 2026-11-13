@@ -268,8 +268,9 @@ function endingText() {
 }
 function renderEnd() {
   var p = P(), st = S.st, e = D.endings[st.end] || {};
-  var same = p.realPath.every(function (v, i) { return st.picks[i] === v; });
-  var hits = p.realPath.filter(function (v, i) { return st.picks[i] === v; }).length;
+  var known = p.realPath.filter(function (v) { return v; }).length, partial = known < p.realPath.length;
+  var same = p.realPath.every(function (v, i) { return !v || st.picks[i] === v; });
+  var hits = p.realPath.filter(function (v, i) { return v && st.picks[i] === v; }).length;
   var path = st.labels.map(function (l, i) { return '<li><b>Round ' + (i + 1) + '</b><span>' + esc(l) + '</span>' + (st.picks[i] === p.realPath[i] ? '<span class="m">= real</span>' : '') + '</li>'; }).join('');
   var g = [];
   if (S.who === 'mayor') {
@@ -296,12 +297,12 @@ function renderEnd() {
     '<div class="pad"><h4>Your path</h4><ol class="path">' + path + '</ol></div>' +
     '<div class="pad"><h4>Your ending</h4><div class="end">' + endingText() + '</div>' +
     (e.img ? '<div class="endimg">' + figure(e.img) + '</div>' : '') +
-    '<span class="match ' + (same ? 'yes' : 'no') + '">' + (same ? 'Your path matches what really happened' : 'Your path differs from what really happened' + (hits ? ' (same in ' + hits + ' of 4 rounds)' : '')) + '</span></div>' +
+    '<span class="match ' + (same ? 'yes' : 'no') + '">' + (same ? (partial ? 'Your path matches what is documented' : 'Your path matches what really happened') : 'Your path differs from what really happened' + (hits ? ' (same in ' + hits + ' of ' + known + ' documented rounds)' : '')) + '</span></div>' +
     burdenHtml(true) + (p.returning ? '<div class="pad"><h4>Can you come back?</h4><ul class="burdens back">' + p.returning.map(function (x) { return '<li>' + fill(x.t) + '</li>'; }).join('') + '</ul>' + (p.returnFact ? '<p class="retfact">' + esc(p.returnFact) + '</p>' : '') + '</div>' : '') +
     (pulls ? '<div class="pad"><h4>What pushed against your choices</h4><ul class="pulls">' + pulls + '</ul></div>' : '') +
     lensBox +
     '<div class="pad"><h4>How hard was it?</h4><div class="hard"><div class="col"><h4>In your game</h4><dl>' + mine + '</dl></div><div class="col"><h4>In reality' + (p.composite ? ' (composite)' : '') + '</h4><dl>' + real + '</dl></div></div></div>' +
-    '<div class="pad"><h4>What really happened to ' + esc(who) + (p.composite ? ' <span class="tag composite">Composite</span>' : '') + '</h4></div><div class="realbox">' + esc(p.real) + '</div>' +
+    '<div class="pad"><h4>What really happened to ' + esc(who) + (p.composite ? ' <span class="tag composite">Composite</span>' : '') + '</h4></div><div class="realbox">' + esc(p.real) + (p.realSource ? '<small class="rsrc">' + esc(p.realSource) + '</small>' : '') + '</div>' +
     (rum ? '<div class="pad"><h4>What you heard that turned out false</h4><ul class="rumours">' + rum + '</ul></div>' : '') +
     '</div><div class="q">' + esc(D.meta.question) + '</div><p class="sources">' + esc(D.meta.sources) + '</p></div>' +
     nav('<button class="btn ghost" id="b-back">‹ Back</button>', '<button class="btn grow" id="b-again">Play again</button>');

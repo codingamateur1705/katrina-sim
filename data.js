@@ -28,7 +28,7 @@ meta: {
   question: 'Who really had a choice? Was it money, health, a car, or the colour of their skin?',
   // Put the final public address here after deployment (used on the projector title slide)
   publicUrl: 'https://codingamateur1705.github.io/katrina-sim/',
-  sources: 'Sources. U.S. House of Representatives (2006), A Failure of Initiative, pp. 106 to 114. U.S. Senate (2006), A Nation Still Unprepared, pp. 249 to 250. Associated Press via NBC News (2005, 2006) on Ethel Freeman. Lessin and Deal (2008), Trouble the Water. Horowitz (2020), Katrina, A History, chapters 4 and 5. USACE IPET (2006). Houston Chronicle (2005) on Jabbar Gibson. Money, food and strength are game values. The Lakeview story is based on neighbourhood data.'
+  sources: 'Sources. U.S. House of Representatives (2006), A Failure of Initiative, pp. 106 to 114. U.S. Senate (2006), A Nation Still Unprepared, pp. 249 to 250. Associated Press via NBC News (2005, 2006) on Ethel Freeman. Lessin and Deal (2008), Trouble the Water. Horowitz (2020), Katrina, A History, chapters 4 and 5. USACE IPET (2006). Houston Chronicle (2005) on Jabbar Gibson. Money, food and strength are game values. Webster, Adelson, Hammer and Chou (2022), ProPublica, on Rita Legrand.'
 },
 
 /* Labels for tags shown next to constraints, cards and locked reasons */
@@ -537,50 +537,54 @@ kim: {
 },
 
 /* =====================================================================
-   4. LAKEVIEW HOMEOWNER (story built from Lakeview neighbourhood data)
+   4. RITA LEGRAND, LAKEVIEW (ProPublica et al. 2022; evacuation not reported)
    ===================================================================== */
 lake: {
-  name: 'Lakeview homeowner', firstName: 'the Lakeview family', sub: 'White, own car, insured',
+  name: 'Rita Legrand', firstName: 'Rita Legrand', sub: 'Retiree in Lakeview, insured homeowner',
   color: '#696969', seat: 'Back right', composite: false,
-  intro: 'You live with your family in Lakeview, a mostly white neighbourhood near the 17th Street Canal. You own your house and have a car with a full tank, savings, a credit card and flood insurance.',
+  intro: 'You are Rita Legrand, a retiree in Lakeview, a mostly white neighbourhood near the 17th Street Canal. You own a modest ranch house and you have insurance. In the game you also have a car with a full tank and some savings.',
   carChip: { t: 'Car, full tank' },
   start: { loc: 'home', money: 3000, food: 3, strength: 5 },
   track: { money: true, food: true, ethel: false },
   constraints: [
-    { t: 'Your boss expects you at work on Monday', kind: 'game' },
+    { t: 'Your house is your savings. You are retired', kind: 'real' },
+    { t: 'Your insurance will not cover everything', kind: 'real' },
+    { t: 'Lakeview lies even lower than the Lower Ninth Ward, behind the 17th Street Canal wall', kind: 'real' },
+    { t: 'On paper your modest house is worth far more than a house in the Lower Ninth', kind: 'real' },
     { t: 'Your neighbour says Ivan was a false alarm and is staying', kind: 'game' },
     { t: 'Your sister in Baton Rouge has a spare room', kind: 'game' },
-    { t: 'You have a dog', kind: 'game' },
-    { t: 'Lakeview lies even lower than the Lower Ninth Ward, behind the 17th Street Canal wall', kind: 'real' },
-    { t: 'Your house is worth far more on paper than a house in the Lower Ninth', kind: 'game' }
+    { t: 'You have a dog', kind: 'game' }
   ],
-  real: 'Like most households with a car in Lakeview, the family drove out before the storm. Their house flooded when the 17th Street Canal broke. Insured, and with a rebuilding grant based on a higher home value, they rebuilt. About 90 % of households citywide came back. (This story follows Lakeview neighbourhood data.)',
-  lensNote: 'In our lens you were protected by a car, savings and insurance (class). The Road Home formula, based on house value, favoured Lakeview over the Lower Ninth (structural).',
-  /* Shown when the family leaves the city, and on the fate screen under "Can you come back?" */
+  real: 'When the floodwalls broke, water reached the eaves of many Lakeview homes. Rita Legrand had to gut her modest ranch house. With $53,000 from insurance, she applied for a Road Home grant in fall 2006. Road Home valued her house at $320,000 and her repairs at $188,000, and paid $135,000. By April 2007 she had completely rebuilt. “The program worked great for me,” she said. How and where she evacuated is not reported.',
+  realSource: 'Webster, Adelson, Hammer and Chou (2022), ProPublica with The Times-Picayune | The Advocate and WWL-TV.',
+  lensNote: 'In our lens a car, savings and insurance protected you (class). The Road Home formula, based on house value, favoured Lakeview over the Lower Ninth (structural).',
+  /* Shown when Rita leaves the city, and on the fate screen under "Can you come back?" */
   leaving: [
     { t: 'Your sister’s spare room is meant for a few nights, not weeks', kind: 'game' },
-    { t: 'Your office is closed. No paycheck until it reopens', kind: 'game' },
+    { t: 'Your mail and pension go to an address that is under water', kind: 'game' },
     { t: 'Every week away costs money: gas, food, the dog', kind: 'game' }
   ],
   returning: [
     { t: 'The city keeps residents out for weeks. You cannot even see the house', kind: 'game' },
-    { t: 'Flood insurance pays, but adjusters are weeks behind', kind: 'game' },
-    { t: 'Your grant is based on your house’s higher pre-storm value', kind: 'real' },
-    { t: 'Months of mould removal and contractors, while the mortgage is still due', kind: 'game' }
+    { t: 'The house must be gutted to the studs', kind: 'real' },
+    { t: 'Insurance pays $53,000. The repairs cost $188,000', kind: 'real' },
+    { t: 'Your grant is based on the house’s high pre-storm value', kind: 'real' }
   ],
-  returnFact: 'About 90 % of households citywide came back, against about 37 % in the Lower Ninth.',
-  realPath: ['l1_drive', 'l2_sister', 'l3_insurer', 'l4_rebuild'],
-  realRows: ['Drives out to relatives', 'Safe inland', 'House floods, insurance claim', 'Insured, rebuilds'],
+  returnFact: 'The average Lakeview owner got about 83 % of what rebuilding needed. About 37 % of Lower Ninth households were back after ten years.',
+  /* null = not documented for this round; only documented rounds count for "matches what really happened" */
+  realPath: [null, null, null, 'l4_rebuild'],
+  realRows: ['Not reported', 'Floodwalls break. Lakeview floods to the eaves', 'Guts her house. Insurance pays $53,000', 'Road Home grant $135,000. Rebuilt by April 2007'],
   realStats: [
-    { label: 'Left before the storm', value: 'Like most households with a car' },
-    { label: 'Rebuilding', value: 'Insurance, and a grant based on a higher home value' },
-    { label: 'Households back, citywide', value: 'About 90 %' },
-    { label: 'Road Home grant', value: 'The lower of repair cost and pre-storm value. About $31,000 larger gap per home in the Lower Ninth' }
+    { label: 'Insurance payout', value: '$53,000' },
+    { label: 'Road Home valued her house at', value: '$320,000, repairs at $188,000' },
+    { label: 'Road Home grant', value: '$135,000, applied in fall 2006' },
+    { label: 'Rebuilt', value: 'Completely, by April 2007' },
+    { label: 'Average Lakeview owner', value: 'Got about 83 % of what rebuilding needed' }
   ],
   rounds: [
     { '*': {
       sit: 'A hurricane may hit on Monday. Your car has a full tank.',
-      hear: ['TV: “Traffic is already heavy on I-10”', 'Boss: “See you Monday”', 'Neighbour: “Ivan was a false alarm, I’m staying”'],
+      hear: ['TV: “Traffic is already heavy on I-10”', 'Neighbour: “Ivan was a false alarm, I’m staying”', 'Your sister: “Come now, before the roads fill up”'],
       card: { t: 'The highway out takes eight hours instead of one.', kind: 'game' },
       choices: [
         { id: 'l1_drive', surprise: { t: 'The first two gas stations on the highway are sold out. You wait an hour in line for fuel.', kind: 'game', wait: 1 }, t: 'Drive to your sister in Baton Rouge', cost: 40, loc: 'out', strength: -1, wait: 8, c: 'Eight hours in traffic, but you get out.' },
@@ -592,7 +596,7 @@ lake: {
       _card: { t: 'Your dog is with you. Many motels and shelters do not take pets.', kind: 'game', mods: [{ choice: 'l2_motel', cost: 60, note: 'Pet fee' }] },
       out: {
         sit: 'You watch the storm on TV at your sister’s house.',
-        hear: [{ t: 'TV: “New Orleans dodged the bullet”', false: 'Misleading. Levees and floodwalls were already breaking. By Tuesday 80 % of the city was under water.' }, 'Your boss: “The office is closed until further notice.”'],
+        hear: [{ t: 'TV: “New Orleans dodged the bullet”', false: 'Misleading. Levees and floodwalls were already breaking. By Tuesday 80 % of the city was under water.' }],
         choices: [
           { id: 'l2_sister', t: 'Stay with your sister', cost: 60, loc: 'out', c: 'Crowded, but safe. You pay for gas, food and dog food.' },
           { id: 'l2_motel', surprise: { t: 'The first motels are booked out. The one that takes dogs is an hour further away.', kind: 'game', strength: -1 }, pull: { lens: 'class', t: 'A motel gives you privacy, but it costs money that most people did not have.', kind: 'game' }, t: 'Book a motel to give your sister space', cost: 420, loc: 'out', c: 'A week in a motel that takes dogs. You can afford it.' }
