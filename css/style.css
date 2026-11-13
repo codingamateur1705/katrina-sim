@@ -188,3 +188,7 @@ ol.path li .m{flex:none;margin-left:auto;font-size:12px;font-weight:700;color:va
 .pulls li{padding:8px 0;border-top:1px solid #e3e3e3;font-size:16px;line-height:1.4}
 .pulls li:first-child{border-top:0}
 .pulls li b{display:block;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--g)}
+
+.pulls li .lensname{display:block;font-style:normal;font-size:13px;font-weight:700;color:var(--g);margin-top:2px}
+.lensrow{font-size:16px;margin:0 0 6px}
+.lensrow b{color:var(--g)}

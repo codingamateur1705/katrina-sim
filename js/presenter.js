@@ -20,7 +20,7 @@ slides.push({ cls: 'title', notes: 'Groups scan the code, pick the person they w
 /* rounds */
 D.rounds.forEach(function (R) {
   var head = '<div class="eyebrow">Round ' + R.n + ' · ' + esc(R.when) + '</div><h2>' + esc(R.ask) + '</h2>';
-  slides.push({ timer: true, notes: (R.n === 1 ? 'Each group has 60 seconds. Press T or click the timer to start it. ' : 'Press T to start the 60 seconds. ') + (R.notes || ''), html:
+  slides.push({ timer: true, notes: (R.n === 1 ? 'Each group has ' + D.meta.timerSeconds + ' seconds. Press T or click the timer to start it. ' : 'Press T to start the ' + D.meta.timerSeconds + ' seconds. ') + (R.notes || ''), html:
     bg(R.knowMedia, R.n === 1) + '<div class="content">' + head + '<div class="box"><h3>What you know</h3><ul>' + R.know.map(function (k) { return '<li>' + esc(k) + '</li>'; }).join('') + '</ul></div></div>' });
   slides.push({ notes: R.notes || '', html:
     bg(R.happenedMedia, false) + '<div class="content"><div class="eyebrow">Round ' + R.n + ' · ' + esc(R.short) + '</div><h2>What happened in the city</h2><div class="box red"><h3>' + esc(R.when) + '</h3><ul>' + R.happened.map(function (k) { return '<li>' + esc(k) + '</li>'; }).join('') + '</ul></div></div>' });

@@ -86,9 +86,9 @@ function pick(id) {
   if (c.wait) st.stats.wait += c.wait;
   var pl = null;
   if (c.pull && c.id !== P().realPath[S.r]) {
-    pl = { t: c.pull.t, kind: c.pull.kind || 'game' };
+    pl = { t: c.pull.t, kind: c.pull.kind || 'game', lens: c.pull.lens || null };
     if (c.pull.strength) applyEffects({ strength: c.pull.strength }, log);
-    st.pulls.push({ r: S.r, t: pl.t, kind: pl.kind });
+    st.pulls.push({ r: S.r, t: pl.t, kind: pl.kind, lens: pl.lens });
   }
   if (c.end) st.end = c.end;
   st.picks.push(c.id); st.labels.push(c.t);
@@ -212,7 +212,7 @@ function renderRound() {
   var timer = done ? '' : '<div class="timer" id="timer"><div class="bar"><i></i></div><span class="s"></span><button class="iconbtn" id="pause" aria-pressed="false">Pause</button></div><div class="timeup" id="timeup" hidden>' + esc(D.meta.timeUp) + '</div>';
   var cons = done ? '<div class="cons"><span class="what">What happens to you</span>' + lg.c +
     (lg.delta.length ? '<div class="delta">' + lg.delta.map(function (d) { return '<span' + (/^\+/.test(d) ? ' class="up"' : '') + '>' + esc(d) + '</span>'; }).join('') + '</div>' : '') +
-    (lg.pull ? '<div class="pull"><span class="what">Reality check ' + tag(lg.pull.kind) + '</span>' + fill(lg.pull.t) + '</div>' : '') +
+    (lg.pull ? '<div class="pull"><span class="what">Reality check' + (lg.pull.lens ? ' · ' + esc(D.lens[lg.pull.lens]) : '') + '</span>' + fill(lg.pull.t) + '</div>' : '') +
     (lg.img ? figure(lg.img) : '') + '</div><div class="wait">' + esc(D.meta.waitBox) + '</div>' : '';
   var last = S.r === D.rounds.length - 1;
   app.innerHTML = topbar(p.name, 'Round ' + R.n + ' of ' + D.rounds.length + (p.composite ? ' · Composite' : '')) + tickerHtml(R) + heroHtml(R) +
@@ -259,7 +259,9 @@ function renderEnd() {
   var real = p.realStats.map(function (r) { return '<dt>' + esc(r.label) + '</dt><dd>' + esc(r.value) + '</dd>'; }).join('');
   var rum = Object.keys(st.seenFalse).map(function (k) { return '<li><span class="tag rumour">Rumour</span> <q>' + esc(k.replace(/^[^:]+:\s*/, '').replace(/[“”]/g, '')) + '</q><div>' + esc(st.seenFalse[k]) + '</div></li>'; }).join('');
   var who = p.firstName || p.name;
-  var pulls = st.pulls.map(function (x) { return '<li><b>Round ' + (x.r + 1) + '</b><span>' + fill(x.t) + '</span>' + tag(x.kind) + '</li>'; }).join('');
+  var pulls = st.pulls.map(function (x) { return '<li><b>Round ' + (x.r + 1) + '</b><span>' + fill(x.t) + '</span>' + (x.lens ? '<em class="lensname">' + esc(D.lens[x.lens]) + '</em>' : '') + '</li>'; }).join('');
+  var lc = { intentional: 0, structural: 0, class: 0 }; st.pulls.forEach(function (x) { if (x.lens) lc[x.lens]++; });
+  var lensBox = '<div class="pad"><h4>Through our lens</h4>' + (st.pulls.length ? '<p class="lensrow">' + Object.keys(lc).map(function (k) { return esc(D.lens[k]) + ' <b>' + lc[k] + '</b>'; }).join(' · ') + '</p>' : '') + (p.lensNote ? '<p>' + esc(p.lensNote) + '</p>' : '') + '</div>';
   app.innerHTML = topbar('Your fate', p.name + (p.composite ? ' · Composite' : '')) +
     '<div class="wrap"><div class="card"><div class="hd" style="background:' + p.color + '"><b>' + esc(p.name) + '</b><small>' + esc(p.sub) + '</small></div>' + chips() +
     '<div class="pad"><h4>Your path</h4><ol class="path">' + path + '</ol></div>' +
@@ -267,6 +269,7 @@ function renderEnd() {
     (e.img ? '<div class="endimg">' + figure(e.img) + '</div>' : '') +
     '<span class="match ' + (same ? 'yes' : 'no') + '">' + (same ? 'Your path matches what really happened' : 'Your path differs from what really happened' + (hits ? ' (same in ' + hits + ' of 4 rounds)' : '')) + '</span></div>' +
     (pulls ? '<div class="pad"><h4>What pushed against your choices</h4><ul class="pulls">' + pulls + '</ul></div>' : '') +
+    lensBox +
     '<div class="pad"><h4>How hard was it?</h4><div class="hard"><div class="col"><h4>In your game</h4><dl>' + mine + '</dl></div><div class="col"><h4>In reality' + (p.composite ? ' (composite)' : '') + '</h4><dl>' + real + '</dl></div></div></div>' +
     '<div class="pad"><h4>What really happened to ' + esc(who) + (p.composite ? ' <span class="tag composite">Composite</span>' : '') + '</h4></div><div class="realbox">' + esc(p.real) + '</div>' +
     (rum ? '<div class="pad"><h4>What you heard that turned out false</h4><ul class="rumours">' + rum + '</ul></div>' : '') +

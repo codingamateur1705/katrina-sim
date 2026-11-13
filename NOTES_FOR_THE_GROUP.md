@@ -88,3 +88,20 @@ Every choice that is not on the real path can now carry a "pull". After the play
 
 ### Back checks (new)
 `node tests/check_paths.js` plays every possible path of all four people through the real app code (148 paths), and checks that each one reaches an ending, that no text shows "undefined" or "{money}", that money never goes negative, and that the real path is playable. It also lists any choice without a pull. The browser test `tests/play_all.py` is unchanged.
+
+## 5. Alignment with the presentation (13 November, second pass)
+
+### What was added to the game
+- **More constraints from the deck.** Mayor: end of month (no money for gas), Hurricane Pam 2004 (100,000 without cars), the state plan's 30-hour rule. Herbert: 27 % of households without a car, Superdome as last-resort shelter (bring your own supplies). Kimberly: 98 % Black and water on three sides, 52 % vs 17 % without a car, Betsy 1965 (loans, not grants). Lakeview: lies lower than the Lower Ninth, house worth more on paper.
+- **Media frame (slide 24).** The Lakeview family now sees the "looting" vs "finding" captions on TV in round 3.
+- **Road Home (slide 32).** The Lakeview ending and the "In reality" box now mention the formula (lower of repair cost and pre-storm value) and the $31,000 larger gap per home in the Lower Ninth.
+- **Our lens (slides 4, 25, 33).** Every "Reality check" is now tagged with one of our three columns (Intentional racism, Structural racism, Classism). The fate screen has a "Through our lens" box with the counts and one sentence per person. The tags are our interpretation, please adjust them in `data.js` (`lens:` on each `pull`).
+- **Timer.** Now 20 seconds, as on slide 13 (it was 60). Change `timerSeconds` in `data.js` if you prefer longer.
+
+### Differences between the game and the deck, to fix before 17 November
+1. **Deaths in the rumour box.** Game now says 6 in the Superdome and 4 at the Convention Center (Times-Picayune, 26 Sept 2005). Slide 24 says 7 and 10 (Horowitz 2020, ch. 4). Check Horowitz, then make both say the same.
+2. **"19 hours before landfall".** Slides 15 and 18 still say 19. The game says "about 20 hours". Slide 18 notes also still say "CHECK 9.30 or 11".
+3. **Plaquemines "97 to 98 %".** Still in the notes of slide 18. The game no longer says it.
+4. **The four stops.** The deck has Stop 1 Saturday, Stop 2 Sunday, Stop 3 Monday and Tuesday, Stop 4 Thursday (slides 14 to 17, hidden backups). The game has Round 1 Saturday and Sunday, Round 2 Monday, Round 3 Tuesday and Wednesday, Round 4 Thursday and Friday. The backup slides also offer different options. Either keep them as backups only or relabel them.
+5. **Slide 13 link.** Still the old claude.ai artifact address. Replace with the new site and QR code.
+6. **Slide 13 and 12 notes.** "20 seconds" now matches the game.
