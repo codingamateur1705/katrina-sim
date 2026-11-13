@@ -95,8 +95,8 @@ rounds: [
       { t: 'Traffic is already heavy on I-10' }
     ],
     know: ['Katrina is a Category 3 in the Gulf', 'Forecast: landfall on Monday morning', 'Last year everyone fled Hurricane Ivan, and it missed the city'],
-    happened: ['Saturday · only a voluntary evacuation', 'Sunday · Katrina reaches Category 5', 'Sunday morning · the first mandatory evacuation, 19 hours before landfall', 'Buses run only to the Superdome. More than 70,000 people stay'],
-    notes: 'Open point: the House report (p. 109) gives the time of Sunday’s mandatory order. Our sources disagree whether it was 9.30 or 11 in the morning, so the slide says “Sunday morning”.'
+    happened: ['Saturday · only a voluntary evacuation', 'Sunday · Katrina reaches Category 5', 'Sunday morning · the first mandatory evacuation, about 20 hours before landfall', 'Buses run only to the Superdome. More than 70,000 people stay'],
+    notes: 'Open point: the House report (p. 109) gives the time of Sunday’s mandatory order. Most timelines (Senate report, National Geographic, FactCheck.org) say 9.30, one says 11, so the slide says “Sunday morning” and “about 20 hours”.'
   },
   {
     n: 2, when: 'Monday, 29 August', short: '29 Aug', days: 1, nights: 1,
@@ -120,7 +120,7 @@ rounds: [
       { t: '80 % of the city is under water' },
       { t: 'No power, no phones, no clean water' },
       { t: 'TV: “Snipers shooting at rescue helicopters”', false: 'Turned out false.' },
-      { t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 7 in the Superdome, 10 at the Convention Center.' }
+      { t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 6 inside the Superdome, 4 at the Convention Center.' }
     ],
     know: ['80 % of the city is under water', 'No power, no phones, no clean water', 'Thousands wait on roofs, in attics and in shelters'],
     happened: ['Boats and helicopters pull thousands off roofs', 'Thousands gather at the Convention Center, never an official shelter', 'FEMA promises 500 buses. They do not come for days', 'TV spreads rumours of snipers, rapes and murders'],
@@ -133,10 +133,10 @@ rounds: [
     ticker: [
       { t: '23,000 people in the Superdome, 19,000 at the Convention Center' },
       { t: 'No food, water or medical care' },
-      { t: 'The promised buses still have not come' },
+      { t: 'At the Convention Center the promised buses still have not come' },
       { t: 'Governor Blanco: the troops “know how to shoot and kill”' }
     ],
-    know: ['23,000 people in the Superdome, 19,000 at the Convention Center', 'No food, water or medical care', 'The promised buses still have not come'],
+    know: ['23,000 people in the Superdome, 19,000 at the Convention Center', 'No food, water or medical care', 'At the Convention Center the promised buses still have not come'],
     happened: ['Gretna police block the bridge out of the city', 'White vigilantes shoot Black men walking to safety at Algiers Point', 'The mayor on WWL radio says federal officials “don’t have a clue”', 'Friday · supply convoys and buses finally arrive'],
     notes: 'Sources: Horowitz (2020), ch. 4; WWL radio interview, 1 September 2005.'
   }
@@ -166,11 +166,11 @@ mayor: {
     { t: 'Last year everyone fled Hurricane Ivan, and it missed the city', kind: 'real' },
     { t: 'You will barely sleep this week. Strength drops every round', kind: 'game' }
   ],
-  real: 'On Saturday he called only a voluntary evacuation. On Sunday, 19 hours before landfall, he ordered the first mandatory evacuation in the city’s history. Bus offers were turned down and buses went only to the Superdome. More than 70,000 people stayed. On Thursday night he made an angry radio appeal for federal help on WWL.',
+  real: 'On Saturday he called only a voluntary evacuation. On Sunday, about 20 hours before landfall, he ordered the first mandatory evacuation in the city’s history. Bus offers were turned down and buses went only to the Superdome. More than 70,000 people stayed. On Thursday night he made an angry radio appeal for federal help on WWL.',
   realPath: ['m1_vol', 'm2_fema', 'm3_demand', 'm4_radio'],
-  realRows: ['Voluntary first, mandatory 19 hours before landfall', 'Asks state and FEMA for help, radios down', 'Thousands at the Convention Center, no supplies', 'Angry radio appeal for help'],
+  realRows: ['Voluntary first, mandatory 20 hours before landfall', 'Asks state and FEMA for help, radios down', 'Thousands at the Convention Center, no supplies', 'Angry radio appeal for help'],
   realStats: [
-    { label: 'Mandatory order', value: '19 hours before landfall' },
+    { label: 'Mandatory order', value: 'about 20 hours before landfall' },
     { label: 'People who stayed in the city', value: 'More than 70,000' },
     { label: 'Buses and drivers', value: '372 buses, about 100 drivers' },
     { label: 'Federal buses promised', value: '500, they did not come for days' }
@@ -181,13 +181,13 @@ mayor: {
       hear: ['Hotels and businesses: “A false alarm costs us millions.”', 'City lawyers: “Closing businesses could get the city sued.”', 'Ivan last year: hours of traffic, then nothing'],
       card: { t: 'A hotel association calls. They ask you to wait before you close the city.', kind: 'game' },
       choices: [
-        { id: 'm1_mand_dome', t: 'Mandatory evacuation today, buses to the Superdome', img: 'domeLine', legacy: 'You gave people a full extra day, but residents without cars still had only the Superdome.',
-          c: 'People get a full extra day. Plaquemines did this and got 97 to 98 % out. But your 100,000 residents without cars still have no way out of the city.' },
+        { id: 'm1_mand_dome', pull: { t: 'The state plan told you to wait until about 30 hours before landfall, and your lawyers warned of lawsuits from closed businesses. Ordering now means breaking both. In reality the order came on Sunday.', kind: 'real', strength: -1 }, t: 'Mandatory evacuation today, buses to the Superdome', img: 'domeLine', legacy: 'You gave people a full extra day, but residents without cars still had only the Superdome.',
+          c: 'People get a full extra day. Plaquemines and St. Charles did this a day earlier, on Saturday. But your 100,000 residents without cars still have no way out of the city.' },
         { id: 'm1_vol', t: 'Voluntary today, mandatory tomorrow, buses to the Superdome', img: 'dome', legacy: 'Your order came when landfall was less than a day away.',
           c: 'Many leave, many do not take it seriously. When the order comes, landfall is less than a day away.' },
-        { id: 'm1_buses_out', t: 'Mandatory today, buses out of the city', img: 'busEvac', legacy: 'A few bus trips left. Most people without cars were still in the city.',
+        { id: 'm1_buses_out', pull: { t: 'The city plan sent carless residents to the Superdome, not out of the region. No shelter outside had agreed to take them, so the buses have nowhere to go.', kind: 'game' }, t: 'Mandatory today, buses out of the city', img: 'busEvac', legacy: 'A few bus trips left. Most people without cars were still in the city.',
           c: 'About 100 drivers means about 4,000 seats per trip, and no shelter outside will take people. A few trips leave before the wind closes the roads.' },
-        { id: 'm1_wait', t: 'Wait for the next forecast', legacy: 'You lost a whole day the city never got back.',
+        { id: 'm1_wait', pull: { t: 'By Sunday morning the hurricane center is forecasting an 18 to 22 foot surge and the President is pressing for a mandatory order. Waiting any longer is not an option anyone will accept.', kind: 'real' }, t: 'Wait for the next forecast', legacy: 'You lost a whole day the city never got back.',
           c: 'By Sunday morning Katrina is a Category 5. You have lost a whole day.' }
       ]
     } },
@@ -196,22 +196,22 @@ mayor: {
       hear: ['Police radio: “Water in the Lower Ninth, rising fast”', { t: 'TV: “New Orleans dodged the bullet”', false: 'Misleading. Levees and floodwalls were already breaking. By Tuesday 80 % of the city was under water.' }],
       card: { t: 'A third of your police radios do not work.', kind: 'game' },
       choices: [
-        { id: 'm2_rescue', t: 'Send police and firefighters to rescue people', img: 'helicopter',
+        { id: 'm2_rescue', pull: { t: 'Without boats and with a third of your radios dead, your officers can only reach a few streets. Only the state and FEMA can send boats, buses and troops in numbers.', kind: 'game' }, t: 'Send police and firefighters to rescue people', img: 'helicopter',
           c: 'Many of your own officers have lost their homes, and radios are down. Rescue is slow and patchy.' },
         { id: 'm2_fema', t: 'Ask the state and FEMA for buses, boats and troops', img: 'sandbags',
           c: 'Your request goes into a system that waits for formal paperwork. Help is days away.' },
-        { id: 'm2_cc', t: 'Tell people to go to the Convention Center', img: 'cc',
+        { id: 'm2_cc', pull: { t: 'The Convention Center has no food, water or staff. Only the state and FEMA can change that, so asking them is where this path ends up anyway.', kind: 'game' }, t: 'Tell people to go to the Convention Center', img: 'cc',
           c: 'Thousands go. But you have no food, water or staff to send there.' }
       ]
     } },
     { '*': {
       sit: '80 % of the city is under water. Thousands wait at the Superdome and the Convention Center.',
-      hear: [{ t: 'TV: “Snipers shooting at rescue helicopters”', false: 'Turned out false.' }, { t: 'TV: “Looting and murders in the Superdome”', false: 'Turned out false. Recorded dead: 7 in the Superdome, 10 at the Convention Center.' }],
+      hear: [{ t: 'TV: “Snipers shooting at rescue helicopters”', false: 'Turned out false.' }, { t: 'TV: “Looting and murders in the Superdome”', false: 'Turned out false. Recorded dead: 6 inside the Superdome, 4 at the Convention Center.' }],
       card: { t: 'You cannot reach FEMA by phone for hours.', kind: 'game' },
       choices: [
-        { id: 'm3_police', t: 'Pull police off rescue to stop looting', img: 'soldiers',
+        { id: 'm3_police', pull: { t: 'Whatever you do on the ground, about 40,000 people can only leave by bus, and only FEMA can send them. Your calls go unanswered, so the demand ends up in public.', kind: 'game' }, t: 'Pull police off rescue to stop looting', img: 'soldiers',
           c: 'Stores are guarded, but fewer boats are out rescuing people.' },
-        { id: 'm3_rescue', t: 'Keep everyone on rescue', img: 'rescue',
+        { id: 'm3_rescue', pull: { t: 'Rescue continues, but the crowds still need buses, and only FEMA can send them. Your calls go unanswered, so the demand ends up in public.', kind: 'game' }, t: 'Keep everyone on rescue', img: 'rescue',
           c: 'More people are pulled off roofs, but the rumours keep spreading.' },
         { id: 'm3_demand', t: 'Publicly demand federal buses', img: 'buses',
           c: 'Federal officials promise 500 buses. They do not come for days.' }
@@ -223,8 +223,8 @@ mayor: {
       card: { t: 'A journalist asks you live on air why there are still people on roofs.', kind: 'game' },
       choices: [
         { id: 'm4_radio', t: 'Go on the radio and demand help', end: 'm_radio' },
-        { id: 'm4_quiet', t: 'Negotiate quietly with the state and FEMA', end: 'm_quiet' },
-        { id: 'm4_bridge', t: 'Tell people to walk out over the bridge', end: 'm_bridge' }
+        { id: 'm4_quiet', pull: { t: 'By Thursday phones are dead and quiet talks have produced no buses. A public appeal is the only channel left that reaches Washington.', kind: 'game' }, t: 'Negotiate quietly with the state and FEMA', end: 'm_quiet' },
+        { id: 'm4_bridge', pull: { t: 'On Thursday night Gretna police really did close the bridge and turned evacuees back.', kind: 'real' }, t: 'Tell people to walk out over the bridge', end: 'm_bridge' }
       ]
     } }
   ]
@@ -266,7 +266,7 @@ herbert: {
       choices: [
         { id: 'h1_drive', t: 'Drive her out of the city', lock: 'No car that can carry her wheelchair, and no relatives outside the city', lockKind: 'real' },
         { id: 'h1_amb', t: 'Hire a private ambulance', cost: 1200, loc: 'out', c: 'An ambulance takes you both out of the city.' },
-        { id: 'h1_dome', t: 'Take her to the Superdome on Sunday', loc: 'dome', ethel: -1, strength: -1, wait: 6, img: 'domeLine',
+        { id: 'h1_dome', pull: { t: 'The Superdome opens as a shelter of last resort. You were told to bring your own food and medicine, and there is no power for Ethel’s pump.', kind: 'game' }, t: 'Take her to the Superdome on Sunday', loc: 'dome', ethel: -1, strength: -1, wait: 6, img: 'domeLine',
           c: 'Hours in line in the heat. Inside there is almost no medical care for someone who is tube-fed.' },
         { id: 'h1_stay', t: 'Buy food and supplies, stay with her', cost: 80, food: 3, loc: 'home',
           c: 'You buy food, water and feeding supplies for several days. {money} is left.' }
@@ -278,18 +278,18 @@ herbert: {
         sit: 'The wind tears at the roof and the power is gone. By noon water is rising in the street.',
         hear: ['Battery radio: “Levee breaks reported”'],
         choices: [
-          { id: 'h2_up', t: 'Move Ethel upstairs and wait', loc: 'upstairs', strength: -1, c: 'The water keeps rising. Nobody knows you are there.' },
+          { id: 'h2_up', pull: { t: 'On Tuesday a neighbour with a boat comes by. In reality he took Herbert and Ethel to the Convention Center.', kind: 'real' }, t: 'Move Ethel upstairs and wait', loc: 'upstairs', strength: -1, c: 'The water keeps rising. Nobody knows you are there.' },
           { id: 'h2_boat', t: 'Ask the neighbour with a boat to take you to dry ground', loc: 'cc', ethel: -1, wait: 20, img: 'cc',
             c: 'He can only go once the wind drops. On Tuesday he takes you to the Convention Center. An officer tells you to wait outside, help will come in an hour or two.' },
-          { id: 'h2_911', t: 'Call 911', loc: 'upstairs', strength: -1, c: 'The lines are dead. Phones and power are down across the city. As the water rises, you carry Ethel upstairs.' }
+          { id: 'h2_911', pull: { t: 'Nobody answers. On Tuesday a neighbour with a boat comes by. In reality he took Herbert and Ethel to the Convention Center.', kind: 'real' }, t: 'Call 911', loc: 'upstairs', strength: -1, c: 'The lines are dead. Phones and power are down across the city. As the water rises, you carry Ethel upstairs.' }
         ]
       },
       dome: {
         sit: 'Wind tears holes in the Superdome roof. The power fails. About 10,000 people are inside.',
         hear: ['People around you: “The water is coming into the city”'],
         choices: [
-          { id: 'h2_dstay', t: 'Stay inside with Ethel', loc: 'dome', c: 'Heat and darkness. The toilets stop working.' },
-          { id: 'h2_doc', t: 'Ask the National Guard for a doctor', loc: 'dome', wait: 5, c: 'The few medical staff are overwhelmed. They can do little for her.' }
+          { id: 'h2_dstay', pull: { t: 'The Dome is already crowded and hot. Ethel cannot be given a proper bed or her pump.', kind: 'game' }, t: 'Stay inside with Ethel', loc: 'dome', c: 'Heat and darkness. The toilets stop working.' },
+          { id: 'h2_doc', pull: { t: 'The few medical staff in the Dome are overwhelmed.', kind: 'game' }, t: 'Ask the National Guard for a doctor', loc: 'dome', wait: 5, c: 'The few medical staff are overwhelmed. They can do little for her.' }
         ]
       }
     },
@@ -299,8 +299,8 @@ herbert: {
         sit: 'The first floor is under water. Ethel’s supplies are running out.',
         hear: ['Nothing. No power, no phone.'],
         choices: [
-          { id: 'h3_sheet', t: 'Hang a sheet from the window and wait', loc: 'roof', ethel: -1, wait: 24, img: 'helicopter', c: 'You wait in the heat for a boat or a helicopter.' },
-          { id: 'h3_boat', t: 'Go with the neighbour’s boat to the Convention Center', loc: 'cc', ethel: -1, img: 'cc', c: 'You reach dry ground. An officer tells you to wait outside, help will come in an hour or two.' }
+          { id: 'h3_sheet', pull: { t: 'Many waited for days at windows and on roofs, and rescuers could only reach the people they could see.', kind: 'game' }, t: 'Hang a sheet from the window and wait', loc: 'roof', ethel: -1, wait: 24, img: 'helicopter', c: 'You wait in the heat for a boat or a helicopter.' },
+          { id: 'h3_boat', pull: { t: 'This is the choice Herbert made, and it was the only dry ground he could reach.', kind: 'real' }, t: 'Go with the neighbour’s boat to the Convention Center', loc: 'cc', ethel: -1, img: 'cc', c: 'You reach dry ground. An officer tells you to wait outside, help will come in an hour or two.' }
         ]
       },
       cc: {
@@ -308,15 +308,15 @@ herbert: {
         hear: [{ t: 'TV and crowd: “Snipers”, “murders”, “gangs”', false: 'Turned out false.' }, { t: 'An officer: “Buses in an hour or two”', false: 'The buses did not come for days.' }],
         choices: [
           { id: 'h3_wait', t: 'Wait outside as you were told', loc: 'cc', ethel: -1, strength: -1, wait: 24, c: 'Hours pass in the heat. No buses come.' },
-          { id: 'h3_doc', t: 'Look for a doctor in the crowd', loc: 'cc', strength: -1, c: 'There is no medical care to find.' }
+          { id: 'h3_doc', pull: { t: 'There is no medical care in the crowd to find. Everyone is looking for the same help.', kind: 'game' }, t: 'Look for a doctor in the crowd', loc: 'cc', strength: -1, c: 'There is no medical care to find.' }
         ]
       },
       dome: {
         sit: 'Day three in the Superdome. Heat, broken toilets, too little water.',
-        hear: [{ t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 7 in the Superdome, 10 at the Convention Center.' }],
+        hear: [{ t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 6 inside the Superdome, 4 at the Convention Center.' }],
         choices: [
-          { id: 'h3_dstay', t: 'Stay and wait for buses', loc: 'dome', ethel: -1, wait: 24, img: 'domeWater', c: 'The first buses to Houston start to leave on Wednesday.' },
-          { id: 'h3_tocc', t: 'Leave for the Convention Center', loc: 'cc', ethel: -1, strength: -1, img: 'cc', c: 'It is no better there.' }
+          { id: 'h3_dstay', pull: { t: 'Superdome evacuees were bused out from Wednesday evening, but the lines were long and the buses slow.', kind: 'real' }, t: 'Stay and wait for buses', loc: 'dome', ethel: -1, wait: 24, img: 'domeWater', c: 'The first buses to Houston start to leave on Wednesday.' },
+          { id: 'h3_tocc', pull: { t: 'The Convention Center was never prepared as a shelter and nothing is waiting there.', kind: 'game' }, t: 'Leave for the Convention Center', loc: 'cc', ethel: -1, strength: -1, img: 'cc', c: 'It is no better there.' }
         ]
       }
     },
@@ -327,16 +327,16 @@ herbert: {
         hear: ['Rumour: “Buses are coming tomorrow”'],
         choices: [
           { id: 'h4_wait', t: 'Wait for the buses', ethel: -1, wait: 48, end: 'h_wait' },
-          { id: 'h4_bridge', t: 'Push her toward the bridge out of the city', ethel: -1, strength: -1, minStrength: 2, weakLock: 'You are too exhausted to push her wheelchair that far', end: 'bridge' },
-          { id: 'h4_ride', t: 'Pay a stranger with a car to drive you out', cost: 100, loc: 'out', end: 'paid_ride' }
+          { id: 'h4_bridge', pull: { t: 'Gretna police really did close the bridge on Thursday night and turned evacuees back.', kind: 'real' }, t: 'Push her toward the bridge out of the city', ethel: -1, strength: -1, minStrength: 2, weakLock: 'You are too exhausted to push her wheelchair that far', end: 'bridge' },
+          { id: 'h4_ride', pull: { t: 'Few drivers are willing to take a wheelchair and a tube-fed patient. Those who are charge more than you have.', kind: 'game' }, t: 'Pay a stranger with a car to drive you out', cost: 100, loc: 'out', end: 'paid_ride' }
         ]
       },
       roof: {
         sit: 'Day four at the window.',
         hear: ['The sound of helicopters'],
         choices: [
-          { id: 'h4_signal', t: 'Signal a helicopter', end: 'rescued' },
-          { id: 'h4_keep', t: 'Keep waiting', wait: 48, end: 'waiting' }
+          { id: 'h4_signal', pull: { t: 'Helicopters mostly look for people they can see from the air. Rescue is slow and patchy.', kind: 'game' }, t: 'Signal a helicopter', end: 'rescued' },
+          { id: 'h4_keep', pull: { t: 'Waiting at a window with a tube-fed patient and no power is what many older residents did.', kind: 'game' }, t: 'Keep waiting', wait: 48, end: 'waiting' }
         ]
       },
       dome: {
@@ -383,8 +383,8 @@ kim: {
       card: { t: 'Scott wants to stay to protect the house.', kind: 'game' },
       choices: [
         { id: 'k1_rent', t: 'Rent a car', lock: 'The rental company refuses. No credit card, no car', lockKind: 'real' },
-        { id: 'k1_bus', t: 'Buy a bus ticket out', cost: 45, loc: 'out', img: 'busEvac', c: 'You get one of the last seats. You arrive in a strange city with {money} and nowhere to stay.' },
-        { id: 'k1_dome', t: 'Walk to the Superdome on Sunday', loc: 'dome', strength: -1, wait: 6, img: 'dome', c: 'Hours in line in the heat, searched at the door. Bring your own food.' },
+        { id: 'k1_bus', pull: { t: 'Intercity buses sell out quickly. With $60 and no card you can reach the last seats, but you arrive with almost nothing and no way to call home.', kind: 'game' }, t: 'Buy a bus ticket out', cost: 45, loc: 'out', img: 'busEvac', c: 'You get one of the last seats. You arrive in a strange city with {money} and nowhere to stay.' },
+        { id: 'k1_dome', pull: { t: 'Carless residents of the Ninth Ward live miles from the Superdome, and there is no shuttle from every street.', kind: 'game' }, t: 'Walk to the Superdome on Sunday', loc: 'dome', strength: -1, wait: 6, img: 'dome', c: 'Hours in line in the heat, searched at the door. Bring your own food.' },
         { id: 'k1_stay', t: 'Buy food and water, stay with Scott', cost: 30, food: 3, loc: 'home', c: 'You stock up on food and water and stay with Scott.' }
       ]
     } },
@@ -394,9 +394,9 @@ kim: {
         sit: 'The storm hits. In the morning the Industrial Canal floodwall breaks three blocks away. Water pours in.',
         hear: ['Neighbours shouting: “The levee broke!”'],
         choices: [
-          { id: 'k2_attic', t: 'Climb into the attic', loc: 'attic', c: 'You make it up with Scott and some neighbours. The water keeps rising below you.' },
-          { id: 'k2_roof', t: 'Get onto the roof', loc: 'roof', strength: -1, img: 'helicopter', c: 'Rescuers can see you. But the sun is brutal and you have no water.' },
-          { id: 'k2_swim', t: 'Swim for a two-storey house', loc: 'house', strength: -1, img: 'ninth', c: 'Deep water, debris and currents. You reach a neighbour’s two-storey house.' }
+          { id: 'k2_attic', pull: { t: 'The attic was the nearest dry place for most people in the Lower Ninth.', kind: 'real' }, t: 'Climb into the attic', loc: 'attic', c: 'You make it up with Scott and some neighbours. The water keeps rising below you.' },
+          { id: 'k2_roof', pull: { t: 'The Lower Ninth had minutes, not hours. Most of those who survived reached the attic.', kind: 'game' }, t: 'Get onto the roof', loc: 'roof', strength: -1, img: 'helicopter', c: 'Rescuers can see you. But the sun is brutal and you have no water.' },
+          { id: 'k2_swim', pull: { t: 'The Lower Ninth had minutes, not hours. Few could swim through the current and the debris.', kind: 'game' }, t: 'Swim for a two-storey house', loc: 'house', strength: -1, img: 'ninth', c: 'Deep water, debris and currents. You reach a neighbour’s two-storey house.' }
         ]
       },
       dome: {
@@ -421,15 +421,15 @@ kim: {
         hear: ['Nothing but water and wind'],
         choices: [
           { id: 'k3_swim', t: 'Swim with Scott to a two-storey house', loc: 'house', strength: -1, minStrength: 2, weakLock: 'Too weak to swim through the current', img: 'ninth', c: 'You make it. Now you wait.' },
-          { id: 'k3_roof', t: 'Break through the roof', loc: 'roof', strength: -1, img: 'helicopter', c: 'You are out in the open, waiting in the heat.' }
+          { id: 'k3_roof', pull: { t: 'On the roof you are in view, but the Ninth Ward was one of the last areas reached.', kind: 'game' }, t: 'Break through the roof', loc: 'roof', strength: -1, img: 'helicopter', c: 'You are out in the open, waiting in the heat.' }
         ]
       },
       house: {
         sit: 'You are dry, but nobody comes.',
         hear: ['Rumour: “They’re not coming for the Ninth Ward”'],
         choices: [
-          { id: 'k3_wait', t: 'Wait for rescue', loc: 'house', wait: 48, c: 'Two days pass. No boat, no helicopter.' },
-          { id: 'k3_wade', t: 'Wade to the highway overpass', loc: 'house', strength: -1, wait: 24, minStrength: 3, weakLock: 'Your cut foot and no strength left. You cannot wade through chest-deep water', c: 'Dirty water up to your chest. Others are already waiting there.' }
+          { id: 'k3_wait', pull: { t: 'In reality Kimberly and Scott waited two days with no help.', kind: 'real' }, t: 'Wait for rescue', loc: 'house', wait: 48, c: 'Two days pass. No boat, no helicopter.' },
+          { id: 'k3_wade', pull: { t: 'Chest-deep, contaminated water with a cut foot is how many people got infections.', kind: 'game' }, t: 'Wade to the highway overpass', loc: 'house', strength: -1, wait: 24, minStrength: 3, weakLock: 'Your cut foot and no strength left. You cannot wade through chest-deep water', c: 'Dirty water up to your chest. Others are already waiting there.' }
         ]
       },
       roof: {
@@ -443,7 +443,7 @@ kim: {
       dome: {
         card: { t: 'You have not slept for two nights. The heat and noise never stop.', kind: 'game', strength: -1 },
         sit: 'Day three in the Superdome.',
-        hear: [{ t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 7 in the Superdome, 10 at the Convention Center.' }],
+        hear: [{ t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 6 inside the Superdome, 4 at the Convention Center.' }],
         choices: [
           { id: 'k3_dstay', t: 'Stay and wait for buses', loc: 'dome', wait: 48, img: 'domeWater', c: 'The first buses to Houston leave on Wednesday.' }
         ]
@@ -464,8 +464,8 @@ kim: {
         hear: ['Rumour: “Buses are coming to the Convention Center”'],
         choices: [
           { id: 'k4_navy', t: 'Walk to the Navy base', strength: -1, end: 'k_navy' },
-          { id: 'k4_wait', t: 'Wait for the buses', wait: 48, end: 'k_wait' },
-          { id: 'k4_bus', t: 'Take an abandoned school bus and drive out', loc: 'out', end: 'k_vehicle' }
+          { id: 'k4_wait', pull: { t: 'Buses reach the Convention Center only on Friday. Waiting in the heat costs more than it gains.', kind: 'game' }, t: 'Wait for the buses', wait: 48, end: 'k_wait' },
+          { id: 'k4_bus', pull: { t: 'This really happened, once. Almost everyone else waited. One man, Jabbar Gibson, had the nerve and the keys.', kind: 'real' }, t: 'Take an abandoned school bus and drive out', minStrength: 2, weakLock: 'You are too exhausted to drive a heavy bus through flooded streets', loc: 'out', end: 'k_vehicle' }
         ]
       },
       roof: {
@@ -473,8 +473,8 @@ kim: {
         sit: 'Day four on the roof.',
         hear: [],
         choices: [
-          { id: 'k4_signal', t: 'Signal a helicopter', end: 'rescued' },
-          { id: 'k4_keep', t: 'Keep waiting', wait: 48, end: 'waiting' }
+          { id: 'k4_signal', pull: { t: 'Helicopter crews reached the roofs they saw first. Many people on the roofs waited far longer.', kind: 'game' }, t: 'Signal a helicopter', end: 'rescued' },
+          { id: 'k4_keep', pull: { t: 'Waiting longer on the roof with no water is a risk of its own.', kind: 'game' }, t: 'Keep waiting', wait: 48, end: 'waiting' }
         ]
       },
       dome: {
@@ -513,14 +513,14 @@ lake: {
     { t: 'Your sister in Baton Rouge has a spare room', kind: 'composite' },
     { t: 'You have a dog', kind: 'game' }
   ],
-  real: 'Composite based on neighbourhood data. Like most households with a car, the family drove out before the storm. Their house flooded when the 17th Street Canal broke. Insured, and with a rebuilding grant based on a higher home value, they rebuilt. About 90 % of Lakeview households came back.',
+  real: 'Composite based on neighbourhood data. Like most households with a car, the family drove out before the storm. Their house flooded when the 17th Street Canal broke. Insured, and with a rebuilding grant based on a higher home value, they rebuilt. About 90 % of households citywide came back.',
   realPath: ['l1_drive', 'l2_sister', 'l3_insurer', 'l4_rebuild'],
   realRows: ['Drives out to relatives', 'Safe inland', 'House floods, insurance claim', 'Insured, rebuilds'],
   realStats: [
     { label: 'This person', value: 'A composite, based on neighbourhood data' },
     { label: 'Left before the storm', value: 'Like most households with a car' },
     { label: 'Rebuilding', value: 'Insurance, and a grant based on a higher home value' },
-    { label: 'Lakeview households back', value: 'About 90 %' }
+    { label: 'Households back, citywide', value: 'About 90 %' }
   ],
   rounds: [
     { '*': {
@@ -529,8 +529,8 @@ lake: {
       card: { t: 'The highway out takes eight hours instead of one.', kind: 'game' },
       choices: [
         { id: 'l1_drive', t: 'Drive to your sister in Baton Rouge', cost: 40, loc: 'out', strength: -1, wait: 8, c: 'Eight hours in traffic, but you get out.' },
-        { id: 'l1_wait', t: 'Wait for an official order', loc: 'home', c: 'When the order comes, the roads out are jammed. You decide to stay one more night. You still have your car.' },
-        { id: 'l1_board', t: 'Board up and stay', cost: 200, food: 3, loc: 'home', c: 'Plywood on the windows, food for days.' }
+        { id: 'l1_wait', pull: { t: 'Around 1.2 million people left the region before landfall, mostly by car, so those who leave late meet the worst traffic.', kind: 'real' }, t: 'Wait for an official order', loc: 'home', c: 'When the order comes, the roads out are jammed. You decide to stay one more night. You still have your car.' },
+        { id: 'l1_board', pull: { t: 'Most households with a car left before the storm. Staying was a minority choice, and a risky one.', kind: 'real' }, t: 'Board up and stay', cost: 200, food: 3, loc: 'home', c: 'Plywood on the windows, food for days.' }
       ]
     } },
     {
@@ -540,14 +540,14 @@ lake: {
         hear: [{ t: 'TV: “New Orleans dodged the bullet”', false: 'Misleading. Levees and floodwalls were already breaking. By Tuesday 80 % of the city was under water.' }],
         choices: [
           { id: 'l2_sister', t: 'Stay with your sister', loc: 'out', c: 'Crowded, but safe.' },
-          { id: 'l2_motel', t: 'Book a motel to give your sister space', cost: 420, loc: 'out', c: 'A week in a motel that takes dogs. You can afford it.' }
+          { id: 'l2_motel', pull: { t: 'A motel gives you privacy, but it costs money that most people did not have.', kind: 'game' }, t: 'Book a motel to give your sister space', cost: 420, loc: 'out', c: 'A week in a motel that takes dogs. You can afford it.' }
         ]
       },
       home: {
         sit: 'The 17th Street Canal breaks. Lakeview floods to the rooftops.',
         hear: ['Neighbours shouting'],
         choices: [
-          { id: 'l2_roof', t: 'Climb onto the roof with your dog', loc: 'roof', strength: -1, img: 'flood', c: 'You wait for a boat or a helicopter.' },
+          { id: 'l2_roof', pull: { t: 'In Lakeview the water rose over hours, not minutes. Boats and helicopters reached many roofs, but not for days.', kind: 'game' }, t: 'Climb onto the roof with your dog', loc: 'roof', strength: -1, img: 'flood', c: 'You wait for a boat or a helicopter.' },
           { id: 'l2_drive', t: 'Drive out now', lock: 'Too late. The storm has closed the roads and the water is rising', lockKind: 'game' }
         ]
       }
@@ -559,7 +559,7 @@ lake: {
         hear: ['TV: “Looting in New Orleans”'],
         choices: [
           { id: 'l3_insurer', t: 'Call your insurer', loc: 'out', c: 'After a day on hold, you file a claim from your sister’s house.' },
-          { id: 'l3_drive', t: 'Try to drive back in', cost: 40, loc: 'out', wait: 6, c: 'The city is closed. Checkpoints keep everyone out.' }
+          { id: 'l3_drive', pull: { t: 'Residents were kept out of the city for weeks, so this trip ends at a checkpoint.', kind: 'real' }, t: 'Try to drive back in', cost: 40, loc: 'out', wait: 6, c: 'The city is closed. Checkpoints keep everyone out.' }
         ]
       },
       roof: {
@@ -567,7 +567,7 @@ lake: {
         sit: 'On the roof in the heat.',
         hear: [],
         choices: [
-          { id: 'l3_rwait', t: 'Keep waiting', loc: 'roof', wait: 24, img: 'helicopter', c: 'A boat passes, full.' }
+          { id: 'l3_rwait', pull: { t: 'Boats passed full. Helicopter crews took the people they could reach first.', kind: 'game' }, t: 'Keep waiting', loc: 'roof', wait: 24, img: 'helicopter', c: 'A boat passes, full.' }
         ]
       }
     },
@@ -578,7 +578,7 @@ lake: {
         hear: [],
         choices: [
           { id: 'l4_rebuild', t: 'Plan to rebuild', end: 'l_rebuild' },
-          { id: 'l4_move', t: 'Move somewhere else', end: 'l_move' }
+          { id: 'l4_move', pull: { t: 'Insurance and a grant tied to home value made rebuilding the common choice in Lakeview.', kind: 'real' }, t: 'Move somewhere else', end: 'l_move' }
         ]
       },
       roof: {
@@ -586,7 +586,7 @@ lake: {
         sit: 'Day four on the roof.',
         hear: [],
         choices: [
-          { id: 'l4_signal', t: 'Signal a helicopter', end: 'l_rescued' }
+          { id: 'l4_signal', pull: { t: 'Helicopter crews eventually reach the roof. Your insurance still pays for the house.', kind: 'game' }, t: 'Signal a helicopter', end: 'l_rescued' }
         ]
       }
     }
@@ -602,7 +602,7 @@ endings: {
   paid_ride: { t: 'You find a driver and get out of the city.', where: 'Out of the city' },
   bridge:    { t: 'Police on the Gretna side block the bridge and turn you back. You return to wait.', where: 'Still in the city' },
   rescued:   { t: 'A helicopter crew lifts you out. Thousands were rescued from rooftops and windows.', where: 'Lifted out by helicopter', img: 'rescue' },
-  waiting:   { t: 'Rescue comes late. Most of the dead in New Orleans died at home.', where: 'Still waiting in the city' },
+  waiting:   { t: 'Rescue comes late. Almost half of the people who died in Louisiana were 75 or older.', where: 'Still waiting in the city' },
   m_radio:   { t: 'On WWL radio you say federal officials “don’t have a clue what’s going on down here”. Buses and troops arrive over the weekend.' },
   m_quiet:   { t: 'The talks go on. Buses and troops arrive over the weekend either way.' },
   m_bridge:  { t: 'Police on the Gretna side block the bridge and turn evacuees back.' },
@@ -611,7 +611,7 @@ endings: {
   k_wait:    { t: 'The buses only come days later.', where: 'Still in the city' },
   k_vehicle: { t: 'You drive out. One young man, Jabbar Gibson, really did this: he took a school bus with about 70 people to Houston. Officials at first hesitated to let him in.', where: 'Houston, about 560 km from home', img: 'buses' },
   k_out:     { t: 'You are safe, but your home is gone. Only about 37 % of Lower Ninth households came back within ten years.', where: 'Another city, far from home' },
-  l_rebuild: { t: 'Insurance and a grant based on your home’s value help you rebuild. About 90 % of Lakeview households came back.', where: 'Baton Rouge, about 130 km from home' },
+  l_rebuild: { t: 'Insurance and a grant based on your home’s value help you rebuild. About 90 % of households citywide came back.', where: 'Baton Rouge, about 130 km from home' },
   l_move:    { t: 'You start over somewhere else, with insurance money to do it.', where: 'A new city' },
   l_rescued: { t: 'A helicopter crew lifts you off the roof. Your insurance still pays for the house.', where: 'Lifted out by helicopter', img: 'rescue' }
 },

@@ -72,3 +72,19 @@ Each card is fixed per person, round and location. Every group with the same per
 10. **Neighbours: "In Betsy they bombed the levee to save the rich parts"**. Shown as a rumour players hear, not marked true or false. You may want to add a correction on the fate screen.
 11. **Composite tags.** The Lakeview constraints are tagged "Composite", not "From the real story", because no single real person stands behind them.
 12. **Photo credits** `flood.jpg` (Paul Morse) and `soldiers.jpg` (Sgt. Michael J. Carden) are as in the starter and deck. The Commons pages name no author. `cc.jpg` could not be matched to an exact Commons file (see CREDITS.md).
+
+## 4. Changes after the review (13 November)
+
+### Facts corrected (please re-check the sources)
+- Mandatory order now says "about 20 hours before landfall" (Senate report timeline, National Geographic and FactCheck.org give 9.30; EMS World gives 11).
+- Lakeview return rate now reads "about 90 % of households citywide". The Lower Ninth figure of 37 % is unchanged (NPR / The Data Center, 2015).
+- Plaquemines: the unsourced "97 to 98 %" is gone. New text: Plaquemines and St. Charles ordered mandatory evacuations on Saturday 27 August (64 Parishes).
+- Deaths in the rumour box: "6 inside the Superdome, 4 at the Convention Center" (Times-Picayune, 26 September 2005). The old "7 and 10" matched no source.
+- "Most of the dead died at home" replaced by "Almost half of the people who died in Louisiana were 75 or older" (Brunkard et al. 2008).
+- Round 4: "At the Convention Center the promised buses still have not come". Superdome buses did start late on Wednesday and were suspended early Thursday (CBS, NPR).
+
+### Destiny pull (new)
+Every choice that is not on the real path can now carry a "pull". After the player chooses, a box "Reality check" says what pushed against that option. The fate screen lists all of them under "What pushed against your choices". Each pull is tagged "From the real story" or "Game detail". Most pulls are text only. Two have an effect: Mayor, "Mandatory evacuation today" costs 1 strength. Kimberly's school bus needs at least Exhausted strength.
+
+### Back checks (new)
+`node tests/check_paths.js` plays every possible path of all four people through the real app code (148 paths), and checks that each one reaches an ending, that no text shows "undefined" or "{money}", that money never goes negative, and that the real path is playable. It also lists any choice without a pull. The browser test `tests/play_all.py` is unchanged.

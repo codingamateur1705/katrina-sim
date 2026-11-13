@@ -13,7 +13,7 @@ function clone(o) { return JSON.parse(JSON.stringify(o)); }
 function P() { return D.people[S.who]; }
 function fill(t) { return esc(t).replace(/\{money\}/g, S && S.st ? usd(S.st.money || 0) : ''); }
 function txt(h) { return typeof h === 'string' ? h : h.t; }
-function tag(kind) { return kind ? '<span class="tag ' + esc(kind) + '">' + esc(D.kinds[kind] || kind) + '</span>' : ''; }
+function tag(kind) { return (kind && kind !== 'real' && kind !== 'game') ? '<span class="tag ' + esc(kind) + '">' + esc(D.kinds[kind] || kind) + '</span>' : ''; }
 function media(key) { return D.media[key] || null; }
 function locLabel(loc) { var p = P(); return (p.locLabels && p.locLabels[loc]) || (D.locations[loc] ? D.locations[loc].label : loc); }
 
@@ -84,9 +84,15 @@ function pick(id) {
   applyEffects(c, log);
   if (c.loc && c.loc !== st.loc) { st.loc = c.loc; log.push(locLabel(c.loc)); }
   if (c.wait) st.stats.wait += c.wait;
+  var pl = null;
+  if (c.pull && c.id !== P().realPath[S.r]) {
+    pl = { t: c.pull.t, kind: c.pull.kind || 'game' };
+    if (c.pull.strength) applyEffects({ strength: c.pull.strength }, log);
+    st.pulls.push({ r: S.r, t: pl.t, kind: pl.kind });
+  }
   if (c.end) st.end = c.end;
   st.picks.push(c.id); st.labels.push(c.t);
-  st.log.push({ c: c.c ? fill(c.c) : (c.end ? 'Your choice is made. You will see your fate at the end.' : ''), img: c.img || null, delta: log });
+  st.log.push({ c: c.c ? fill(c.c) : (c.end ? 'Your choice is made. You will see your fate at the end.' : ''), img: c.img || null, pull: pl, delta: log });
   stopTimer();
   render();
 }
@@ -99,7 +105,7 @@ function finish() { push(); roundEnd(D.rounds.length - 1); S.phase = 'end'; go()
 function choose(k) {
   var p = D.people[k];
   hist = []; timers = {};
-  S = { who: k, phase: 'intro', r: -1, st: Object.assign({ money: 0, food: 0, ethel: 3, strength: 5, picks: [], labels: [], log: [], end: null, seenFalse: {}, stats: { hungry: 0, nights: 0, wait: 0 } }, clone(p.start)) };
+  S = { who: k, phase: 'intro', r: -1, st: Object.assign({ money: 0, food: 0, ethel: 3, strength: 5, picks: [], labels: [], log: [], pulls: [], end: null, seenFalse: {}, stats: { hungry: 0, nights: 0, wait: 0 } }, clone(p.start)) };
   S.st.sceneLoc = S.st.loc;
   go();
 }
@@ -206,6 +212,7 @@ function renderRound() {
   var timer = done ? '' : '<div class="timer" id="timer"><div class="bar"><i></i></div><span class="s"></span><button class="iconbtn" id="pause" aria-pressed="false">Pause</button></div><div class="timeup" id="timeup" hidden>' + esc(D.meta.timeUp) + '</div>';
   var cons = done ? '<div class="cons"><span class="what">What happens to you</span>' + lg.c +
     (lg.delta.length ? '<div class="delta">' + lg.delta.map(function (d) { return '<span' + (/^\+/.test(d) ? ' class="up"' : '') + '>' + esc(d) + '</span>'; }).join('') + '</div>' : '') +
+    (lg.pull ? '<div class="pull"><span class="what">Reality check ' + tag(lg.pull.kind) + '</span>' + fill(lg.pull.t) + '</div>' : '') +
     (lg.img ? figure(lg.img) : '') + '</div><div class="wait">' + esc(D.meta.waitBox) + '</div>' : '';
   var last = S.r === D.rounds.length - 1;
   app.innerHTML = topbar(p.name, 'Round ' + R.n + ' of ' + D.rounds.length + (p.composite ? ' · Composite' : '')) + tickerHtml(R) + heroHtml(R) +
@@ -252,12 +259,14 @@ function renderEnd() {
   var real = p.realStats.map(function (r) { return '<dt>' + esc(r.label) + '</dt><dd>' + esc(r.value) + '</dd>'; }).join('');
   var rum = Object.keys(st.seenFalse).map(function (k) { return '<li><span class="tag rumour">Rumour</span> <q>' + esc(k.replace(/^[^:]+:\s*/, '').replace(/[“”]/g, '')) + '</q><div>' + esc(st.seenFalse[k]) + '</div></li>'; }).join('');
   var who = p.firstName || p.name;
+  var pulls = st.pulls.map(function (x) { return '<li><b>Round ' + (x.r + 1) + '</b><span>' + fill(x.t) + '</span>' + tag(x.kind) + '</li>'; }).join('');
   app.innerHTML = topbar('Your fate', p.name + (p.composite ? ' · Composite' : '')) +
     '<div class="wrap"><div class="card"><div class="hd" style="background:' + p.color + '"><b>' + esc(p.name) + '</b><small>' + esc(p.sub) + '</small></div>' + chips() +
     '<div class="pad"><h4>Your path</h4><ol class="path">' + path + '</ol></div>' +
     '<div class="pad"><h4>Your ending</h4><div class="end">' + endingText() + '</div>' +
     (e.img ? '<div class="endimg">' + figure(e.img) + '</div>' : '') +
     '<span class="match ' + (same ? 'yes' : 'no') + '">' + (same ? 'Your path matches what really happened' : 'Your path differs from what really happened' + (hits ? ' (same in ' + hits + ' of 4 rounds)' : '')) + '</span></div>' +
+    (pulls ? '<div class="pad"><h4>What pushed against your choices</h4><ul class="pulls">' + pulls + '</ul></div>' : '') +
     '<div class="pad"><h4>How hard was it?</h4><div class="hard"><div class="col"><h4>In your game</h4><dl>' + mine + '</dl></div><div class="col"><h4>In reality' + (p.composite ? ' (composite)' : '') + '</h4><dl>' + real + '</dl></div></div></div>' +
     '<div class="pad"><h4>What really happened to ' + esc(who) + (p.composite ? ' <span class="tag composite">Composite</span>' : '') + '</h4></div><div class="realbox">' + esc(p.real) + '</div>' +
     (rum ? '<div class="pad"><h4>What you heard that turned out false</h4><ul class="rumours">' + rum + '</ul></div>' : '') +
