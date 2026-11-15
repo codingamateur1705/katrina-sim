@@ -22,7 +22,7 @@ meta: {
   eyebrow: 'Hurricane Katrina · 27 August to 2 September 2005',
   instruction: 'Your group plays one person through the whole disaster. Pick the person you were given.',
   gameValues: 'Money, food and strength are game values, set to fit each person’s situation. They are not historical figures.',
-  timerSeconds: 20,
+  timerSeconds: 120,
   timeUp: 'Time is up. In reality there was no time to think either.',
   waitBox: 'Now look at the main screen. What happened in the city.',
   question: 'Who really had a choice? Was it money, health, a car, or the colour of their skin?',
@@ -102,6 +102,7 @@ rounds: [
   },
   {
     n: 2, when: 'Monday, 29 August', short: '29 Aug', days: 1, nights: 1,
+    dome: ['About 10,000 people are inside when the storm hits', 'The wind tears holes in the roof. Rain pours in', 'The power fails. No air conditioning in the August heat', 'You were told to bring your own food for days'],
     ask: 'It is Monday, 29 August, early morning. The storm is coming ashore. What do you do?',
     media: 'flood', knowMedia: 'flood', happenedMedia: 'levee', sound: true,
     ticker: [
@@ -116,6 +117,7 @@ rounds: [
   },
   {
     n: 3, when: 'Tuesday and Wednesday, 30 to 31 August', short: '30 to 31 Aug', days: 2, nights: 2,
+    dome: ['The toilets overflow. The smell is everywhere', 'Water and food come in small, irregular handouts', 'People sleep on concrete floors and plastic seats', 'Nobody tells you when or where the buses will come', 'Rumours of violence spread through the crowd'],
     ask: 'It is Tuesday, 30 August. What do you do now?',
     media: 'cgVideo', knowMedia: 'roofRescue', happenedMedia: 'rescue',
     ticker: [
@@ -130,6 +132,7 @@ rounds: [
   },
   {
     n: 4, when: 'Thursday and Friday, 1 to 2 September', short: '1 to 2 Sep', days: 2, nights: 2,
+    dome: ['23,000 people are inside. No food, water or medical care', 'The lines for the buses last for hours in the heat', 'People near you are sick, old or in wheelchairs, with no care'],
     ask: 'It is Thursday, 1 September. What do you do?',
     media: 'cc', knowMedia: 'cc', happenedMedia: 'soldiers',
     ticker: [
@@ -172,7 +175,6 @@ mayor: {
     { t: 'You will barely sleep this week. Strength drops every round', kind: 'game' }
   ],
   real: 'On Saturday he called only a voluntary evacuation. On Sunday, about 20 hours before landfall, he ordered the first mandatory evacuation in the city’s history. Bus offers were turned down and buses went only to the Superdome. More than 70,000 people stayed. On Thursday night he made an angry radio appeal for federal help on WWL.',
-  lensNote: 'In our lens this is mostly structural. The plan relied on cars and on buses that nobody had staffed. See Parts 3 and 4.',
   realPath: ['m1_vol', 'm2_fema', 'm3_demand', 'm4_radio'],
   realRows: ['Voluntary first, mandatory 20 hours before landfall', 'Asks state and FEMA for help, radios down', 'Thousands at the Convention Center, no supplies', 'Angry radio appeal for help'],
   realStats: [
@@ -187,7 +189,7 @@ mayor: {
       hear: ['Hotels and businesses: “A false alarm costs us millions.”', 'City lawyers: “Closing businesses could get the city sued.”', 'Ivan last year: hours of traffic, then nothing'],
       card: { t: 'A hotel association calls. They ask you to wait before you close the city.', kind: 'game' },
       choices: [
-        { id: 'm1_mand_dome', pull: { lens: 'structural', t: 'The state plan told you to wait until about 30 hours before landfall, and your lawyers warned of lawsuits from closed businesses. Ordering now means breaking both. In reality the order came on Sunday.', kind: 'real', strength: -1 }, t: 'Mandatory evacuation today, buses to the Superdome', img: 'domeLine', legacy: 'You gave people a full extra day, but residents without cars still had only the Superdome.',
+        { id: 'm1_mand_dome', pull: { lens: 'structural', t: 'The state plan told you to wait until about 30 hours before landfall, and your lawyers warned of lawsuits from closed businesses. Ordering now means breaking both.', kind: 'real', strength: -1 }, t: 'Mandatory evacuation today, buses to the Superdome', img: 'domeLine', legacy: 'You gave people a full extra day, but residents without cars still had only the Superdome.',
           c: 'People get a full extra day. Plaquemines and St. Charles did this a day earlier, on Saturday. But your 100,000 residents without cars still have no way out of the city.' },
         { id: 'm1_vol', t: 'Voluntary today, mandatory tomorrow, buses to the Superdome', img: 'dome', legacy: 'Your order came when landfall was less than a day away.',
           c: 'Many leave, many do not take it seriously. When the order comes, landfall is less than a day away.' },
@@ -202,7 +204,7 @@ mayor: {
       hear: ['Police radio: “Water in the Lower Ninth, rising fast”', { t: 'TV: “New Orleans dodged the bullet”', false: 'Misleading. Levees and floodwalls were already breaking. By Tuesday 80 % of the city was under water.' }],
       card: { t: 'A third of your police radios do not work.', kind: 'game' },
       choices: [
-        { id: 'm2_rescue', pull: { lens: 'structural', t: 'Without boats and with a third of your radios dead, your officers can only reach a few streets. Only the state and FEMA can send boats, buses and troops in numbers.', kind: 'game' }, t: 'Send police and firefighters to rescue people', img: 'helicopter',
+        { id: 'm2_rescue', surprise: { t: 'Some of your officers cannot be reached at all.', kind: 'game' }, pull: { lens: 'structural', t: 'Without boats and with a third of your radios dead, your officers can only reach a few streets. Only the state and FEMA can send boats, buses and troops in numbers.', kind: 'game' }, t: 'Send police and firefighters to rescue people', img: 'helicopter',
           c: 'Many of your own officers have lost their homes, and radios are down. Rescue is slow and patchy.' },
         { id: 'm2_fema', surprise: { t: 'The phone and fax lines to the state go dead for hours. Your request waits in a queue.', kind: 'game' }, t: 'Ask the state and FEMA for buses, boats and troops', img: 'sandbags',
           c: 'Your request goes into a system that waits for formal paperwork. Help is days away.' },
@@ -258,7 +260,6 @@ herbert: {
     { t: 'The Superdome is a shelter of last resort. You must bring your own food, water and medicine', kind: 'real' }
   ],
   real: 'He judged it too dangerous to move his mother and stayed. On Tuesday a neighbour’s boat took them to the Convention Center, where a police officer told him to wait outside, help would come in an hour or two. Ethel Freeman died in her wheelchair on 1 September. When the buses finally came, he had to leave her body behind.',
-  lensNote: 'In our lens this is mostly class and structure. No car, no transport for a wheelchair, and a plan that relied on cars. If you tried the bridge, you met the intentional part.',
   /* Shown when Herbert leaves the city, and on the fate screen under "Can you come back?" */
   leaving: [
     { t: 'No relatives outside the city, so nobody is waiting for you', kind: 'real' },
@@ -287,7 +288,7 @@ herbert: {
       card: { t: 'You call a hospital. They tell you they take emergencies only.', kind: 'game' },
       choices: [
         { id: 'h1_drive', t: 'Drive her out of the city', lock: 'No car that can carry her wheelchair, and no relatives outside the city', lockKind: 'real' },
-        { id: 'h1_amb', t: 'Hire a private ambulance', cost: 1200, loc: 'out', c: 'An ambulance takes you both out of the city.' },
+        { id: 'h1_amb', t: 'Hire a private ambulance', cost: 1200, lock: 'Booked out. Every private ambulance is taken, and one costs $1,200. You have $150', lockKind: 'game', loc: 'out', c: 'An ambulance takes you both out of the city.' },
         { id: 'h1_dome', pull: { lens: 'structural', t: 'The Superdome opens as a shelter of last resort. You were told to bring your own food and medicine, and there is no power for Ethel’s pump.', kind: 'game' }, t: 'Take her to the Superdome on Sunday', loc: 'dome', ethel: -1, strength: -1, wait: 6, img: 'domeLine',
           c: 'Hours in line in the heat. Inside there is almost no medical care for someone who is tube-fed.' },
         { id: 'h1_stay', surprise: { t: 'The pharmacy has sold out of Ethel’s feeding formula. You find a smaller supply at a second store across town.', kind: 'game', strength: -1 }, t: 'Buy food and supplies, stay with her', cost: 80, food: 3, loc: 'home',
@@ -300,18 +301,20 @@ herbert: {
         sit: 'The wind tears at the roof and the power is gone. By noon water is rising in the street.',
         hear: ['Battery radio: “Levee breaks reported”'],
         choices: [
-          { id: 'h2_up', pull: { lens: 'class', t: 'On Tuesday a neighbour with a boat comes by. In reality he took Herbert and Ethel to the Convention Center.', kind: 'real' }, t: 'Move Ethel upstairs and wait', loc: 'upstairs', strength: -1, c: 'The water keeps rising. Nobody knows you are there.' },
+          { id: 'h2_up', pull: { lens: 'class', t: 'On Tuesday a neighbour with a boat comes by.', kind: 'real' }, t: 'Move Ethel upstairs and wait', loc: 'upstairs', strength: -1, c: 'The water keeps rising. Nobody knows you are there.' },
           { id: 'h2_boat', surprise: { t: 'The boat is full on the first trip. The neighbour comes back for you hours later.', kind: 'game', wait: 6 }, t: 'Ask the neighbour with a boat to take you to dry ground', loc: 'cc', ethel: -1, wait: 20, img: 'cc',
             c: 'He can only go once the wind drops. On Tuesday he takes you to the Convention Center. An officer tells you to wait outside, help will come in an hour or two.' },
-          { id: 'h2_911', pull: { lens: 'structural', t: 'Nobody answers. On Tuesday a neighbour with a boat comes by. In reality he took Herbert and Ethel to the Convention Center.', kind: 'real' }, t: 'Call 911', loc: 'upstairs', strength: -1, c: 'The lines are dead. Phones and power are down across the city. As the water rises, you carry Ethel upstairs.' }
+          { id: 'h2_911', pull: { lens: 'structural', t: 'Nobody answers. On Tuesday a neighbour with a boat comes by.', kind: 'real' }, t: 'Call 911', loc: 'upstairs', strength: -1, c: 'The lines are dead. Phones and power are down across the city. As the water rises, you carry Ethel upstairs.' },
+          { id: 'h2_leave', t: 'Leave the city with Ethel', lock: 'The storm has closed the roads. No car can carry her wheelchair', lockKind: 'game' }
         ]
       },
       dome: {
         sit: 'Wind tears holes in the Superdome roof. The power fails. About 10,000 people are inside.',
         hear: ['People around you: “The water is coming into the city”'],
         choices: [
-          { id: 'h2_dstay', pull: { lens: 'structural', t: 'The Dome is already crowded and hot. Ethel cannot be given a proper bed or her pump.', kind: 'game' }, t: 'Stay inside with Ethel', loc: 'dome', c: 'Heat and darkness. The toilets stop working.' },
-          { id: 'h2_doc', pull: { lens: 'structural', t: 'The few medical staff in the Dome are overwhelmed.', kind: 'game' }, t: 'Ask the National Guard for a doctor', loc: 'dome', wait: 5, c: 'The few medical staff are overwhelmed. They can do little for her.' }
+          { id: 'h2_dstay', surprise: { t: 'A section of the roof tears open above your seats. You move Ethel in the dark.', kind: 'game', strength: -1 }, pull: { lens: 'structural', t: 'The Dome is already crowded and hot. Ethel cannot be given a proper bed or her pump.', kind: 'game' }, t: 'Stay inside with Ethel', loc: 'dome', c: 'Heat and darkness. The toilets stop working.' },
+          { id: 'h2_doc', pull: { lens: 'structural', t: 'The few medical staff in the Dome are overwhelmed.', kind: 'game' }, t: 'Ask the National Guard for a doctor', loc: 'dome', wait: 5, c: 'The few medical staff are overwhelmed. They can do little for her.' },
+          { id: 'h2_dleave', t: 'Leave the Superdome for a shelter outside the city', lock: 'The doors stay shut during the storm. No buses run', lockKind: 'game' }
         ]
       }
     },
@@ -322,23 +325,26 @@ herbert: {
         hear: ['Nothing. No power, no phone.'],
         choices: [
           { id: 'h3_sheet', pull: { lens: 'class', t: 'Many waited for days at windows and on roofs, and rescuers could only reach the people they could see.', kind: 'game' }, t: 'Hang a sheet from the window and wait', loc: 'roof', ethel: -1, wait: 24, img: 'helicopter', c: 'You wait in the heat for a boat or a helicopter.' },
-          { id: 'h3_boat', pull: { lens: 'class', t: 'This is the choice Herbert made, and it was the only dry ground he could reach.', kind: 'real' }, t: 'Go with the neighbour’s boat to the Convention Center', loc: 'cc', ethel: -1, img: 'cc', c: 'You reach dry ground. An officer tells you to wait outside, help will come in an hour or two.' }
+          { id: 'h3_boat', pull: { lens: 'class', t: 'The Convention Center is the only dry ground the boat can reach.', kind: 'real' }, t: 'Go with the neighbour’s boat to the Convention Center', loc: 'cc', ethel: -1, img: 'cc', c: 'You reach dry ground. An officer tells you to wait outside, help will come in an hour or two.' },
+          { id: 'h3_leave', t: 'Get out of the city', lock: 'Water all around the house. No car, no boat of your own', lockKind: 'game' }
         ]
       },
       cc: {
         sit: 'Thousands wait at the Convention Center. No food, no water, no doctors. It was never an official shelter.',
         hear: [{ t: 'TV and crowd: “Snipers”, “murders”, “gangs”', false: 'Turned out false.' }, { t: 'An officer: “Buses in an hour or two”', false: 'The buses did not come for days.' }],
         choices: [
-          { id: 'h3_wait', t: 'Wait outside as you were told', loc: 'cc', ethel: -1, strength: -1, wait: 24, c: 'Hours pass in the heat. No buses come.' },
-          { id: 'h3_doc', pull: { lens: 'structural', t: 'There is no medical care in the crowd to find. Everyone is looking for the same help.', kind: 'game' }, t: 'Look for a doctor in the crowd', loc: 'cc', strength: -1, c: 'There is no medical care to find.' }
+          { id: 'h3_wait', surprise: { t: 'Someone says the buses will stop at another corner. You push Ethel there. Nothing comes.', kind: 'game', strength: -1 }, t: 'Wait outside as you were told', loc: 'cc', ethel: -1, strength: -1, wait: 24, c: 'Hours pass in the heat. No buses come.' },
+          { id: 'h3_doc', pull: { lens: 'structural', t: 'There is no medical care in the crowd to find. Everyone is looking for the same help.', kind: 'game' }, t: 'Look for a doctor in the crowd', loc: 'cc', strength: -1, c: 'There is no medical care to find.' },
+          { id: 'h3_cleave', t: 'Walk out of the city with Ethel', lock: 'Ethel cannot walk, and nobody tells you where to go', lockKind: 'game' }
         ]
       },
       dome: {
         sit: 'Day three in the Superdome. Heat, broken toilets, too little water.',
         hear: [{ t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 6 inside the Superdome, 4 at the Convention Center.' }],
         choices: [
-          { id: 'h3_dstay', pull: { lens: 'structural', t: 'Superdome evacuees were bused out from Wednesday evening, but the lines were long and the buses slow.', kind: 'real' }, t: 'Stay and wait for buses', loc: 'dome', ethel: -1, wait: 24, img: 'domeWater', c: 'The first buses to Houston start to leave on Wednesday.' },
-          { id: 'h3_tocc', pull: { lens: 'structural', t: 'The Convention Center was never prepared as a shelter and nothing is waiting there.', kind: 'game' }, t: 'Leave for the Convention Center', loc: 'cc', ethel: -1, strength: -1, img: 'cc', c: 'It is no better there.' }
+          { id: 'h3_dstay', surprise: { t: 'The water handout runs out before you reach the front of the line.', kind: 'game', food: -1 }, pull: { lens: 'structural', t: 'Superdome evacuees were bused out from Wednesday evening, but the lines were long and the buses slow.', kind: 'real' }, t: 'Stay and wait for buses', loc: 'dome', ethel: -1, wait: 24, img: 'domeWater', c: 'The first buses to Houston start to leave on Wednesday.' },
+          { id: 'h3_tocc', pull: { lens: 'structural', t: 'The Convention Center was never prepared as a shelter and nothing is waiting there.', kind: 'game' }, t: 'Leave for the Convention Center', loc: 'cc', ethel: -1, strength: -1, img: 'cc', c: 'It is no better there.' },
+          { id: 'h3_dleave', t: 'Get on the first bus out', lock: 'Booked out. The first buses fill up long before you reach the doors', lockKind: 'game' }
         ]
       }
     },
@@ -393,7 +399,6 @@ kim: {
     { t: 'Older neighbours remember Betsy in 1965, when the Lower Ninth flooded and help came as loans, not grants', kind: 'real' }
   ],
   real: 'The rental company refused her a car, so she stayed with Scott and filmed her street on a 20 dollar camcorder. When the Industrial Canal broke they fled to the attic, then swam to a neighbour’s two-storey house and waited two days with no help. When they walked to the Navy base for food and water, armed guards turned them away at gunpoint. They were evacuated days later. Her film became the documentary “Trouble the Water” (2008).',
-  lensNote: 'In our lens this is mostly class (no car, no money), but a class divide that racism built, see Part 1. The intentional part was Gretna and Algiers Point.',
   /* Shown when Kimberly leaves the city, and on the fate screen under "Can you come back?" */
   leaving: [
     { t: 'You arrive with {money} and nowhere to stay', kind: 'game' },
@@ -422,7 +427,7 @@ kim: {
       card: { t: 'Scott wants to stay to protect the house.', kind: 'game' },
       choices: [
         { id: 'k1_rent', t: 'Rent a car', lock: 'The rental company refuses. No credit card, no car', lockKind: 'real' },
-        { id: 'k1_bus', pull: { lens: 'class', t: 'Intercity buses sell out quickly. With $60 and no card you can reach the last seats, but you arrive with almost nothing and no way to call home.', kind: 'game' }, t: 'Buy bus tickets out for you and Scott (2 × $45)', cost: 90, loc: 'out', img: 'busEvac', c: 'You get two of the last seats. You arrive in a strange city with {money} and nowhere to stay.' },
+        { id: 'k1_bus', lock: 'Booked out. When you finally get through, the last seats out of the city are gone', lockKind: 'game', pull: { lens: 'class', t: 'Intercity buses sell out quickly. With $60 and no card you can reach the last seats, but you arrive with almost nothing and no way to call home.', kind: 'game' }, t: 'Buy bus tickets out for you and Scott (2 × $45)', cost: 90, loc: 'out', img: 'busEvac', c: 'You get two of the last seats. You arrive in a strange city with {money} and nowhere to stay.' },
         { id: 'k1_dome', surprise: { t: 'The line stops moving for hours. The doors on your side close for a while: that hall is full.', kind: 'game', wait: 3 }, pull: { lens: 'class', t: 'Carless residents of the Ninth Ward live miles from the Superdome, and there is no shuttle from every street.', kind: 'game' }, t: 'Walk to the Superdome on Sunday', loc: 'dome', strength: -1, wait: 6, img: 'dome', c: 'Hours in line in the heat, searched at the door. Bring your own food.' },
         { id: 'k1_stay', surprise: { t: 'The corner store has sold out of bottled water. You fill pots and the bathtub instead.', kind: 'game' }, t: 'Buy food and water, stay with Scott', cost: 30, food: 3, loc: 'home', c: 'You stock up on food and water and stay with Scott.' }
       ]
@@ -433,16 +438,18 @@ kim: {
         sit: 'The storm hits. In the morning the Industrial Canal floodwall breaks three blocks away. Water pours in.',
         hear: ['Neighbours shouting: “The levee broke!”'],
         choices: [
-          { id: 'k2_attic', pull: { lens: 'structural', t: 'The attic was the nearest dry place for most people in the Lower Ninth.', kind: 'real' }, t: 'Climb into the attic', loc: 'attic', c: 'You make it up with Scott and some neighbours. The water keeps rising below you.' },
+          { id: 'k2_attic', surprise: { t: 'The attic is darker and hotter than you thought, and you have nothing to break through the roof with.', kind: 'game' }, pull: { lens: 'structural', t: 'The attic was the nearest dry place for most people in the Lower Ninth.', kind: 'real' }, t: 'Climb into the attic', loc: 'attic', c: 'You make it up with Scott and some neighbours. The water keeps rising below you.' },
           { id: 'k2_roof', pull: { lens: 'structural', t: 'The Lower Ninth had minutes, not hours. Most of those who survived reached the attic.', kind: 'game' }, t: 'Get onto the roof', loc: 'roof', strength: -1, img: 'helicopter', c: 'Rescuers can see you. But the sun is brutal and you have no water.' },
-          { id: 'k2_swim', pull: { lens: 'structural', t: 'The Lower Ninth had minutes, not hours. Few could swim through the current and the debris.', kind: 'game' }, t: 'Swim for a two-storey house', loc: 'house', strength: -1, img: 'ninth', c: 'Deep water, debris and currents. You reach a neighbour’s two-storey house.' }
+          { id: 'k2_swim', pull: { lens: 'structural', t: 'The Lower Ninth had minutes, not hours. Few could swim through the current and the debris.', kind: 'game' }, t: 'Swim for a two-storey house', loc: 'house', strength: -1, img: 'ninth', c: 'Deep water, debris and currents. You reach a neighbour’s two-storey house.' },
+          { id: 'k2_leave', t: 'Get out of the city', lock: 'No car, and the water is already in the street', lockKind: 'game' }
         ]
       },
       dome: {
         sit: 'Wind tears holes in the Superdome roof. The power fails.',
         hear: ['People around you: “The Ninth Ward is under water”'],
         choices: [
-          { id: 'k2_dstay', t: 'Stay inside', loc: 'dome', c: 'Heat and darkness. The toilets stop working.' }
+          { id: 'k2_dstay', surprise: { t: 'Part of the roof tears open. Rain pours onto the seats around you.', kind: 'game' }, t: 'Stay inside', loc: 'dome', c: 'Heat and darkness. The toilets stop working.' },
+          { id: 'k2_dleave', t: 'Leave the Superdome', lock: 'The doors stay shut during the storm. No buses run', lockKind: 'game' }
         ]
       },
       out: {
@@ -460,15 +467,17 @@ kim: {
         hear: ['Nothing but water and wind'],
         choices: [
           { id: 'k3_swim', t: 'Swim with Scott to a two-storey house', loc: 'house', strength: -1, minStrength: 2, weakLock: 'Too weak to swim through the current', img: 'ninth', c: 'You make it. Now you wait.' },
-          { id: 'k3_roof', pull: { lens: 'structural', t: 'On the roof you are in view, but the Ninth Ward was one of the last areas reached.', kind: 'game' }, t: 'Break through the roof', loc: 'roof', strength: -1, img: 'helicopter', c: 'You are out in the open, waiting in the heat.' }
+          { id: 'k3_roof', pull: { lens: 'structural', t: 'On the roof you are in view, but the Ninth Ward was one of the last areas reached.', kind: 'game' }, t: 'Break through the roof', loc: 'roof', strength: -1, img: 'helicopter', c: 'You are out in the open, waiting in the heat.' },
+          { id: 'k3_leave', t: 'Get out of the city', lock: 'Water up to the roofs all around. No boat', lockKind: 'game' }
         ]
       },
       house: {
         sit: 'You are dry, but nobody comes.',
         hear: ['Rumour: “They’re not coming for the Ninth Ward”'],
         choices: [
-          { id: 'k3_wait', pull: { lens: 'structural', t: 'In reality Kimberly and Scott waited two days with no help.', kind: 'real' }, t: 'Wait for rescue', loc: 'house', wait: 48, c: 'Two days pass. No boat, no helicopter.' },
-          { id: 'k3_wade', pull: { lens: 'class', t: 'Chest-deep, contaminated water with a cut foot is how many people got infections.', kind: 'game' }, t: 'Wade to the highway overpass', loc: 'house', strength: -1, wait: 24, minStrength: 3, weakLock: 'Your cut foot and no strength left. You cannot wade through chest-deep water', c: 'Dirty water up to your chest. Others are already waiting there.' }
+          { id: 'k3_wait', pull: { lens: 'structural', t: 'Nobody knows you are here. Boats and helicopters reach other streets first.', kind: 'real' }, t: 'Wait for rescue', loc: 'house', wait: 48, c: 'Two days pass. No boat, no helicopter.' },
+          { id: 'k3_wade', pull: { lens: 'class', t: 'Chest-deep, contaminated water with a cut foot is how many people got infections.', kind: 'game' }, t: 'Wade to the highway overpass', loc: 'house', strength: -1, wait: 24, minStrength: 3, weakLock: 'Your cut foot and no strength left. You cannot wade through chest-deep water', c: 'Dirty water up to your chest. Others are already waiting there.' },
+          { id: 'k3_hleave', t: 'Get out of the city', lock: 'Water up to your chest all around. No boat, no car', lockKind: 'game' }
         ]
       },
       roof: {
@@ -484,7 +493,8 @@ kim: {
         sit: 'Day three in the Superdome.',
         hear: [{ t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 6 inside the Superdome, 4 at the Convention Center.' }],
         choices: [
-          { id: 'k3_dstay', t: 'Stay and wait for buses', loc: 'dome', wait: 48, img: 'domeWater', c: 'The first buses to Houston leave on Wednesday.' }
+          { id: 'k3_dstay', surprise: { t: 'The water handout runs out before you reach the front of the line.', kind: 'game', food: -1 }, t: 'Stay and wait for buses', loc: 'dome', wait: 48, img: 'domeWater', c: 'The first buses to Houston leave on Wednesday.' },
+          { id: 'k3_dleave', t: 'Get on the first bus out', lock: 'Booked out. The first buses fill up long before you reach the doors', lockKind: 'game' }
         ]
       },
       out: {
@@ -557,7 +567,6 @@ lake: {
   ],
   real: 'When the floodwalls broke, water reached the eaves of many Lakeview homes. Rita Legrand had to gut her modest ranch house. With $53,000 from insurance, she applied for a Road Home grant in fall 2006. Road Home valued her house at $320,000 and her repairs at $188,000, and paid $135,000. By April 2007 she had completely rebuilt. “The program worked great for me,” she said. How and where she evacuated is not reported.',
   realSource: 'Webster, Adelson, Hammer and Chou (2022), ProPublica with The Times-Picayune | The Advocate and WWL-TV.',
-  lensNote: 'In our lens a car, savings and insurance protected you (class). The Road Home formula, based on house value, favoured Lakeview over the Lower Ninth (structural).',
   /* Shown when Rita leaves the city, and on the fate screen under "Can you come back?" */
   leaving: [
     { t: 'Your sister’s spare room is meant for a few nights, not weeks', kind: 'game' },

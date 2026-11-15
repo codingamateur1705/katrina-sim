@@ -45,19 +45,20 @@ function show(n) {
   i = Math.max(0, Math.min(slides.length - 1, n));
   stopTimer();
   var s = slides[i];
-  stage.innerHTML = '<section class="slide ' + (s.cls || '') + '">' + s.html + (s.timer ? '<button class="timer" id="tm" title="Start or pause (T)">' + D.meta.timerSeconds + '<small>seconds</small></button>' : '') + '</section>';
+  stage.innerHTML = '<section class="slide ' + (s.cls || '') + '">' + s.html + (s.timer ? '<button class="timer" id="tm" title="Start or pause (T)">' + mmss(D.meta.timerSeconds) + '<small>to decide</small></button>' : '') + '</section>';
   tLeft = D.meta.timerSeconds;
   document.getElementById('bar').style.width = (100 * (i + 1) / slides.length) + '%';
   document.getElementById('notes').innerHTML = '<b>Notes · slide ' + (i + 1) + ' of ' + slides.length + '</b>' + esc(s.notes || 'No notes.');
   if (location.hash !== '#' + (i + 1)) history.replaceState(null, '', '#' + (i + 1));
 }
+function mmss(n) { return Math.floor(n / 60) + ':' + ('0' + n % 60).slice(-2); }
 function stopTimer() { if (tRun) { clearInterval(tRun); tRun = null; } }
 function toggleTimer() {
   var el = document.getElementById('tm'); if (!el) return;
   if (tRun) { stopTimer(); return; }
   if (tLeft <= 0) tLeft = D.meta.timerSeconds;
   tRun = setInterval(function () {
-    tLeft--; el.firstChild.nodeValue = String(Math.max(0, tLeft));
+    tLeft--; el.firstChild.nodeValue = mmss(Math.max(0, tLeft));
     el.className = 'timer' + (tLeft <= 10 ? ' low' : '');
     if (tLeft <= 0) { stopTimer(); el.lastChild.textContent = 'time is up'; }
   }, 1000);

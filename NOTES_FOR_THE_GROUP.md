@@ -157,3 +157,19 @@ Source: Richard A. Webster, Jeff Adelson, David Hammer and Sophie Chou (12 Decem
 **Other documented Lakeview voice in the same article (not used):** William Stoudt, Rebuilding Together New Orleans, whose parents climbed in through a second-storey window and rebuilt within a year with flood insurance.
 
 **Searched but not readable:** NPR (22 Nov 2005), "Residents Say Levee Leaked Months Before Katrina" (names Lakeview residents), and an LSU oral history with Lakeview resident Patsy Ashton (2012).
+
+## 7. Update: 2-minute timer, no early exit for Herbert and Kimberly, Superdome, no verdicts
+
+- **Timer:** 2 minutes per round (phones and projector), shown as 2:00.
+- **No early exit for Herbert and Kimberly** (all game details, shown as locked options with a reason):
+  - Round 1: Herbert's private ambulance is "Booked out" (and costs $1,200). Kimberly's bus is "Booked out, the last seats are gone".
+  - Round 2: "Leave the city" is locked at home (storm closed the roads, no car / water already in the street) and in the Superdome (doors shut during the storm, no buses).
+  - Round 3: "Get out of the city" is locked in every flooded location (no boat, no car; Ethel cannot walk), and "Get on the first bus out" at the Superdome is "Booked out".
+  - They can only leave in round 4 (bus to Houston, a paid ride, the school bus), each with a sudden change.
+- **Superdome:** a dark "Inside the Superdome" box in every round spent there, and each line goes into "Your difficulties so far".
+  - Round 2: about 10,000 inside, roof torn open, power fails, no air conditioning, bring your own food (from the starter).
+  - Round 3: toilets overflow, small irregular handouts, sleeping on concrete and plastic seats, nobody says when buses come, rumours of violence (game details except the rumours).
+  - Round 4: 23,000 inside, no food, water or medical care (from the round 4 facts), hours-long bus lines, sick and old people without care (game).
+- **More sudden changes:** roof tears open above your seats (Herbert, Kimberly), the water handout runs out (Superdome, round 3), buses "at another corner" (Convention Center), no tool to break through the attic roof, officers cannot be reached (Mayor).
+- **No racism verdicts in the game:** the "Through our lens" box, the lens counts, and the "Intentional / Structural racism / Classism" labels on the reality checks were removed from the player view, so the discussion stays in the presentation. The closing question on the fate screen stays.
+- **Fixed reveals:** four reality-check texts told players during the game what the real person did ("In reality he took Herbert and Ethel to the Convention Center", "This is the choice Herbert made", "In reality Kimberly and Scott waited two days", "In reality the order came on Sunday"). They were rewritten so the real story only appears at the end.
