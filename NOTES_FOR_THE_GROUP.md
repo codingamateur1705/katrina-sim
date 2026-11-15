@@ -173,3 +173,9 @@ Source: Richard A. Webster, Jeff Adelson, David Hammer and Sophie Chou (12 Decem
 - **More sudden changes:** roof tears open above your seats (Herbert, Kimberly), the water handout runs out (Superdome, round 3), buses "at another corner" (Convention Center), no tool to break through the attic roof, officers cannot be reached (Mayor).
 - **No racism verdicts in the game:** the "Through our lens" box, the lens counts, and the "Intentional / Structural racism / Classism" labels on the reality checks were removed from the player view, so the discussion stays in the presentation. The closing question on the fate screen stays.
 - **Fixed reveals:** four reality-check texts told players during the game what the real person did ("In reality he took Herbert and Ethel to the Convention Center", "This is the choice Herbert made", "In reality Kimberly and Scott waited two days", "In reality the order came on Sunday"). They were rewritten so the real story only appears at the end.
+
+## 8. Update: character introductions, one colour for all
+
+- **"Meet your person"** card at the top of the person screen: photo or initials, name, and four short facts taken only from the real stories (prompt, starter and sources).
+- **Photos:** only Ray Nagin has a free photo (Jocelyn Augustino, FEMA, September 2005, public domain, on Wikimedia Commons). The photos of Herbert Freeman Jr. and Kimberly Roberts that circulate online are agency or film photos (for example AP via Alamy, with a watermark) and are copyrighted, so they are not used. Herbert, Kimberly and Rita show their initials. To add a photo you have the rights to, put it in `img/` and add it to `media` and the person's `profile.portrait` in `data.js`.
+- **Colour:** all four people now use the same dark green.

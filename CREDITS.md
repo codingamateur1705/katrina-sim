@@ -25,6 +25,7 @@ All files were resized and compressed for phones (images 1400 px maximum, videos
 | `soldiers.jpg` | Soldiers in the flooded French Quarter | Sgt. Michael J. Carden, U.S. Army (050904-A-7377C-005, as in the deck; the Commons page names no author) | 4 Sep 2005 | Public domain (U.S. Army) | [Commons](https://commons.wikimedia.org/wiki/File:US-SoldatenNewOrleans2005.jpg) |
 | `ninth-ward.jpg` | Ninth Ward still flooded two weeks after the storm | Marvin Nauman, FEMA (FEMA 15826) | 16 to 18 Sep 2005 | Public domain (FEMA) | [Commons](https://commons.wikimedia.org/wiki/File:FEMA_-_15826_-_Photograph_by_Marvin_Nauman_taken_on_09-18-2005_in_Louisiana.jpg) |
 | `superdome-water.jpg` | Superdome surrounded by water | Jh12 | 31 Aug 2005 | **CC BY 2.5** (attribution required, given on screen) | [Commons](https://commons.wikimedia.org/wiki/File:Superdome_postKatrina_Wednesday.jpg) |
+| `portrait-nagin.jpg` | Mayor Ray Nagin at a press conference (cropped) | Jocelyn Augustino, FEMA (FEMA 15844) | 20 to 21 Sep 2005 | Public domain (FEMA) | [Commons](https://commons.wikimedia.org/wiki/File:Ray_Nagin.jpg) |
 | `r1-satellite-poster.jpg` | Still frame from the satellite animation below | NASA GSFC, NOAA GOES data | 28 to 29 Aug 2005 | Public domain | see video |
 | `r3-coastguard-poster.jpg` | Still frame from the Coast Guard footage below | U.S. Coast Guard | 2005 | Public domain | see video |
 

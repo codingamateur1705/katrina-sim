@@ -76,6 +76,7 @@ media: {
   busEvac:    { src: 'img/bus-evacuation.jpg',  credit: 'Win Henderson, FEMA, 31 August 2005, public domain' },
   astrodome:  { src: 'img/astrodome.jpg',       credit: 'Ed Edahl, FEMA, Houston, 2 September 2005, public domain' },
   soldiers:   { src: 'img/soldiers.jpg',        credit: 'Sgt. Michael J. Carden, U.S. Army, 4 September 2005, public domain' },
+  portraitNagin: { src: 'img/portrait-nagin.jpg', credit: 'Jocelyn Augustino, FEMA, September 2005, public domain' },
   ninth:      { src: 'img/ninth-ward.jpg',      credit: 'Marvin Nauman, FEMA, Ninth Ward, September 2005, public domain' }
 },
 
@@ -156,6 +157,15 @@ people: {
    1. THE MAYOR
    ===================================================================== */
 mayor: {
+  profile: {
+    portrait: 'portraitNagin', initials: 'RN',
+    facts: [
+      { label: 'Who', value: 'Ray Nagin, mayor of New Orleans since 2002' },
+      { label: 'Before', value: 'A former cable TV executive' },
+      { label: 'Power', value: 'Only you can order a mandatory evacuation' },
+      { label: 'Job this week', value: 'Run the city’s emergency plan' }
+    ]
+  },
   name: 'The Mayor', fullName: 'Ray Nagin', firstName: 'the Mayor', sub: 'Ray Nagin, decides for the city',
   color: '#1F5F35', seat: 'Front left', composite: false,
   intro: 'You are the mayor of New Orleans, in office since 2002 and a former cable TV executive. Only you can order a mandatory evacuation, and you run the city’s emergency plan.',
@@ -242,8 +252,17 @@ mayor: {
    2. HERBERT FREEMAN JR.
    ===================================================================== */
 herbert: {
+  profile: {
+    portrait: null, initials: 'HF',
+    facts: [
+      { label: 'Who', value: 'Herbert Freeman Jr., son and full-time carer' },
+      { label: 'Family', value: 'Your mother Ethel Freeman, 91' },
+      { label: 'Ethel', value: 'Blind, both hips broken, fed through a tube' },
+      { label: 'Every day', value: 'You care for her yourself' }
+    ]
+  },
   name: 'Herbert Freeman Jr.', firstName: 'Herbert Freeman Jr.', sub: 'Black, cares for his mother Ethel, 91',
-  color: '#0E883F', seat: 'Front right', composite: false,
+  color: '#1F5F35', seat: 'Front right', composite: false,
   intro: 'You live with your mother Ethel and care for her every day. She is 91, blind, has broken both hips and is fed through a tube.',
   carChip: { t: 'No car for her wheelchair', bad: true },
   start: { loc: 'home', money: 150, food: 2, ethel: 3, strength: 5 },
@@ -382,8 +401,17 @@ herbert: {
    3. KIMBERLY ROBERTS
    ===================================================================== */
 kim: {
+  profile: {
+    portrait: null, initials: 'KR',
+    facts: [
+      { label: 'Who', value: 'Kimberly Roberts, 24' },
+      { label: 'Home', value: 'Lower Ninth Ward, with your husband Scott' },
+      { label: 'Dream', value: 'To make it as a rapper' },
+      { label: 'Right now', value: 'Car stolen two weeks ago. Payday is days away' }
+    ]
+  },
   name: 'Kimberly Roberts, 24', firstName: 'Kimberly Roberts', sub: 'Black, Lower Ninth Ward, no car',
-  color: '#0E883F', seat: 'Back left', composite: false,
+  color: '#1F5F35', seat: 'Back left', composite: false,
   intro: 'You live in the Lower Ninth Ward with your husband Scott and want to be a rapper. Your car was stolen two weeks ago. It is the end of the month and payday is days away.',
   carChip: { t: 'No car', bad: true },
   start: { loc: 'home', money: 60, food: 1, strength: 5 },
@@ -550,8 +578,17 @@ kim: {
    4. RITA LEGRAND, LAKEVIEW (ProPublica et al. 2022; evacuation not reported)
    ===================================================================== */
 lake: {
+  profile: {
+    portrait: null, initials: 'RL',
+    facts: [
+      { label: 'Who', value: 'Rita Legrand, retiree' },
+      { label: 'Home', value: 'A modest ranch house in Lakeview, near the 17th Street Canal' },
+      { label: 'Protection', value: 'You have insurance on the house' },
+      { label: 'Neighbourhood', value: 'Mostly white, higher house values than the Lower Ninth' }
+    ]
+  },
   name: 'Rita Legrand', firstName: 'Rita Legrand', sub: 'Retiree in Lakeview, insured homeowner',
-  color: '#696969', seat: 'Back right', composite: false,
+  color: '#1F5F35', seat: 'Back right', composite: false,
   intro: 'You are Rita Legrand, a retiree in Lakeview, a mostly white neighbourhood near the 17th Street Canal. You own a modest ranch house and you have insurance. In the game you also have a car with a full tank and some savings.',
   carChip: { t: 'Car, full tank' },
   start: { loc: 'home', money: 3000, food: 3, strength: 5 },

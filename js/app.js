@@ -217,11 +217,18 @@ function renderChoose() {
     '<div class="txt"><div class="eyebrow">' + esc(D.meta.eyebrow) + '</div><h1>Who are you?</h1><p>' + esc(D.meta.instruction) + '</p>' +
     '<div class="people">' + btns + '</div><p class="small">' + esc(D.meta.gameValues) + '</p></div></div>';
 }
+function profileHtml() {
+  var p = P(), pr = p.profile || {}, m = pr.portrait ? media(pr.portrait) : null;
+  var pic = m ? '<figure class="portrait"><img src="' + esc(m.src) + '" alt="' + esc(p.name) + '"><figcaption>' + esc(m.credit) + '</figcaption></figure>'
+              : '<div class="portrait mono" aria-hidden="true"><span>' + esc(pr.initials || '') + '</span><small>No free photo</small></div>';
+  var facts = (pr.facts || []).map(function (f) { return '<div><dt>' + esc(f.label) + '</dt><dd>' + esc(f.value) + '</dd></div>'; }).join('');
+  return '<div class="profile" style="background:' + p.color + '">' + pic + '<div class="pinfo"><span class="meet">Meet your person</span><b>' + esc(p.name) + '</b><small>' + esc(p.sub) + '</small>' + (facts ? '<dl>' + facts + '</dl>' : '') + '</div></div>';
+}
 function renderIntro() {
   var p = P();
   var lim = p.constraints.map(function (c) { return '<li><span>' + esc(c.t) + '</span>' + tag(c.kind) + '</li>'; }).join('');
   app.innerHTML = topbar('Your person', p.composite ? 'Composite person' : '') +
-    '<div class="wrap"><div class="card"><div class="hd" style="background:' + p.color + '"><b>' + esc(p.name) + '</b><small>' + esc(p.sub) + '</small></div>' + chips() +
+    '<div class="wrap"><div class="card">' + profileHtml() + chips() +
     '<div class="intro-text">' + esc(p.intro) + '</div>' +
     '<div class="pad"><h4>Your constraints</h4><ul class="lim">' + lim + '</ul></div>' +
     '<p class="note">' + esc(D.meta.gameValues) + ' Every round you spend in the city uses up a day of food. Heat, waiting and water cost strength.</p></div></div>' +
