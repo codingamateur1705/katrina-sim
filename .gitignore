@@ -3,3 +3,6 @@ __pycache__/
 .DS_Store
 
 *.bak
+img/portrait-freeman.jpg.png
+img/portrait-nagin.jpg.png
+img/portrait-roberts.jpg

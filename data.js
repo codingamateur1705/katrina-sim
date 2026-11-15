@@ -76,7 +76,9 @@ media: {
   busEvac:    { src: 'img/bus-evacuation.jpg',  credit: 'Win Henderson, FEMA, 31 August 2005, public domain' },
   astrodome:  { src: 'img/astrodome.jpg',       credit: 'Ed Edahl, FEMA, Houston, 2 September 2005, public domain' },
   soldiers:   { src: 'img/soldiers.jpg',        credit: 'Sgt. Michael J. Carden, U.S. Army, 4 September 2005, public domain' },
-  portraitNagin: { src: 'img/portrait-nagin.jpg', credit: 'Jocelyn Augustino, FEMA, September 2005, public domain' },
+  portraitNagin: { src: 'img/portrait-nagin-licensed.jpg', credit: 'Photo licensed by the group' },
+  portraitNaginFema: { src: 'img/portrait-nagin.jpg', credit: 'Jocelyn Augustino, FEMA, September 2005, public domain' },
+  portraitKim: { src: 'img/portrait-kim.jpg', credit: 'Photo licensed by the group' },
   ninth:      { src: 'img/ninth-ward.jpg',      credit: 'Marvin Nauman, FEMA, Ninth Ward, September 2005, public domain' }
 },
 
@@ -402,7 +404,7 @@ herbert: {
    ===================================================================== */
 kim: {
   profile: {
-    portrait: null, initials: 'KR',
+    portrait: 'portraitKim', initials: 'KR',
     facts: [
       { label: 'Who', value: 'Kimberly Roberts, 24' },
       { label: 'Home', value: 'Lower Ninth Ward, with your husband Scott' },
