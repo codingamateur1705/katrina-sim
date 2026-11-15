@@ -79,6 +79,7 @@ media: {
   portraitNagin: { src: 'img/portrait-nagin-licensed.jpg', credit: 'Photo licensed by the group' },
   portraitNaginFema: { src: 'img/portrait-nagin.jpg', credit: 'Jocelyn Augustino, FEMA, September 2005, public domain' },
   portraitKim: { src: 'img/portrait-kim.jpg', credit: 'Photo licensed by the group' },
+  portraitHerbert: { src: 'img/portrait-herbert.jpg', credit: 'Photo licensed by the group' },
   ninth:      { src: 'img/ninth-ward.jpg',      credit: 'Marvin Nauman, FEMA, Ninth Ward, September 2005, public domain' }
 },
 
@@ -255,7 +256,7 @@ mayor: {
    ===================================================================== */
 herbert: {
   profile: {
-    portrait: null, initials: 'HF',
+    portrait: 'portraitHerbert', initials: 'HF',
     facts: [
       { label: 'Who', value: 'Herbert Freeman Jr., son and full-time carer' },
       { label: 'Family', value: 'Your mother Ethel Freeman, 91' },

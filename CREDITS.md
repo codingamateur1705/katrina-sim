@@ -27,6 +27,7 @@ All files were resized and compressed for phones (images 1400 px maximum, videos
 | `superdome-water.jpg` | Superdome surrounded by water | Jh12 | 31 Aug 2005 | **CC BY 2.5** (attribution required, given on screen) | [Commons](https://commons.wikimedia.org/wiki/File:Superdome_postKatrina_Wednesday.jpg) |
 | `portrait-nagin.jpg` | Mayor Ray Nagin at a press conference (cropped) | Jocelyn Augustino, FEMA (FEMA 15844) | 20 to 21 Sep 2005 | Public domain (FEMA) | [Commons](https://commons.wikimedia.org/wiki/File:Ray_Nagin.jpg) |
 | `portrait-nagin-licensed.jpg` | Ray Nagin, portrait | supplied by the group | — | Licensed by the group (credit line to be added) | supplied by the group |
+| `portrait-herbert.jpg` | Herbert Freeman Jr., portrait (cropped from a licensed photo) | supplied by the group | — | Licensed by the group (credit line to be added) | supplied by the group |
 | `portrait-kim.jpg` | Kimberly Roberts, portrait | supplied by the group | — | Licensed by the group (credit line to be added) | supplied by the group |
 | `r1-satellite-poster.jpg` | Still frame from the satellite animation below | NASA GSFC, NOAA GOES data | 28 to 29 Aug 2005 | Public domain | see video |
 | `r3-coastguard-poster.jpg` | Still frame from the Coast Guard footage below | U.S. Coast Guard | 2005 | Public domain | see video |
