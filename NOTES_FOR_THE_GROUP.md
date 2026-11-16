@@ -294,3 +294,29 @@ The fourth person is now **Chris Rose**, columnist at The Times-Picayune, Uptown
   - Chris Rose: three children to feed, calm and keep in school; the paper expects a column every day.
 - **Start screen** now says: "These are real people. At the end you see what really happened to them. Only money, food and strength are game values."
 - **Photo captions** "Photo licensed by the group" were removed; the photos stay. CREDITS.md still lists them.
+
+## 14. Update: every path checked for coherence
+
+**Timing of round 2 (Monday before dawn):** nothing in round 2 now speaks as if the storm had already hit.
+- Mayor: the situation says the storm will come ashore within hours, and the choices are what he can still do before landfall. Police and boats stand ready for after the storm; a request to the state and FEMA; a last radio call to go to the highest floor. "Tell people to go to the Convention Center" was removed, because the Convention Center only opened on Tuesday.
+- Herbert, Kimberly and Chris Rose: the radio no longer reports levee breaks before dawn. Kimberly hears the Industrial Canal break "a few hours later".
+- "New Orleans dodged the bullet" moved from round 2 to round 3, as "Monday's headline", because it was said on Monday during the day.
+
+**More constraints for the Mayor:**
+- **New constraints:** he depends on the state and FEMA for boats, buses and troops (real). Game details: no city contracts for buses or drivers out of the region; many officers live in areas that may flood; the Superdome has no stock for days.
+- **Locked options:** shelters in other states (no shelter agreed to take people, real); a last bus run before dawn (wind too strong); city buses on Tuesday (in flooded lots, drivers gone); taking over buses from other states (only the state and federal government can).
+- **Round 2 card:** the command post runs on backup power.
+
+**Chris Rose, family or risk:**
+- Round 3, away: drive back into the city now to report.
+- Round 3, in the city: go into the flooded neighbourhoods. Needs strength; you cut your leg in the water.
+- Round 4: go back to the worst flooded areas whatever the risk, or go there from the city. New ending "r_risk": bodies, ruins, sick from the water, the "1 dead in attic" mark, family far away.
+- He can still choose to go to his family at every step.
+
+**FEMA** now appears as "FEMA (Federal Emergency Management Agency)" in every text players see. Photo credits keep the short form.
+
+**Small fixes:**
+- Mayor, round 1: "Wait" now says you lose Saturday.
+- Mayor, round 4: now says the first buses are only just leaving the Superdome, matching the round facts.
+- Herbert: Ethel has been in her wheelchair at the Convention Center "for two days", Tuesday to Thursday.
+- Kimberly: "Another day on the roof", which fits both ways of getting there.
