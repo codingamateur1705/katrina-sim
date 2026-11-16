@@ -91,11 +91,11 @@ media: {
   busEvac:    { src: 'img/bus-evacuation.jpg',  credit: 'Win Henderson, FEMA, 31 August 2005, public domain' },
   astrodome:  { src: 'img/astrodome.jpg',       credit: 'Ed Edahl, FEMA, Houston, 2 September 2005, public domain' },
   soldiers:   { src: 'img/soldiers.jpg',        credit: 'Sgt. Michael J. Carden, U.S. Army, 4 September 2005, public domain' },
-  portraitNagin: { src: 'img/portrait-nagin-licensed.jpg', credit: 'Photo licensed by the group' },
+  portraitNagin: { src: 'img/portrait-nagin-licensed.jpg', credit: '' },
   portraitNaginFema: { src: 'img/portrait-nagin.jpg', credit: 'Jocelyn Augustino, FEMA, September 2005, public domain' },
-  portraitKim: { src: 'img/portrait-kim.jpg', credit: 'Photo licensed by the group' },
-  portraitHerbert: { src: 'img/portrait-herbert.jpg', credit: 'Photo licensed by the group' },
-  portraitRose: { src: 'img/portrait-rose-sq.jpg', credit: 'Photo licensed by the group' },
+  portraitKim: { src: 'img/portrait-kim.jpg', credit: '' },
+  portraitHerbert: { src: 'img/portrait-herbert.jpg', credit: '' },
+  portraitRose: { src: 'img/portrait-rose-sq.jpg', credit: '' },
   ninth:      { src: 'img/ninth-ward.jpg',      credit: 'Marvin Nauman, FEMA, Ninth Ward, September 2005, public domain' }
 },
 
