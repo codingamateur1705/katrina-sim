@@ -344,3 +344,5 @@ The fourth person is now **Chris Rose**, columnist at The Times-Picayune, Uptown
   - The rumours of violence stay marked as false at the end.
   - Chris Rose's round 3 feed adds the documented "looting" vs "finding" photo captions from your deck (slide 28, Sommers et al. 2006) next to the TV line, so the media frame is shown, not repeated.
   - No text describes anyone by character traits; every limit comes from money, a car, health, information or official decisions.
+
+- **Removed:** the red box "Who really had a choice? …" at the bottom of the phone end screen. The projector closing slide still asks it; delete that slide in `js/presenter.js` if you want it gone there too.

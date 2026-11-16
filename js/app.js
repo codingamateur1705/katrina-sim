@@ -388,7 +388,7 @@ function renderEnd() {
     (p.returning ? '<div class="pad"><h4>Can you come back?</h4><ul class="burdens back">' + p.returning.map(function (x) { return '<li>' + fill(x.t) + '</li>'; }).join('') + '</ul>' + (p.returnFact ? '<p class="retfact">' + esc(p.returnFact) + '</p>' : '') + '</div>' : '') +
     (b.length ? '<div class="pad"><details class="burden all"><summary>Everything you had to deal with <b>' + b.length + '</b></summary><ul class="burdens">' + b.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></details></div>' : '') +
     (rum ? '<div class="pad"><h4>What you heard that turned out false</h4><ul class="rumours">' + rum + '</ul></div>' : '') +
-    '</div><div class="q">' + esc(D.meta.question) + '</div><p class="sources">' + esc(D.meta.sources) + '</p></div>' +
+    '</div><p class="sources">' + esc(D.meta.sources) + '</p></div>' +
     nav('<button class="btn ghost" id="b-back">‹ Back</button>', '<button class="btn grow" id="b-again">Play again</button>');
 }
 function render() {
