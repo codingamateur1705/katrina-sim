@@ -346,3 +346,12 @@ The fourth person is now **Chris Rose**, columnist at The Times-Picayune, Uptown
   - No text describes anyone by character traits; every limit comes from money, a car, health, information or official decisions.
 
 - **Removed:** the red box "Who really had a choice? …" at the bottom of the phone end screen. The projector closing slide still asks it; delete that slide in `js/presenter.js` if you want it gone there too.
+
+## After Katrina section (added on request)
+
+The fate screen and a new projector slide ("After Katrina") now say what happened to each person later: Nagin's 2014 corruption conviction and 10-year sentence, Herbert Freeman's dismissed lawsuits (2007 federal, 2008 state appeal), the Oscar nomination for "Trouble the Water", and Chris Rose's bestseller "1 Dead in Attic". Texts are in `data.js` under `after:` for each person.
+
+To check:
+- **Date of Ethel Freeman's death.** The court opinions (Freeman v. State, La. App. 4 Cir. 2008; Freeman v. United States) say she died on **31 August 2005**. Our texts, following AP via NBC News, say **1 September**. Please decide which date to use.
+- **How they reached the Convention Center.** The federal opinion says Herbert borrowed a boat from a friend and police directed them to the Convention Center. Our text says "a neighbour's boat". Both fit, but the wording could be aligned.
+- Added context not in the earlier texts: Nagin was re-elected in 2006 and left office in 2010; "Trouble the Water" won the Sundance Grand Jury Prize (2008); "1 Dead in Attic" was reissued by Simon & Schuster in 2007.

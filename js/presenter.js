@@ -37,6 +37,12 @@ slides.push({ cls: 'tab', notes: 'Groups now open “Your fate” on their phone
   D.rounds.map(function (R) { return '<th>Round ' + R.n + ' · ' + esc(R.short) + '</th>'; }).join('') + '</tr></thead><tbody>' + rows + '</tbody></table>' +
   '<div class="src">Sources. House (2006), pp. 109 to 113; Senate (2006), p. 250; WWL (2005); AP via NBC News (2005, 2006); Lessin and Deal (2008); Horowitz (2020), ch. 4 and 5. Wikipedia, Chris Rose (journalist); Christian Science Monitor (2007).</div></div>' });
 
+/* after Katrina */
+slides.push({ cls: 'tab after', notes: 'What happened to the four people in the years after the storm.', html:
+  '<div class="content"><h2>After Katrina</h2><div class="aftergrid">' +
+  D.order.map(function (k) { var p = D.people[k]; if (!p.after) return ''; return '<div class="acard"><div class="ahd" style="background:' + p.color + '">' + esc(p.fullName ? 'The Mayor, ' + p.fullName : p.name.replace(/,.*$/, '')) + '</div><b>' + esc(p.after.headline) + '</b><p>' + esc(p.after.context) + '</p></div>'; }).join('') +
+  '</div><div class="src">Sources. ' + D.order.map(function (k) { return D.people[k].after ? esc(D.people[k].after.source) : ''; }).join(' ') + '</div></div>' });
+
 /* closing */
 slides.push({ cls: 'close', notes: '', html: '<div class="content"><div class="eyebrow" style="color:#f6d3d5">Same storm, four fates</div><h1>' + esc(D.meta.question) + '</h1><div class="src">' + esc(D.meta.sources) + '</div></div>' });
 

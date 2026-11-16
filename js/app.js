@@ -380,6 +380,7 @@ function renderEnd() {
   app.innerHTML = topbar('Your fate', p.name) +
     '<div class="wrap"><div class="card">' + miniHead() + chips() +
     '<div class="pad"><h4>What really happened to ' + esc(who) + '</h4></div><div class="realbox">' + esc(p.real) + (p.realSource ? '<small class="rsrc">' + esc(p.realSource) + '</small>' : '') + '</div>' +
+    (p.after ? '<div class="pad"><h4>After Katrina</h4><div class="afterbox"><b>' + esc(p.after.headline) + '</b><p>' + esc(p.after.context) + '</p>' + (p.after.source ? '<small class="rsrc">' + esc(p.after.source) + '</small>' : '') + '</div></div>' : '') +
     (why ? '<div class="pad"><h4>Why ' + esc(who) + ' may have decided this</h4><ul class="why">' + why + '</ul></div>' : '') +
     '<div class="pad"><h4>Your path and the real path</h4>' + cmp + '</div>' +
     '<div class="pad"><h4>Your ending</h4><div class="end">' + endingHtml() + '</div>' + (e.img ? '<div class="endimg">' + figure(e.img) + '</div>' : '') +

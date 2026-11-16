@@ -217,6 +217,12 @@ mayor: {
   real: 'On Saturday he called only a voluntary evacuation. On Sunday, about 20 hours before landfall, he ordered the first mandatory evacuation in the city’s history. Bus offers were turned down and buses went only to the Superdome. More than 70,000 people stayed. On Thursday night he made an angry radio appeal for federal help on WWL.',
   realPath: ['m1_vol', 'm2_fema', 'm3_demand', 'm4_radio'],
   realRows: ['Voluntary first, mandatory 20 hours before landfall', 'Asks state and FEMA (Federal Emergency Management Agency) for help, radios down', 'Thousands at the Convention Center, no supplies', 'Angry radio appeal for help'],
+  /* After Katrina: shown on the fate screen and on the projector */
+  after: {
+    headline: 'Convicted of corruption in 2014, sentenced to 10 years in prison',
+    context: 'Nagin was re-elected in 2006 and left office in 2010. In 2014 a federal jury convicted him of taking bribes and favours from businessmen who wanted city contracts, some of them during the rebuilding after Katrina. He was sentenced to 10 years in federal prison.',
+    source: 'U.S. Department of Justice (2014); Associated Press (2014).'
+  },
   realStats: [
     { label: 'Mandatory order', value: 'about 20 hours before landfall' },
     { label: 'People who stayed in the city', value: 'More than 70,000' },
@@ -340,6 +346,11 @@ herbert: {
   returnFact: '119,076 fewer Black residents lived in New Orleans in 2010 than in 2000.',
   realPath: ['h1_stay', 'h2_boat', 'h3_wait', 'h4_wait'],
   realRows: ['Stays home, moving Ethel seems too risky', 'Water rises around the house', 'Neighbour’s boat to the Convention Center, told to wait outside', 'Ethel dies in her wheelchair, waiting'],
+  after: {
+    headline: 'Sued the city, the state and FEMA. The courts dismissed his cases in 2007 and 2008',
+    context: 'In 2006 he sued over his mother’s death. A federal judge dismissed the claims against the U.S. government in 2007, and a Louisiana appeals court upheld the dismissal of the claims against the state in 2008. The courts ruled that he had no claim they could hear, so no court ever decided who was responsible for leaving Ethel Freeman to wait outside the Convention Center.',
+    source: 'Freeman v. United States (E.D. La. 2007; 5th Cir. 2009); Freeman v. State of Louisiana (La. App. 4 Cir. 2008); Claims Journal (2007).'
+  },
   realStats: [
     { label: 'Reached the Convention Center', value: 'Tuesday, 30 August, by a neighbour’s boat' },
     { label: 'Told by a police officer', value: 'Help would come “in an hour or two”' },
@@ -503,6 +514,11 @@ kim: {
   returnFact: 'About 37 % of Lower Ninth households were back after ten years.',
   realPath: ['k1_stay', 'k2_attic', 'k3_swim', 'k4_navy'],
   realRows: ['Rental car refused, stays and films', 'Canal breaks, flees to the attic', 'Swims to a neighbour’s house, no help for two days', 'Turned away at gunpoint at the Navy base'],
+  after: {
+    headline: 'Her camcorder footage became “Trouble the Water”, nominated for an Oscar',
+    context: 'Filmmakers Tia Lessin and Carl Deal met Kimberly and Scott Roberts in a shelter and built their documentary around her home footage from the storm. “Trouble the Water” (2008) won the Grand Jury Prize at the Sundance Film Festival and was nominated for the Academy Award for Best Documentary Feature.',
+    source: 'Lessin and Deal (2008), Trouble the Water; Academy of Motion Picture Arts and Sciences (2009); Sundance Institute (2008).'
+  },
   realStats: [
     { label: 'Waited in a neighbour’s house', value: 'Two days, with no help' },
     { label: 'At the Navy base', value: 'Turned away at gunpoint' },
@@ -701,6 +717,11 @@ rose: {
   /* null = not documented for this round */
   realPath: ['r1_leave', null, 'r3_school', 'r4_report'],
   realRows: ['Drives with his wife and three children to Mississippi', 'Not reported', 'House Uptown is dry. His family moves to Maryland for the school year', 'Goes back alone to report for the paper'],
+  after: {
+    headline: 'Turned his columns into the bestseller “1 Dead in Attic”',
+    context: 'Rose collected the columns he wrote for The Times-Picayune in the months after the storm into a book, first published locally and then by Simon & Schuster in 2007. It became a bestseller. The title is the mark a search team spray-painted on a house where it found a body.',
+    source: 'Rose (2007), 1 Dead in Attic; Wikipedia, “Chris Rose (journalist)”; Christian Science Monitor (2007).'
+  },
   realStats: [
     { label: 'Evacuated', value: 'To Mississippi, with his wife and three children' },
     { label: 'His house', value: 'Uptown, made it through the storm' },
