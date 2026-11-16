@@ -347,8 +347,8 @@ herbert: {
   realPath: ['h1_stay', 'h2_boat', 'h3_wait', 'h4_wait'],
   realRows: ['Stays home, moving Ethel seems too risky', 'Water rises around the house', 'Neighbour’s boat to the Convention Center, told to wait outside', 'Ethel dies in her wheelchair, waiting'],
   after: {
-    headline: 'Sued the city, the state and FEMA. The courts dismissed his cases in 2007 and 2008',
-    context: 'In 2006 he sued over his mother’s death. A federal judge dismissed the claims against the U.S. government in 2007, and a Louisiana appeals court upheld the dismissal of the claims against the state in 2008. The courts ruled that he had no claim they could hear, so no court ever decided who was responsible for leaving Ethel Freeman to wait outside the Convention Center.',
+    headline: 'Sued the U.S. government and the state over his mother’s death. The courts dismissed the cases',
+    context: 'In 2006 he sued over his mother’s death. A federal judge dismissed the claims against the U.S. government in 2007, the federal appeals court confirmed this in 2009, and a Louisiana appeals court upheld the dismissal of the claims against the state in 2008. The courts ruled that he had no claim they could hear, so no court ever decided who was responsible for leaving Ethel Freeman to wait outside the Convention Center.',
     source: 'Freeman v. United States (E.D. La. 2007; 5th Cir. 2009); Freeman v. State of Louisiana (La. App. 4 Cir. 2008); Claims Journal (2007).'
   },
   realStats: [
