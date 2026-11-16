@@ -42,7 +42,9 @@ def play(page, who, strategy, tag, shots=False):
         page.wait_for_selector('.choices')
         overflow(page, '%s r%d' % (tag, r + 1))
         if shots: page.screenshot(path='%s/%s-%d-round.png' % (OUT, tag, r + 1), full_page=True)
-        ids = page.eval_on_selector_all('.opt:not([disabled])', 'els=>els.map(e=>e.dataset.id)')
+        ids = page.eval_on_selector_all('.opt:not(.locked):not([disabled])', 'els=>els.map(e=>e.dataset.id)')
+        if len(ids) < 2:
+            problems.append('%s r%d: fewer than two open choices %s' % (tag, r + 1, ids))
         if not ids:
             problems.append('%s r%d: no available choice' % (tag, r + 1)); return
         if strategy == 'real':
@@ -101,7 +103,7 @@ with sync_playwright() as p:
             play(page, who, 'real', '%s-%s-real' % (vp_name, who), shots=True)
             for k in range(4):
                 play(page, who, k, '%s-%s-first%d' % (vp_name, who, k))
-            for seed in range(10):
+            for seed in range(25):
                 random.seed(seed * 7 + len(who))
                 e = play(page, who, 'rand', '%s-%s-rand%d' % (vp_name, who, seed))
                 endings.setdefault(who, set()).add(e[:60])

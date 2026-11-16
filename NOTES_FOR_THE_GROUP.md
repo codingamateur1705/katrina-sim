@@ -222,3 +222,34 @@ All new facts come from your timeline slides (Knabb et al. 2005; Senate 2006, pp
 - **Superdome size:** now "about 10,000 to 12,000 people" at landfall (deck: House 2006). This resolves fact check 9.
 - **Round 1 ticker:** "Forecasters expect landfall on the Gulf Coast on Monday" is not on your slides. Please check it against Knabb et al. (2005) or delete it in `data.js`.
 - **Round 4:** "Friday · supply convoys arrive" is replaced by your "Saturday 3 Sep: fully evacuated". If you want both, add the Friday line back in `happened`.
+
+## 11. Update: new look, more interaction, always two options
+
+**Removed on request** (this replaces parts of section 9): the "Your group" roles box, the challenger reminder, "Why did your group choose this?", and the guess quiz on phones and projector. The one-tap scale "How much choice did you really have?" stays, because the Look back chart is built from it. Delete `askHtml()` in `js/app.js` if you want that gone too.
+
+**Always at least two open options.** New choices (all game details):
+| Person | Round, place | New option | Effect |
+|---|---|---|---|
+| Kimberly | 2, Superdome | Share your water with an old woman next to you | Food −1 |
+| Kimberly | 2, Superdome | Move to a higher level, away from the leaking roof | Strength −1 |
+| Kimberly | 3, Superdome | Queue for the water handout | 3 h waiting, Strength −1 |
+| Kimberly | 3, Superdome | Look for your family in the crowd | 4 h, Strength −1 |
+| Kimberly | 4, Superdome | Give your place in line to a family with small children | Ending "one of the last buses" |
+| Kimberly | 3, roof | Write HELP on the roof · Swim to the two-storey house | Strength −1 |
+| Kimberly | 3, neighbour's house | Hang a sheet from the window and shout to passing boats | 12 h waiting |
+| Herbert | 4, Superdome | Wait for a later bus with more room for the wheelchair | Ethel worse, ending "one of the last buses" |
+| Herbert | 4, Convention Center | Ask the soldiers at the corner for water and a medic | Ending "no water to give and no medic to send" |
+| Rita | 2, at home | Carry food and water upstairs first, then climb out | Food +1, Strength −2 |
+| Rita | 3, roof | Wave a towel at every boat and helicopter | Strength −1 |
+| Rita | 4, roof | Go with a neighbour's small boat to the highway | Ending "boat to the highway, then a bus" |
+
+New endings: `late_bus` (uses your slide: Superdome and Convention Center empty on Saturday, five days after landfall), `h_ask`, `l_boat`. Only waiting for the buses at the Convention Center still ends with Ethel's death.
+
+**Look and interaction** (`css/polish.css`, loaded after `style.css`):
+- Start screen with the title over the photo and portrait buttons.
+- A date timeline under the top bar (26 Aug · 29 Aug · 30 Aug · 1 to 3 Sep · Fate).
+- The 2-minute timer is a ring in the top bar and stays visible while scrolling. It turns red in the last 10 seconds and the phone vibrates at zero (Android only; iPhones do not vibrate from web pages).
+- Water rises in the header photo from round 2 (values `water:` per round in `data.js`), and rain falls over the photo in round 2 (`storm: true`).
+- Closed options show a lock. Tapping one shakes it. Look back counts how often the group tapped a closed option.
+- Screens fade in step by step; the sudden change drops in after the result; money, food and strength chips flash when they change. All motion is off for people who have "reduce motion" set on their phone.
+- Projector: slides fade, photos zoom slowly, bullets appear one after another.

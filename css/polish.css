@@ -1,0 +1,141 @@
+/* Katrina simulation · visual and motion layer (loads after style.css) */
+:root{--shadow:0 1px 2px rgba(30,30,30,.06),0 6px 18px rgba(30,30,30,.07);--ease:cubic-bezier(.2,.7,.2,1)}
+body{background:#fbfaf7}
+button{-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid #f0b400;outline-offset:2px}
+.card{box-shadow:var(--shadow);border-radius:12px}
+.btn{border-radius:10px;transition:transform .08s,filter .15s,background .15s}
+.btn:active:not([disabled]){transform:scale(.97)}
+.btn:not(.ghost):not([disabled]){background:var(--dg);box-shadow:0 2px 0 #143f23}
+.btn.ghost{color:var(--dg);border-color:var(--dg)}
+
+/* top bar: timeline of dates and the timer that stays in view */
+.top{background:rgba(255,255,255,.97)}
+.top .row{padding:8px 16px 6px}
+.tl{list-style:none;margin:0 auto;padding:0 16px 7px;max-width:860px;display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.tl li{font-size:11px;font-weight:700;color:#a09c93;text-align:center;white-space:nowrap}
+.tl li i{display:block;height:4px;border-radius:2px;background:#e6e2d8;margin-bottom:3px;transition:background .3s}
+.tl li.done i{background:#9fd0ae}
+.tl li.on i{background:var(--dg)}
+.tl li.on{color:var(--dg)}
+.tpill{display:flex;align-items:center;gap:6px;background:#f1ece2;border-radius:22px;padding:3px 4px 3px 5px;flex:none}
+.tpill>svg{width:30px;height:30px;transform:rotate(-90deg);flex:none}
+.tpill circle{fill:none;stroke-width:4}
+.tpill .tr{stroke:#d9d3c5}
+.tpill .tv{stroke:var(--dg);stroke-linecap:round;stroke-dasharray:81.68;transition:stroke-dashoffset 1s linear,stroke .3s}
+.tpill .s{font-weight:700;font-variant-numeric:tabular-nums;font-size:17px;min-width:40px;text-align:center}
+.tbtn{border:0;background:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;fill:var(--dg)}
+.tpill.low{background:#fbe9e9}
+.tpill.low .tv{stroke:var(--r)}
+.tpill.low .s{color:var(--r)}
+.tpill.paused .s{opacity:.5}
+.iconbtn.snd{position:absolute;top:10px;right:10px;z-index:3;background:rgba(0,0,0,.55);color:#fff;border-color:rgba(255,255,255,.5);font-size:13px}
+.iconbtn.snd[aria-pressed="true"]{background:var(--dg)}
+.timeup{border-radius:8px}
+
+/* header photo: rising water and rain */
+.hero{min-height:250px}
+.hero h2{text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.hero .day{background:rgba(14,40,24,.75);display:inline-block;padding:3px 8px;border-radius:4px;color:#bfe6cb}
+.water{position:absolute;left:0;right:0;bottom:0;z-index:1;background:linear-gradient(180deg,rgba(63,98,112,.62),rgba(18,38,48,.82));transition:height 1.2s var(--ease)}
+.water svg{position:absolute;left:0;bottom:100%;width:200%;height:14px;fill:rgba(63,98,112,.62);display:block}
+.rain{position:absolute;inset:-40% 0 0 -40%;width:180%;z-index:1;opacity:.35;pointer-events:none;
+  background-image:repeating-linear-gradient(104deg,rgba(255,255,255,0) 0 13px,rgba(255,255,255,.55) 13px 14px,rgba(255,255,255,0) 14px 31px);background-size:62px 180px}
+
+/* start screen */
+.start .pic{display:flex;align-items:flex-end;min-height:44vh}
+.start .pic::after{background:linear-gradient(180deg,rgba(0,0,0,.05) 20%,rgba(10,25,16,.88))}
+.ptxt{position:relative;z-index:2;padding:20px 16px 40px;color:#fff}
+.ptxt .eyebrow{color:#bfe6cb}
+.ptxt h1{font-size:34px;line-height:1.05;margin:6px 0 0;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.start .txt h2{font-size:28px;margin:0;line-height:1.1}
+.pp{display:flex;align-items:center;gap:14px;border-radius:12px;padding:12px 14px;min-height:78px;box-shadow:0 3px 0 #143f23;transition:transform .08s,filter .15s}
+.pp:active{transform:translateY(2px);box-shadow:0 1px 0 #143f23}
+.pp .av{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.85);flex:none}
+.pp .av.mono{display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;background:rgba(255,255,255,.14)}
+.pp .pt{flex:1;min-width:0}
+.pp .go{font-size:28px;opacity:.7;line-height:1}
+
+/* choices */
+.opt{border-radius:10px;border-width:2px;border-color:var(--dg);box-shadow:0 2px 0 rgba(31,95,53,.25);overflow:hidden}
+.opt .k{background:var(--dg);border-radius:0;width:46px;fill:#fff}
+.opt:active:not([disabled]):not(.locked){transform:translateY(2px);box-shadow:none}
+.opt.locked{box-shadow:none;cursor:pointer;background:#f6f1ef}
+.opt.locked .k{background:#9B2328}
+.opt.locked .l{color:#6b6b6b}
+.opt.picked{box-shadow:0 0 0 3px rgba(31,95,53,.2)}
+.opt.shake{border-style:solid;border-color:var(--r);background:#fbe9e9}
+.cplx{border-radius:8px}
+.hear{border-radius:8px}
+.cons{border-radius:10px;box-shadow:var(--shadow)}
+.surprise{border-radius:8px}
+.ask,.guess{border-radius:10px}
+.wait{border-radius:10px;display:flex;gap:10px;align-items:center}
+.wait::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:#9FD7B0}
+.knocks{margin:10px 0 0;font-size:15.5px;color:var(--r);font-weight:600}
+
+/* fate: path as a timeline */
+ol.path{position:relative;padding-left:20px}
+ol.path::before{content:"";position:absolute;left:5px;top:16px;bottom:16px;width:2px;background:#cfc8b8}
+ol.path li{position:relative;border-top:0;padding:9px 0}
+ol.path li::before{content:"";position:absolute;left:-20px;top:14px;width:12px;height:12px;border-radius:50%;background:var(--dg);box-shadow:0 0 0 3px var(--b)}
+.end{font-size:20px}
+.tabs button{transition:color .2s,border-color .2s}
+.q{border-radius:12px;box-shadow:var(--shadow)}
+
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+@keyframes jolt{0%{transform:scale(1)}30%{transform:scale(1.03) rotate(-.6deg)}60%{transform:scale(.99) rotate(.4deg)}100%{transform:none}}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes wave{to{transform:translateX(-50%)}}
+@keyframes rain{to{background-position:-62px 180px}}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(155,35,40,.18)}}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.1)}}
+@keyframes blink{50%{opacity:.35}}
+
+@media (prefers-reduced-motion:no-preference){
+  #app.enter .card>*{animation:up .4s var(--ease) both}
+  #app.enter .card>*:nth-child(2){animation-delay:.05s}
+  #app.enter .card>*:nth-child(3){animation-delay:.1s}
+  #app.enter .card>*:nth-child(4){animation-delay:.15s}
+  #app.enter .card>*:nth-child(5){animation-delay:.2s}
+  #app.enter .card>*:nth-child(6){animation-delay:.25s}
+  #app.enter .card>*:nth-child(n+7){animation-delay:.3s}
+  #app.enter .hero .in{animation:up .5s var(--ease) both}
+  #app.enter .start .ptxt{animation:up .6s var(--ease) both}
+  #app.enter .pp{animation:up .4s var(--ease) both}
+  #app.enter .pp:nth-child(2){animation-delay:.07s}
+  #app.enter .pp:nth-child(3){animation-delay:.14s}
+  #app.enter .pp:nth-child(4){animation-delay:.21s}
+  #app.enter .start .pic{animation:fadein .7s both}
+  #app.stay .cons{animation:up .4s var(--ease) both}
+  #app.stay .ask{animation:up .4s .15s var(--ease) both}
+  #app.stay .guess{animation:up .4s .25s var(--ease) both}
+  #app.stay .wait{animation:up .4s .35s var(--ease) both}
+  .surprise{animation:up .35s .35s var(--ease) both,jolt .5s .7s}
+  .delta span{animation:pop .35s .2s both}
+  .opt.shake{animation:shake .4s}
+  .chip.flash{animation:flash 1.2s ease-out,pop .35s}
+  .fbar i{transform-origin:bottom;animation:grow .7s var(--ease) both}
+  .fcol:nth-child(2) .fbar i{animation-delay:.1s}.fcol:nth-child(3) .fbar i{animation-delay:.2s}.fcol:nth-child(4) .fbar i{animation-delay:.3s}
+  .water svg{animation:wave 7s linear infinite}
+  .rain{animation:rain .55s linear infinite}
+  .hero{background-size:cover}
+  .tpill.low{animation:pulse 1s infinite}
+  .wait::before{animation:blink 1.2s infinite}
+  .overlay .ov{animation:up .4s var(--ease) both}
+}
+@media (min-width:760px){
+  .ptxt{padding:40px}
+  .ptxt h1{font-size:52px}
+  .start .pic{min-height:100vh}
+  .start .txt h2{font-size:36px}
+  .tl li{font-size:12.5px}
+  .hero{min-height:320px}
+}
+@media (max-width:380px){
+  .top h1{font-size:15.5px}
+  .tpill .s{font-size:15px;min-width:34px}
+}

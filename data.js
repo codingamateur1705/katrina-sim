@@ -33,9 +33,6 @@ meta: {
 
 /* Student interaction: reasons, felt choice, group roles, debrief questions (no verdicts) */
 student: {
-  roles: 'Before you start, pick three roles in your group: a reader (reads the screen aloud), a timekeeper (watches the 2 minutes) and a challenger (argues for a different option every round).',
-  reasonsAsk: 'Why did your group choose this?',
-  reasons: ['Safety', 'Money', 'Family and people', 'Health', 'What we heard', 'No time to think', 'No real choice'],
   feltAsk: 'How much choice did you really have?',
   felt: ['None', 'Little', 'Some', 'Much', 'Full'],
   debrief: [
@@ -45,9 +42,7 @@ student: {
     'Compare with another group: where were your options different from theirs?'
   ],
   answerAsk: 'In one sentence: what decided your path?',
-  answerHint: 'Write it together. You may be asked to read it to the class.',
-  guessAsk: 'Guess before you look at the main screen',
-  challenger: 'Challenger: argue for one option you are not going to pick, then decide together.'
+  answerHint: 'Write it together. You may be asked to read it to the class.'
 },
 
 /* Labels for tags shown next to constraints, cards and locked reasons */
@@ -107,11 +102,11 @@ media: {
    know = "What you know" (projector, before deciding)
    happened = "What happened in the city" (projector, after deciding)
    ticker = breaking news line at the top of the round on the phones
+   water = how high the water stands in the header photo (percent), storm = rain over the photo
    --------------------------------------------------------------------- */
 rounds: [
   {
     n: 1, when: 'Friday evening, 26 August', short: '26 Aug', days: 3, nights: 2,
-    guess: { q: 'How many people do you think stayed in the city?', options: ['Under 10,000', 'About 30,000', 'More than 70,000'], answer: 2 },
     ask: 'Imagine it is Friday evening, 26 August. What do you do over the weekend?',
     media: 'satVideo', knowMedia: 'sat', happenedMedia: 'dome',
     ticker: [
@@ -125,8 +120,7 @@ rounds: [
     notes: 'Open point: the House report (p. 109) gives the time of Sunday’s mandatory order. Most timelines (Senate report, National Geographic, FactCheck.org) say 9.30, one says 11, so the slide says “Sunday morning” and “about 20 hours”.'
   },
   {
-    n: 2, when: 'Monday, 29 August, before dawn', short: '29 Aug', days: 1, nights: 1,
-    guess: { q: 'How much of the city do you think will be under water by Tuesday?', options: ['A few low streets', 'About half', 'About 80 %'], answer: 2 },
+    n: 2, water: 14, storm: true, when: 'Monday, 29 August, before dawn', short: '29 Aug', days: 1, nights: 1,
     dome: ['About 10,000 to 12,000 people are inside when the storm hits', 'The wind tears holes in the roof. Rain pours in', 'The power fails. No air conditioning in the August heat', 'You were told to bring your own food for days'],
     ask: 'It is Monday, 29 August, before dawn. The storm is about to come ashore. What do you do?',
     media: 'flood', knowMedia: 'flood', happenedMedia: 'levee', sound: true,
@@ -141,8 +135,7 @@ rounds: [
     notes: 'Sources: Knabb et al. (2005, pp. 3, 9) for landfall and surge; USACE IPET (2006) for the breaches.'
   },
   {
-    n: 3, when: 'Tuesday, 30 August', short: '30 Aug', days: 2, nights: 2,
-    guess: { q: 'How long until the promised federal buses come?', options: ['A few hours', 'About a day', 'Several days'], answer: 2 },
+    n: 3, water: 38, when: 'Tuesday, 30 August', short: '30 Aug', days: 2, nights: 2,
     dome: ['The toilets overflow. The smell is everywhere', 'Water and food come in small, irregular handouts', 'People sleep on concrete floors and plastic seats', 'Nobody tells you when or where the buses will come', 'Rumours of violence spread through the crowd'],
     ask: 'It is Tuesday, 30 August. What do you do now?',
     media: 'cgVideo', knowMedia: 'roofRescue', happenedMedia: 'rescue',
@@ -157,8 +150,7 @@ rounds: [
     notes: 'Sources: Knabb et al. (2005, p. 9); Senate (2006, pp. 67–74); House (2006, pp. 120–121). Death figures from our deck (Sommers et al. 2006; Horowitz 2020).'
   },
   {
-    n: 4, when: 'Thursday 1 to Saturday 3 September', short: '1 to 3 Sep', days: 3, nights: 2,
-    guess: { q: 'What happens to people who try to walk out over the bridge to Gretna?', options: ['They reach safety', 'Police turn them back', 'The bridge is under water'], answer: 1 },
+    n: 4, water: 30, when: 'Thursday 1 to Saturday 3 September', short: '1 to 3 Sep', days: 3, nights: 2,
     dome: ['23,000 people are inside. No food, water or medical care', 'The lines for the buses last for hours in the heat', 'People near you are sick, old or in wheelchairs, with no care'],
     ask: 'It is Thursday, 1 September. What do you do?',
     media: 'cc', knowMedia: 'cc', happenedMedia: 'soldiers',
@@ -402,6 +394,7 @@ herbert: {
         hear: ['Rumour: “Buses are coming tomorrow”'],
         choices: [
           { id: 'h4_wait', t: 'Wait for the buses', ethel: -1, wait: 48, end: 'h_wait' },
+          { id: 'h4_ask', t: 'Ask the soldiers at the corner for water and a medic', wait: 6, end: 'h_ask' },
           { id: 'h4_bridge', pull: { lens: 'intentional', t: 'Gretna police really did close the bridge on Thursday night and turned evacuees back.', kind: 'real' }, t: 'Push her toward the bridge out of the city', ethel: -1, strength: -1, minStrength: 2, weakLock: 'You are too exhausted to push her wheelchair that far', end: 'bridge' },
           { id: 'h4_ride', surprise: { t: 'At the last minute the driver doubles the price. You hand over almost everything you have left.', kind: 'game', cost: 40 }, pull: { lens: 'class', t: 'Few drivers are willing to take a wheelchair and a tube-fed patient. Those who are charge more than you have.', kind: 'game' }, t: 'Pay a stranger with a car to drive you out', cost: 100, loc: 'out', end: 'paid_ride' }
         ]
@@ -418,7 +411,8 @@ herbert: {
         sit: 'Buses finally take people to Houston.',
         hear: [],
         choices: [
-          { id: 'h4_bus', surprise: { t: 'The first buses fill up before you reach the front. Wheelchairs go last. You wait another night.', kind: 'game', wait: 12, ethel: -1 }, t: 'Get Ethel on a bus to Houston', ethel: -1, loc: 'out', end: 'houston' }
+          { id: 'h4_bus', surprise: { t: 'The first buses fill up before you reach the front. Wheelchairs go last. You wait another night.', kind: 'game', wait: 12, ethel: -1 }, t: 'Get Ethel on a bus to Houston', ethel: -1, loc: 'out', end: 'houston' },
+          { id: 'h4_dlater', t: 'Wait for a later bus with more room for the wheelchair', ethel: -1, loc: 'out', wait: 24, end: 'late_bus' }
         ]
       }
     }
@@ -505,7 +499,9 @@ kim: {
         sit: 'Wind tears holes in the Superdome roof. The power fails.',
         hear: ['People around you: “The Ninth Ward is under water”'],
         choices: [
-          { id: 'k2_dstay', surprise: { t: 'Part of the roof tears open. Rain pours onto the seats around you.', kind: 'game' }, t: 'Stay inside', loc: 'dome', c: 'Heat and darkness. The toilets stop working.' },
+          { id: 'k2_dstay', surprise: { t: 'Part of the roof tears open. Rain pours onto the seats around you.', kind: 'game' }, t: 'Stay in your seats and save your strength', loc: 'dome', c: 'Heat and darkness. The toilets stop working.' },
+          { id: 'k2_dmove', t: 'Move to a higher level, away from the leaking roof', loc: 'dome', strength: -1, c: 'It is drier up there, but hotter and darker. You lose your place near the exit.' },
+          { id: 'k2_dshare', t: 'Share your water with an old woman next to you', loc: 'dome', food: -1, c: 'She thanks you. Now you have less for yourself and Scott.' },
           { id: 'k2_dleave', t: 'Leave the Superdome', lock: 'The doors stay shut during the storm. No buses run', lockKind: 'game' }
         ]
       },
@@ -533,6 +529,7 @@ kim: {
         hear: ['Rumour: “They’re not coming for the Ninth Ward”'],
         choices: [
           { id: 'k3_wait', pull: { lens: 'structural', t: 'Nobody knows you are here. Boats and helicopters reach other streets first.', kind: 'real' }, t: 'Wait for rescue', loc: 'house', wait: 48, c: 'Two days pass. No boat, no helicopter.' },
+          { id: 'k3_hsheet', t: 'Hang a sheet from the window and shout to passing boats', loc: 'house', wait: 12, c: 'A boat slows down. It is full. They say they will send someone.' },
           { id: 'k3_wade', pull: { lens: 'class', t: 'Chest-deep, contaminated water with a cut foot is how many people got infections.', kind: 'game' }, t: 'Wade to the highway overpass', loc: 'house', strength: -1, wait: 24, minStrength: 3, weakLock: 'Your cut foot and no strength left. You cannot wade through chest-deep water', c: 'Dirty water up to your chest. Others are already waiting there.' },
           { id: 'k3_hleave', t: 'Get out of the city', lock: 'Water up to your chest all around. No boat, no car', lockKind: 'game' }
         ]
@@ -542,7 +539,9 @@ kim: {
         sit: 'On the roof in the sun, no water.',
         hear: ['Helicopters, far away'],
         choices: [
-          { id: 'k3_rwait', t: 'Keep waiting', loc: 'roof', wait: 48, img: 'helicopter', c: 'You wave at every helicopter.' }
+          { id: 'k3_rwait', t: 'Keep waiting', loc: 'roof', wait: 48, img: 'helicopter', c: 'You wave at every helicopter.' },
+          { id: 'k3_rswim', t: 'Swim to the two-storey house down the street', loc: 'house', strength: -1, minStrength: 2, weakLock: 'Too weak to swim through the current', c: 'You reach it. There is shade here, but still nobody comes.' },
+          { id: 'k3_rsign', t: 'Write HELP on the roof with what you can find', loc: 'roof', strength: -1, c: 'Paint from the attic and a bedsheet. A helicopter circles once, then flies on.' }
         ]
       },
       dome: {
@@ -551,6 +550,8 @@ kim: {
         hear: [{ t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 6 inside the Superdome, 4 at the Convention Center.' }],
         choices: [
           { id: 'k3_dstay', surprise: { t: 'The water handout runs out before you reach the front of the line.', kind: 'game', food: -1 }, t: 'Stay and wait for buses', loc: 'dome', wait: 48, img: 'domeWater', c: 'You wait. The buses only start on Thursday.' },
+          { id: 'k3_dsearch', t: 'Look for your family in the crowd', loc: 'dome', wait: 4, strength: -1, c: 'You walk every level for hours. Nobody has seen them.' },
+          { id: 'k3_dline', t: 'Queue for the water handout', loc: 'dome', wait: 3, strength: -1, c: 'Three hours in line in the heat for one bottle each.' },
           { id: 'k3_dleave', t: 'Get on the first bus out', lock: 'Booked out. The first buses fill up long before you reach the doors', lockKind: 'game' }
         ]
       },
@@ -588,7 +589,8 @@ kim: {
         sit: 'Buses finally take people to Houston.',
         hear: [],
         choices: [
-          { id: 'k4_hbus', surprise: { t: 'The first buses are full. You wait another night on the ramp outside.', kind: 'game', wait: 12, strength: -1 }, t: 'Get on a bus to Houston', loc: 'out', end: 'houston' }
+          { id: 'k4_hbus', surprise: { t: 'The first buses are full. You wait another night on the ramp outside.', kind: 'game', wait: 12, strength: -1 }, t: 'Get on a bus to Houston', loc: 'out', end: 'houston' },
+          { id: 'k4_dgive', t: 'Give your place in line to a family with small children', loc: 'out', wait: 24, strength: -1, end: 'late_bus' }
         ]
       },
       out: {
@@ -682,7 +684,8 @@ lake: {
         sit: 'The 17th Street Canal breaks. Lakeview floods to the rooftops.',
         hear: ['Neighbours shouting'],
         choices: [
-          { id: 'l2_roof', pull: { lens: 'structural', t: 'In Lakeview the water rose over hours, not minutes. Boats and helicopters reached many roofs, but not for days.', kind: 'game' }, t: 'Climb onto the roof with your dog', loc: 'roof', strength: -1, img: 'flood', c: 'You wait for a boat or a helicopter.' },
+          { id: 'l2_roof', pull: { lens: 'structural', t: 'In Lakeview the water rose over hours, not minutes. Boats and helicopters reached many roofs, but not for days.', kind: 'game' }, t: 'Climb onto the roof with your dog right now', loc: 'roof', strength: -1, img: 'flood', c: 'You wait for a boat or a helicopter.' },
+          { id: 'l2_supplies', t: 'Carry food and water upstairs first, then climb out', loc: 'roof', food: 1, strength: -2, c: 'You save some supplies, but the water is at your chest when you climb onto the roof.' },
           { id: 'l2_drive', t: 'Drive out now', lock: 'Too late. The storm has closed the roads and the water is rising', lockKind: 'game' }
         ]
       }
@@ -702,7 +705,8 @@ lake: {
         sit: 'On the roof in the heat.',
         hear: [],
         choices: [
-          { id: 'l3_rwait', pull: { lens: 'structural', t: 'Boats passed full. Helicopter crews took the people they could reach first.', kind: 'game' }, t: 'Keep waiting', loc: 'roof', wait: 24, img: 'helicopter', c: 'A boat passes, full.' }
+          { id: 'l3_rwait', pull: { lens: 'structural', t: 'Boats passed full. Helicopter crews took the people they could reach first.', kind: 'game' }, t: 'Keep waiting', loc: 'roof', wait: 24, img: 'helicopter', c: 'A boat passes, full.' },
+          { id: 'l3_rwave', t: 'Wave a towel at every boat and helicopter', loc: 'roof', strength: -1, wait: 24, c: 'One boat crew sees you. They are full and write down your address.' }
         ]
       }
     },
@@ -721,7 +725,8 @@ lake: {
         sit: 'Day four on the roof.',
         hear: [],
         choices: [
-          { id: 'l4_signal', pull: { lens: 'structural', t: 'Helicopter crews eventually reach the roof. Your insurance still pays for the house.', kind: 'game' }, t: 'Signal a helicopter', end: 'l_rescued' }
+          { id: 'l4_signal', pull: { lens: 'structural', t: 'Helicopter crews eventually reach the roof. Your insurance still pays for the house.', kind: 'game' }, t: 'Signal a helicopter', end: 'l_rescued' },
+          { id: 'l4_boat', t: 'Go with a neighbour’s small boat to the highway', loc: 'out', wait: 8, end: 'l_boat' }
         ]
       }
     }
@@ -748,6 +753,9 @@ endings: {
   k_out:     { t: 'You are safe, but your home is gone. Only about 37 % of Lower Ninth households came back within ten years.', where: 'Another city, far from home' },
   l_rebuild: { t: 'Insurance and a grant based on your home’s value help you rebuild. About 90 % of households citywide came back. It still takes months of mould removal, adjusters and paperwork. In the Lower Ninth the funding gap was about $31,000 larger per home.', where: 'Baton Rouge, about 130 km from home' },
   l_move:    { t: 'You start over somewhere else, with insurance money to do it.', where: 'A new city' },
+  late_bus:  { t: 'You leave on one of the last buses. The Superdome and the Convention Center are only empty on Saturday, five days after landfall.', where: 'Houston, about 560 km from home', img: 'astrodome' },
+  h_ask:     { t: 'They have no water to give and no medic to send. You go back to Ethel and wait.', where: 'Convention Center' },
+  l_boat:    { t: 'The boat brings you to the highway. From there a bus takes you out of the city. Your insurance still pays for the house.', where: 'Out of the city' },
   l_rescued: { t: 'A helicopter crew lifts you off the roof. Your insurance still pays for the house.', where: 'Lifted out by helicopter', img: 'rescue' }
 },
 

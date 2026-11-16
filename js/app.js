@@ -14,6 +14,13 @@ function P() { return D.people[S.who]; }
 function fill(t) { return esc(t).replace(/\{money\}/g, S && S.st ? usd(S.st.money || 0) : ''); }
 function txt(h) { return typeof h === 'string' ? h : h.t; }
 function tag(kind) { return (kind && kind !== 'real' && kind !== 'game') ? '<span class="tag ' + esc(kind) + '">' + esc(D.kinds[kind] || kind) + '</span>' : ''; }
+var lastChips = {};
+function vib(ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) {} }
+var ICON = {
+  pause: '<svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" rx="1"/><rect x="7" y="1.5" width="3" height="9" rx="1"/></svg>',
+  play: '<svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M3 1.5v9l7.5-4.5z"/></svg>',
+  lock: '<svg viewBox="0 0 16 16" width="17" height="17" aria-hidden="true"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2h.5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1zm1.6 0h3.8V5a1.9 1.9 0 0 0-3.8 0z"/></svg>'
+};
 function media(key) { return D.media[key] || null; }
 function locLabel(loc) { var p = P(); return (p.locLabels && p.locLabels[loc]) || (D.locations[loc] ? D.locations[loc].label : loc); }
 
@@ -113,7 +120,14 @@ function pick(id) {
   st.picks.push(c.id); st.labels.push(c.t);
   st.log.push({ c: c.c ? fill(c.c) : (c.end ? 'Your choice is made. You will see your fate at the end.' : ''), img: c.img || null, pull: pl, delta: log, leaving: !!leaving, surprise: sp ? sp.t : null, closed: closed, total: all.length });
   stopTimer();
+  vib(15);
+  app.className = 'stay';
   render();
+}
+function knock(b) {
+  S.st.knocks = (S.st.knocks || 0) + 1;
+  b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake');
+  vib(60);
 }
 function back() {
   if (!hist.length) { reset(); return; }
@@ -123,13 +137,13 @@ function back() {
 function finish() { push(); roundEnd(D.rounds.length - 1); S.phase = 'end'; S.tab = 'fate'; go(); }
 function choose(k) {
   var p = D.people[k];
-  hist = []; timers = {};
+  hist = []; timers = {}; lastChips = {};
   S = { who: k, phase: 'intro', r: -1, st: Object.assign({ money: 0, food: 0, ethel: 3, strength: 5, picks: [], labels: [], log: [], pulls: [], burdens: [], reasons: {}, felt: {}, guess: {}, end: null, seenFalse: {}, stats: { hungry: 0, nights: 0, wait: 0 } }, clone(p.start)) };
   S.st.sceneLoc = S.st.loc;
   go();
 }
 function reset() { stopTimer(); Sound.stop(); hist = []; timers = {}; S = { who: null, phase: 'choose' }; go(); }
-function go() { window.scrollTo(0, 0); render(); }
+function go() { app.className = 'enter'; window.scrollTo(0, 0); render(); }
 
 /* ---------- timer ---------- */
 function stopTimer() { if (tick) { clearInterval(tick); tick = null; } }
@@ -146,39 +160,51 @@ function startTimer() {
 }
 function drawTimer() {
   var el = document.getElementById('timer'); if (!el) return;
-  var left = timers[S.r], tot = D.meta.timerSeconds;
-  el.className = 'timer' + (left <= 10 ? ' low' : '');
-  el.querySelector('.bar i').style.width = (100 * left / tot) + '%';
+  var left = timers[S.r], tot = D.meta.timerSeconds, C = 81.68;
+  el.className = 'tpill' + (left <= 10 ? ' low' : '') + (timers.paused ? ' paused' : '');
+  el.querySelector('.tv').style.strokeDashoffset = C * (1 - left / tot);
   el.querySelector('.s').textContent = Math.floor(left / 60) + ':' + ('0' + left % 60).slice(-2);
   var pb = document.getElementById('pause');
-  if (pb) { pb.textContent = timers.paused ? 'Resume' : 'Pause'; pb.setAttribute('aria-pressed', timers.paused ? 'true' : 'false'); }
+  if (pb) { pb.innerHTML = timers.paused ? ICON.play : ICON.pause; pb.setAttribute('aria-pressed', timers.paused ? 'true' : 'false'); pb.setAttribute('aria-label', timers.paused ? 'Resume timer' : 'Pause timer'); }
   var up = document.getElementById('timeup');
   if (up) up.hidden = left > 0;
+  if (left <= 0 && !timers['buzz' + S.r]) { timers['buzz' + S.r] = 1; vib([120, 80, 120]); }
 }
 
 /* ---------- pieces ---------- */
 function chips() {
   var p = P(), st = S.st, out = [];
-  if (p.fixedChips) p.fixedChips.forEach(function (c) { out.push('<span class="chip' + (c.bad ? ' bad' : '') + '">' + esc(c.t) + '</span>'); });
-  if (p.track.money) out.push('<span class="chip' + (st.money < 50 ? ' bad' : '') + '">' + usd(st.money) + '</span>');
-  if (p.track.food) out.push('<span class="chip' + (st.food <= 0 ? ' bad' : '') + '">Food ' + st.food + (st.food === 1 ? ' day' : ' days') + '</span>');
+  function add(key, text, bad, extra) {
+    var changed = lastChips[key] != null && lastChips[key] !== text;
+    lastChips[key] = text;
+    out.push('<span class="chip' + (bad ? ' bad' : '') + (changed ? ' flash' : '') + '">' + esc(text) + (extra || '') + '</span>');
+  }
+  if (p.fixedChips) p.fixedChips.forEach(function (c, i) { add('fx' + i, c.t, c.bad); });
+  if (p.track.money) add('money', usd(st.money), st.money < 50);
+  if (p.track.food) add('food', 'Food ' + st.food + (st.food === 1 ? ' day' : ' days'), st.food <= 0);
   var m = ''; for (var i = 1; i <= 5; i++) m += '<i class="' + (i <= st.strength ? 'f' : '') + '"></i>';
-  out.push('<span class="chip' + (st.strength <= 1 ? ' bad' : '') + '" title="Strength ' + st.strength + ' of 5">Strength: ' + esc(D.strengthLabels[st.strength]) + '<span class="meter" aria-hidden="true">' + m + '</span></span>');
-  if (p.track.ethel) out.push('<span class="chip' + (st.ethel <= 1 ? ' bad' : '') + '">Ethel ' + esc(D.ethelLabels[st.ethel]) + '</span>');
-  if (p.carChip) out.push('<span class="chip' + (p.carChip.bad ? ' bad' : '') + '">' + esc(p.carChip.t) + '</span>');
-  if (S.phase !== 'intro') out.push('<span class="chip">' + esc(locLabel(S.phase === 'round' ? S.st.sceneLoc : S.st.loc)) + '</span>');
+  add('strength', 'Strength: ' + D.strengthLabels[st.strength], st.strength <= 1, '<span class="meter" aria-hidden="true">' + m + '</span>');
+  if (p.track.ethel) add('ethel', 'Ethel ' + D.ethelLabels[st.ethel], st.ethel <= 1);
+  if (p.carChip) add('car', p.carChip.t, p.carChip.bad);
+  if (S.phase !== 'intro') add('loc', locLabel(S.phase === 'round' ? S.st.sceneLoc : S.st.loc), false);
   return '<div class="chips">' + out.join('') + '</div>';
 }
 function topbar(title, sub) {
-  var p = S.who ? P() : null, dots = '';
-  D.rounds.forEach(function (x, i) { dots += '<i class="' + (S.phase === 'end' || i < S.r ? 'done' : i === S.r ? 'on' : '') + '" title="Round ' + (i + 1) + '"></i>'; });
-  var snd = (S.phase === 'round' && D.rounds[S.r].sound) ? '<button class="iconbtn" id="snd" aria-pressed="' + (Sound.on ? 'true' : 'false') + '">' + (Sound.on ? '🔊 Sound on' : '🔈 Sound off') + '</button>' : '';
-  return '<header class="top" style="border-top-color:' + (p ? p.color : 'var(--g)') + '"><div class="row"><h1>' + esc(title) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</h1>' + snd + '<div class="dots" aria-label="Progress">' + dots + '</div></div></header>';
+  var p = S.who ? P() : null, live = S.phase === 'round' && S.st.picks.length <= S.r;
+  var steps = D.rounds.map(function (x, i) {
+    var c = (S.phase === 'end' || i < S.r) ? 'done' : i === S.r ? 'on' : '';
+    return '<li class="' + c + '"><i></i><span>' + esc(x.short) + '</span></li>';
+  }).join('') + '<li class="' + (S.phase === 'end' ? 'on' : '') + '"><i></i><span>Fate</span></li>';
+  var tm = live ? '<div class="tpill" id="timer"><svg viewBox="0 0 32 32" aria-hidden="true"><circle class="tr" cx="16" cy="16" r="13"/><circle class="tv" cx="16" cy="16" r="13"/></svg><span class="s"></span><button class="tbtn" id="pause" aria-pressed="false" aria-label="Pause timer">' + ICON.pause + '</button></div>' : '';
+  return '<header class="top" style="border-top-color:' + (p ? p.color : 'var(--g)') + '"><div class="row"><h1>' + esc(title) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</h1>' + tm + '</div><ol class="tl" aria-label="Progress">' + steps + '</ol></header>';
 }
 function heroHtml(R) {
-  var m = media(R.media), v = '';
+  var m = media(R.media), v = '', L = D.locations[S.st.sceneLoc] || {};
   if (m.video) v = '<video muted autoplay loop playsinline preload="metadata" poster="' + esc(m.src) + '"><source src="' + esc(m.video) + '" type="video/mp4"></video>';
-  return '<section class="hero" style="background-image:url(\'' + esc(m.src) + '\')">' + v +
+  var snd = R.sound ? '<button class="iconbtn snd" id="snd" aria-pressed="' + (Sound.on ? 'true' : 'false') + '">' + (Sound.on ? '🔊 Sound on' : '🔈 Sound off') + '</button>' : '';
+  var rain = R.storm ? '<div class="rain" aria-hidden="true"></div>' : '';
+  var water = (R.water && (L.inCity || S.who === 'mayor')) ? '<div class="water" aria-hidden="true" style="height:' + R.water + '%"><svg viewBox="0 0 1200 24" preserveAspectRatio="none"><path d="M0 12 Q75 0 150 12 T300 12 T450 12 T600 12 T750 12 T900 12 T1050 12 T1200 12 V24 H0z"/></svg></div>' : '';
+  return '<section class="hero" style="background-image:url(\'' + esc(m.src) + '\')">' + v + rain + water + snd +
     '<div class="in"><div class="day">Round ' + R.n + ' · ' + esc(R.when) + '</div><h2>' + esc(R.ask) + '</h2></div><span class="credit">' + esc(m.credit) + '</span></section>';
 }
 function tickerHtml(R) {
@@ -202,17 +228,9 @@ function domeHtml() {
   return '<div class="dome"><span class="what">Inside the Superdome</span><ul>' + R.dome.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>';
 }
 function askHtml() {
-  var Q = D.student, st = S.st, rs = st.reasons[S.r] || [], f = st.felt[S.r];
-  return '<div class="ask"><h4>' + esc(Q.reasonsAsk) + ' <small>tap all that fit</small></h4><div class="chipsel">' +
-    Q.reasons.map(function (r) { return '<button class="rchip' + (rs.indexOf(r) >= 0 ? ' on' : '') + '" data-reason="' + esc(r) + '">' + esc(r) + '</button>'; }).join('') +
-    '</div><h4>' + esc(Q.feltAsk) + '</h4><div class="scale">' +
+  var Q = D.student, f = S.st.felt[S.r];
+  return '<div class="ask"><h4>' + esc(Q.feltAsk) + '</h4><div class="scale">' +
     Q.felt.map(function (l, i) { return '<button class="sbtn' + (f === i ? ' on' : '') + '" data-felt="' + i + '"><b>' + i + '</b>' + esc(l) + '</button>'; }).join('') + '</div></div>';
-}
-function guessHtml() {
-  var G = D.rounds[S.r].guess; if (!G) return '';
-  var g = S.st.guess[S.r];
-  return '<div class="guess"><h4>' + esc(D.student.guessAsk) + '</h4><p>' + esc(G.q) + '</p><div class="gopts">' +
-    G.options.map(function (o, i) { return '<button class="gbtn' + (g === i ? ' on' : '') + '" data-guess="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div></div>';
 }
 function leaveHtml() {
   var p = P(); if (!p.leaving) return '';
@@ -223,12 +241,14 @@ function nav(left, right) { return '<nav class="nav"><div class="row">' + left +
 /* ---------- screens ---------- */
 function renderChoose() {
   var btns = D.order.map(function (k) {
-    var p = D.people[k];
-    return '<button class="pp" data-who="' + k + '" style="background:' + p.color + '"><b>' + esc(p.name) + '</b><small>' + esc(p.sub) + '</small>' + (p.composite ? '<span class="badge">Composite</span>' : '') + '</button>';
+    var p = D.people[k], pr = p.profile || {}, m = pr.portrait ? media(pr.portrait) : null;
+    return '<button class="pp" data-who="' + k + '" style="background:' + p.color + '">' +
+      (m ? '<img class="av" src="' + esc(m.src) + '" alt="">' : '<span class="av mono" aria-hidden="true">' + esc(pr.initials || '') + '</span>') +
+      '<span class="pt"><b>' + esc(p.name) + '</b><small>' + esc(p.sub) + '</small></span><span class="go" aria-hidden="true">›</span></button>';
   }).join('');
   var m = media('title');
-  app.innerHTML = '<div class="start"><div class="pic" style="background-image:url(\'' + esc(m.src) + '\')"><span class="credit">' + esc(m.credit) + '</span></div>' +
-    '<div class="txt"><div class="eyebrow">' + esc(D.meta.eyebrow) + '</div><h1>Who are you?</h1><p>' + esc(D.meta.instruction) + '</p>' +
+  app.innerHTML = '<div class="start"><div class="pic" style="background-image:url(\'' + esc(m.src) + '\')"><div class="ptxt"><div class="eyebrow">' + esc(D.meta.eyebrow) + '</div><h1>' + esc(D.meta.title) + '</h1></div><span class="credit">' + esc(m.credit) + '</span></div>' +
+    '<div class="txt"><h2>Who are you?</h2><p>' + esc(D.meta.instruction) + '</p>' +
     '<div class="people">' + btns + '</div><p class="small">' + esc(D.meta.gameValues) + '</p></div></div>';
 }
 function profileHtml() {
@@ -246,7 +266,7 @@ function renderIntro() {
     '<div class="intro-text">' + esc(p.intro) + '</div>' +
     '<div class="pad"><h4>Your constraints</h4><ul class="lim">' + lim + '</ul></div>' +
     '<p class="note">' + esc(D.meta.gameValues) + ' Every round you spend in the city uses up a day of food. Heat, waiting and water cost strength.</p></div>' +
-    '<div class="roles"><h4>Your group</h4><p>' + esc(D.student.roles) + '</p></div></div>' +
+    '</div>' +
     nav('<button class="btn ghost" id="b-back">‹ Change person</button>', '<button class="btn grow" id="b-next">Start round 1 ›</button>');
 }
 function renderRound() {
@@ -263,14 +283,14 @@ function renderRound() {
     var cls = done ? (pk === c.id ? 'picked' : 'faded') : (c.lock ? 'locked' : '');
     var price = c.cost ? '<span class="p">' + (c.modNote ? '<s>' + usd(c.baseCost) + '</s>' : '') + usd(c.cost) + '</span>' : '';
     var lk = c.lock ? '<em>' + esc(c.lock) + (c.poor ? '' : tag(c.lockKind || 'game')) + '</em>' : '';
-    return '<button class="opt ' + cls + '" data-id="' + esc(c.id) + '"' + (c.lock || done ? ' disabled aria-disabled="true"' : '') + '><span class="k">' + 'ABCDEF'[j] + '</span><span class="l">' + esc(c.t) + lk + '</span>' + price + '</button>';
+    return '<button class="opt ' + cls + '" data-id="' + esc(c.id) + '"' + (done ? ' disabled aria-disabled="true"' : c.lock ? ' aria-disabled="true"' : '') + '><span class="k">' + (c.lock && !done ? ICON.lock : 'ABCDEF'[j]) + '</span><span class="l">' + esc(c.t) + lk + '</span>' + price + '</button>';
   }).join('');
-  var timer = done ? '' : '<div class="timer" id="timer"><div class="bar"><i></i></div><span class="s"></span><button class="iconbtn" id="pause" aria-pressed="false">Pause</button></div><div class="timeup" id="timeup" hidden>' + esc(D.meta.timeUp) + '</div>' + '<p class="chal">' + esc(D.student.challenger) + '</p>';
+  var timer = done ? '' : '<div class="timeup" id="timeup" hidden>' + esc(D.meta.timeUp) + '</div>';
   var cons = done ? '<div class="cons"><span class="what">What happens to you</span>' + lg.c +
     (lg.surprise ? '<div class="surprise"><span class="what">Sudden change · nobody could plan for this</span>' + fill(lg.surprise) + '</div>' : '') +
     (lg.delta.length ? '<div class="delta">' + lg.delta.map(function (d) { return '<span' + (/^\+/.test(d) ? ' class="up"' : '') + '>' + esc(d) + '</span>'; }).join('') + '</div>' : '') +
     (lg.pull ? '<div class="pull"><span class="what">Reality check' + '' + '</span>' + fill(lg.pull.t) + '</div>' : '') +
-    (lg.leaving ? leaveHtml() : '') + (lg.img ? figure(lg.img) : '') + '</div>' + askHtml() + guessHtml() + '<div class="wait">' + esc(D.meta.waitBox) + '</div>' : '';
+    (lg.leaving ? leaveHtml() : '') + (lg.img ? figure(lg.img) : '') + '</div>' + askHtml() + '<div class="wait">' + esc(D.meta.waitBox) + '</div>' : '';
   var last = S.r === D.rounds.length - 1;
   app.innerHTML = topbar(p.name, 'Round ' + R.n + ' of ' + D.rounds.length + (p.composite ? ' · Composite' : '')) + tickerHtml(R) + heroHtml(R) +
     '<div class="wrap"><div class="card">' + chips() + burdenHtml(false) + '<div class="sit">' + fill(sc.s.sit) + '</div>' + domeHtml() + hear + card + timer +
@@ -323,13 +343,12 @@ function endLook() {
     var closed = (lg.closed || []).map(function (c) { return '<li>' + esc(c.t) + ' <em>' + esc(c.why) + '</em></li>'; }).join('');
     return '<div class="lb"><div class="lbh">Round ' + R.n + ' · ' + esc(R.short) + '</div>' +
       '<p class="lbc">You chose: <b>' + esc(l) + '</b></p>' +
-      '<p class="lbm">' + (rs.length ? 'Because: ' + esc(rs.join(', ')) : 'No reason given') + ' · Choice you felt: ' + (f == null ? '–' : esc(Q.felt[f])) + '</p>' +
+      '<p class="lbm">Choice you felt: ' + (f == null ? '–' : esc(Q.felt[f])) + '</p>' +
       (closed ? '<div class="lbx"><span>Closed to you (' + (lg.closed.length) + ' of ' + lg.total + ')</span><ul>' + closed + '</ul></div>' : '<div class="lbx"><span>Every option was open to you this round</span></div>') +
       (lg.surprise ? '<div class="lbs">Sudden change: ' + fill(lg.surprise) + '</div>' : '') +
-      (R.guess ? '<div class="lbg">' + esc(R.guess.q) + '<br>Your guess: <b>' + (st.guess[i] == null ? '–' : esc(R.guess.options[st.guess[i]])) + '</b> · Answer: <b>' + esc(R.guess.options[R.guess.answer]) + '</b> ' + (st.guess[i] == null ? '' : st.guess[i] === R.guess.answer ? '<span class="ok">✓</span>' : '<span class="no">✗</span>') + '</div>' : '') +
       '<div class="lbk"><span>Meanwhile in the city</span><ul>' + R.happened.slice(0, 2).map(function (h) { return '<li>' + esc(h) + '</li>'; }).join('') + '</ul></div></div>';
   }).join('');
-  return '<div class="pad"><h4>How much choice did you feel?</h4>' + feltChart() + '</div><div class="pad"><h4>Your decisions, round by round</h4>' + rows + '</div>';
+  return '<div class="pad"><h4>How much choice did you feel?</h4>' + feltChart() + (st.knocks ? '<p class="knocks">You tapped a closed option <b>' + st.knocks + '</b> ' + (st.knocks === 1 ? 'time' : 'times') + '. It stayed closed.</p>' : '') + '</div><div class="pad"><h4>Your decisions, round by round</h4>' + rows + '</div>';
 }
 function endReal() {
   var p = P(), st = S.st, e = D.endings[st.end] || {}, g = [];
@@ -399,9 +418,7 @@ app.addEventListener('input', function (ev) { if (ev.target.id === 'answer') sav
 app.addEventListener('click', function (ev) {
   var b = ev.target.closest('button'); if (!b || b.disabled) return;
   if (b.dataset.who) return choose(b.dataset.who);
-  if (b.dataset.id) return pick(b.dataset.id);
-  if (b.dataset.reason) { var rs = S.st.reasons[S.r] = S.st.reasons[S.r] || [], ix = rs.indexOf(b.dataset.reason); if (ix >= 0) rs.splice(ix, 1); else rs.push(b.dataset.reason); b.classList.toggle('on'); return; }
-  if (b.dataset.guess) { S.st.guess[S.r] = +b.dataset.guess; b.parentNode.querySelectorAll('.gbtn').forEach(function (x) { x.classList.toggle('on', x === b); }); return; }
+  if (b.dataset.id) { if (b.classList.contains('locked')) return knock(b); return pick(b.dataset.id); }
   if (b.dataset.felt) { S.st.felt[S.r] = +b.dataset.felt; b.parentNode.querySelectorAll('.sbtn').forEach(function (x) { x.classList.toggle('on', x === b); }); return; }
   if (b.dataset.tab) { S.tab = b.dataset.tab; go(); return; }
   if (b.id === 'b-tab') { S.tab = b.dataset.next; go(); return; }
@@ -411,7 +428,7 @@ app.addEventListener('click', function (ev) {
   if (b.id === 'b-next') { if (S.phase === 'intro') return enterRound(0); if (S.r === D.rounds.length - 1) return finish(); return enterRound(S.r + 1); }
   if (b.id === 'b-again') return reset();
   if (b.id === 'pause') { timers.paused = !timers.paused; startTimer(); return; }
-  if (b.id === 'snd') { Sound.toggle(); render(); return; }
+  if (b.id === 'snd') { Sound.toggle(); app.className = 'stay'; render(); return; }
 });
 
 window.KatrinaApp = { state: function () { return S; } };

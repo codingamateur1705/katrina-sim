@@ -64,6 +64,22 @@ td.who small{display:block;font-weight:400;font-size:.75em;opacity:.9}
 .gq b{color:#1E1E1E}
 ol.dql{font-size:clamp(18px,2.1vw,36px);line-height:1.3;margin:0 0 3vh;padding-left:1.2em;max-width:85vw}
 ol.dql li{margin:.4em 0}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.1)}}
+@media (prefers-reduced-motion:no-preference){
+.slide{animation:fade .5s both}
+.bg{animation:kb 45s ease-out both}
+.content>*{animation:up .55s cubic-bezier(.2,.7,.2,1) both}
+.content>*:nth-child(2){animation-delay:.1s}
+.content>*:nth-child(3){animation-delay:.2s}
+.box li{animation:up .5s cubic-bezier(.2,.7,.2,1) both}
+.box li:nth-child(1){animation-delay:.35s}.box li:nth-child(2){animation-delay:.55s}.box li:nth-child(3){animation-delay:.75s}.box li:nth-child(4){animation-delay:.95s}
+.seat{animation:up .5s both}.seat:nth-child(2){animation-delay:.08s}.seat:nth-child(3){animation-delay:.16s}.seat:nth-child(4){animation-delay:.24s}
+tbody tr{animation:up .5s both}tbody tr:nth-child(2){animation-delay:.12s}tbody tr:nth-child(3){animation-delay:.24s}tbody tr:nth-child(4){animation-delay:.36s}
+}
+.box{border-radius:8px}
+.timer{box-shadow:0 4px 18px rgba(0,0,0,.35)}
 /* chrome */
 #bar{position:fixed;left:0;bottom:0;height:5px;background:var(--g);z-index:10;transition:width .2s}
 #ctl{position:fixed;left:1vw;bottom:1.2vh;z-index:11;display:flex;gap:6px;opacity:.25;transition:opacity .2s}
