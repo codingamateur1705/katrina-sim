@@ -21,7 +21,7 @@ meta: {
   title: 'Katrina: Four People, One Storm',
   eyebrow: 'Hurricane Katrina · 26 August to 3 September 2005',
   instruction: 'Your group plays one person through the whole disaster. Pick the person you were given.',
-  gameValues: 'Money, food and strength are game values, set to fit each person’s situation. They are not historical figures.',
+  gameValues: 'These are real people. At the end you see what really happened to them. Only money, food and strength are game values, set to fit each person’s situation.',
   timerSeconds: 120,
   how: ['Read your situation', 'Decide together within 2 minutes', 'Then look at the main screen'],
   timeUp: 'Time is up. In reality there was no time to think either.',

@@ -254,7 +254,7 @@ function renderChoose() {
 }
 function profileHtml() {
   var p = P(), pr = p.profile || {}, m = pr.portrait ? media(pr.portrait) : null;
-  var pic = m ? '<figure class="portrait"><img src="' + esc(m.src) + '" alt="' + esc(p.name) + '"><figcaption>' + esc(m.credit) + '</figcaption></figure>'
+  var pic = m ? '<figure class="portrait"><img src="' + esc(m.src) + '" alt="' + esc(p.name) + '">' + (m.credit ? '<figcaption>' + esc(m.credit) + '</figcaption>' : '') + '</figure>'
               : '<div class="portrait mono" aria-hidden="true"><span>' + esc(pr.initials || '') + '</span><small>Photo to come</small></div>';
   var facts = (pr.facts || []).map(function (f) { return '<div><dt>' + esc(f.label) + '</dt><dd>' + esc(f.value) + '</dd></div>'; }).join('');
   return '<div class="profile" style="background:' + p.color + '">' + pic + '<div class="pinfo"><span class="meet">Meet your person</span><b>' + esc(p.name) + '</b><small>' + esc(p.sub) + '</small>' + (facts ? '<dl>' + facts + '</dl>' : '') + '</div></div>';
