@@ -99,7 +99,7 @@ with sync_playwright() as p:
         errs = []
         page.on('pageerror', lambda e: errs.append(str(e)))
         page.on('console', lambda m: errs.append(m.text) if m.type == 'error' else None)
-        for who in ['mayor', 'herbert', 'kim', 'lake']:
+        for who in ['mayor', 'herbert', 'kim', 'rose']:
             play(page, who, 'real', '%s-%s-real' % (vp_name, who), shots=True)
             for k in range(4):
                 play(page, who, k, '%s-%s-first%d' % (vp_name, who, k))

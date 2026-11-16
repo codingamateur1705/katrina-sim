@@ -35,7 +35,7 @@ var rows = D.order.map(function (k) {
 slides.push({ cls: 'tab', notes: 'Groups now open “Your fate” on their phones and compare.', html:
   '<div class="content"><h2>What our four people really did</h2><table><thead><tr><th style="width:17%"></th>' +
   D.rounds.map(function (R) { return '<th>Round ' + R.n + ' · ' + esc(R.short) + '</th>'; }).join('') + '</tr></thead><tbody>' + rows + '</tbody></table>' +
-  '<div class="src">Sources. House (2006), pp. 109 to 113; Senate (2006), p. 250; WWL (2005); AP via NBC News (2005, 2006); Lessin and Deal (2008); Horowitz (2020), ch. 4 and 5. Webster, Adelson, Hammer and Chou (2022), ProPublica, on Rita Legrand.</div></div>' });
+  '<div class="src">Sources. House (2006), pp. 109 to 113; Senate (2006), p. 250; WWL (2005); AP via NBC News (2005, 2006); Lessin and Deal (2008); Horowitz (2020), ch. 4 and 5. Wikipedia, Chris Rose (journalist); Christian Science Monitor (2007).</div></div>' });
 
 /* debrief */
 slides.push({ cls: 'tab', notes: 'About 5 minutes. Groups open the Discuss tab on their phones, talk, and write one sentence. Then each group shows it with “Show to the class” and reads it out. No right answer: the presentation discusses the research question afterwards.', html:

@@ -255,3 +255,24 @@ New endings: `late_bus` (uses your slide: Superdome and Convention Center empty 
 - Projector: slides fade, photos zoom slowly, bullets appear one after another.
 
 - **Second pass:** a three-step "how it works" strip on the person screen (texts in `meta.how` in `data.js`), the ending as a dark headline with its consequences listed below, and the difficulties counter pops when it grows.
+
+## 12. Update: Chris Rose replaces Rita Legrand
+
+The fourth person is now **Chris Rose**, columnist at The Times-Picayune, Uptown, with his wife and three children. The texts use only the facts in your notes:
+- Fled to Mississippi with his wife and three kids; his house Uptown made it through the storm.
+- His wife and children moved to Chevy Chase, Maryland, for the fall of 2005; he went back alone to report.
+- "1 Dead in Attic", named after a search team's mark; New York Times bestseller.
+- October 2006 column "Hell and Back" about anxiety, depression and anti-depressants.
+- Later separated, left the paper in 2009, waiter and tour guide, end-stage cirrhosis disclosed in 2025.
+
+**Real path in the game:** round 1 drive to Mississippi, round 3 move the family away so the kids can go to school, round 4 go back alone to report. Round 2 (what he did on the morning of landfall) is not reported, so it does not count for "matches what is documented".
+
+**Game details** (fictional): editor asking who stays; motels booked out; power out before dawn; children asking about school; phone without signal; the choice to stay and cover the storm; working at the newspaper building; motel ($420); savings $2,500; car with a full tank. The ending "go back alone" shows the "1 dead in attic" mark, which is a real phrase but the moment you see it in the game is invented.
+
+**Please check:**
+- **Sources:** most facts come from Wikipedia, so cite the underlying sources in the deck: Rose's columns, his book "1 Dead in Attic" (2007), the Christian Science Monitor (2007) piece, and Fort Worth Weekly.
+- **Race:** the subtitle says "White". Your notes do not say it directly. Keep or delete it in `data.js` (`rose`, `sub`).
+- **Where in Mississippi:** not reported, so the game only says "Mississippi".
+- **Photo:** `portrait-rose-sq.jpg` is cropped from your file; the credit line still says "Photo licensed by the group". `portrait-legrand.webp` stays on your computer but is not published.
+- **Legrand material:** her text and figures were removed from the game; section 6 of these notes keeps the source in case you want her back.
+- **Presenter table row** for round 2: "Not reported".

@@ -309,7 +309,7 @@ function endingText() {
     if (st.strength <= 2) x.push(esc(L.mayorWeak));
     return x;
   }
-  if (p.track.money) x.push(fill(st.money < 150 ? L.moneyLow : st.money < 1000 ? L.moneyMid : L.moneyHigh));
+  if (p.track.money && !e.noMoney) x.push(fill(st.money < 150 ? L.moneyLow : st.money < 1000 ? L.moneyMid : L.moneyHigh));
   if (p.track.food && (st.food <= 0 || st.stats.hungry > 0)) x.push(esc(L.hungry));
   if (st.strength <= 1) x.push(esc(L.weak));
   if (p.track.ethel) x.push(esc(st.end === 'h_wait' && st.loc === 'cc' ? L.ethelDeath : L.ethel[st.ethel]));

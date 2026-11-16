@@ -29,7 +29,7 @@ meta: {
   question: 'Who really had a choice? Was it money, health, a car, or the colour of their skin?',
   // Put the final public address here after deployment (used on the projector title slide)
   publicUrl: 'https://codingamateur1705.github.io/katrina-sim/',
-  sources: 'Sources. U.S. House of Representatives (2006), A Failure of Initiative, pp. 106 to 114. U.S. Senate (2006), A Nation Still Unprepared, pp. 249 to 250. Associated Press via NBC News (2005, 2006) on Ethel Freeman. Lessin and Deal (2008), Trouble the Water. Horowitz (2020), Katrina, A History, chapters 4 and 5. USACE IPET (2006). Houston Chronicle (2005) on Jabbar Gibson. Money, food and strength are game values. Webster, Adelson, Hammer and Chou (2022), ProPublica, on Rita Legrand.'
+  sources: 'Sources. U.S. House of Representatives (2006), A Failure of Initiative, pp. 106 to 114. U.S. Senate (2006), A Nation Still Unprepared, pp. 249 to 250. Associated Press via NBC News (2005, 2006) on Ethel Freeman. Lessin and Deal (2008), Trouble the Water. Horowitz (2020), Katrina, A History, chapters 4 and 5. USACE IPET (2006). Houston Chronicle (2005) on Jabbar Gibson. Money, food and strength are game values. Wikipedia, Chris Rose (journalist); Christian Science Monitor (2007); Rose (2007), 1 Dead in Attic.'
 },
 
 /* Student interaction: reasons, felt choice, group roles, debrief questions (no verdicts) */
@@ -95,6 +95,7 @@ media: {
   portraitNaginFema: { src: 'img/portrait-nagin.jpg', credit: 'Jocelyn Augustino, FEMA, September 2005, public domain' },
   portraitKim: { src: 'img/portrait-kim.jpg', credit: 'Photo licensed by the group' },
   portraitHerbert: { src: 'img/portrait-herbert.jpg', credit: 'Photo licensed by the group' },
+  portraitRose: { src: 'img/portrait-rose-sq.jpg', credit: 'Photo licensed by the group' },
   ninth:      { src: 'img/ninth-ward.jpg',      credit: 'Marvin Nauman, FEMA, Ninth Ward, September 2005, public domain' }
 },
 
@@ -168,7 +169,7 @@ rounds: [
 ],
 
 /* Order of the buttons on the first screen and seats from the deck */
-order: ['mayor', 'herbert', 'kim', 'lake'],
+order: ['mayor', 'herbert', 'kim', 'rose'],
 
 people: {
 
@@ -607,127 +608,130 @@ kim: {
 },
 
 /* =====================================================================
-   4. RITA LEGRAND, LAKEVIEW (ProPublica et al. 2022; evacuation not reported)
+   4. CHRIS ROSE, UPTOWN (Wikipedia; Christian Science Monitor 2007; Rose 2007)
    ===================================================================== */
-lake: {
+rose: {
+  debrief: 'Which costs of the storm could you see right away, and which only months later?',
   profile: {
-    portrait: null, initials: 'RL',
+    portrait: 'portraitRose', initials: 'CR',
     facts: [
-      { label: 'Who', value: 'Rita Legrand, retiree' },
-      { label: 'Home', value: 'A modest ranch house in Lakeview, near the 17th Street Canal' },
-      { label: 'Protection', value: 'You have insurance on the house' },
-      { label: 'Neighbourhood', value: 'Mostly white, higher house values than the Lower Ninth' }
+      { label: 'Who', value: 'Chris Rose, columnist at The Times-Picayune since 1984' },
+      { label: 'Family', value: 'Your wife and your three children' },
+      { label: 'Home', value: 'A house Uptown' },
+      { label: 'Before', value: 'You mostly write light pieces about celebrities and entertainment' }
     ]
   },
-  debrief: 'Which of your advantages did you notice during the game, and which only at the end?',
-  name: 'Rita Legrand', firstName: 'Rita Legrand', sub: 'Retiree in Lakeview, insured homeowner',
+  name: 'Chris Rose', firstName: 'Chris Rose', sub: 'White, newspaper columnist, Uptown',
   color: '#1F5F35', seat: 'Back right', composite: false,
-  intro: 'You are Rita Legrand, a retiree in Lakeview, a mostly white neighbourhood near the 17th Street Canal. You own a modest ranch house and you have insurance. In the game you also have a car with a full tank and some savings.',
+  intro: 'You are Chris Rose, a columnist at The Times-Picayune. You live Uptown with your wife and your three children. Before Katrina you mostly write light pieces about celebrities and entertainment.',
   carChip: { t: 'Car, full tank' },
-  start: { loc: 'home', money: 3000, food: 3, strength: 5 },
+  start: { loc: 'home', money: 2500, food: 3, strength: 5 },
   track: { money: true, food: true, ethel: false },
   constraints: [
-    { t: 'Your house is your savings. You are retired', kind: 'real' },
-    { t: 'Your insurance will not cover everything', kind: 'real' },
-    { t: 'Lakeview lies even lower than the Lower Ninth Ward, behind the 17th Street Canal wall', kind: 'real' },
-    { t: 'On paper your modest house is worth far more than a house in the Lower Ninth', kind: 'real' },
-    { t: 'Your neighbour says Ivan was a false alarm and is staying', kind: 'game' },
-    { t: 'Your sister in Baton Rouge has a spare room', kind: 'game' },
-    { t: 'You have a dog', kind: 'game' }
+    { t: 'You have a wife and three children', kind: 'real' },
+    { t: 'Your job is to write about the city', kind: 'real' },
+    { t: 'Your house is Uptown, on higher ground than much of the city', kind: 'game' },
+    { t: 'You have a car, some savings and a steady job', kind: 'game' },
+    { t: 'Your editor needs people to cover the storm', kind: 'game' }
   ],
-  real: 'When the floodwalls broke, water reached the eaves of many Lakeview homes. Rita Legrand had to gut her modest ranch house. With $53,000 from insurance, she applied for a Road Home grant in fall 2006. Road Home valued her house at $320,000 and her repairs at $188,000, and paid $135,000. By April 2007 she had completely rebuilt. “The program worked great for me,” she said. How and where she evacuated is not reported.',
-  realSource: 'Webster, Adelson, Hammer and Chou (2022), ProPublica with The Times-Picayune | The Advocate and WWL-TV.',
-  /* Shown when Rita leaves the city, and on the fate screen under "Can you come back?" */
+  real: 'Chris Rose fled to Mississippi with his wife and three children as Katrina approached. His house Uptown made it through the storm. For the fall of 2005 his wife and children moved to Chevy Chase, Maryland, so the kids could keep going to school, and he went back to New Orleans alone to report. His columns became the book “1 Dead in Attic”, named after a search team’s mark for a body found in a house. In October 2006 he wrote about taking anti-depressants after anxiety and depression. He and his wife later separated. He left the paper in 2009, later worked as a waiter and a tour guide, and in 2025 disclosed end-stage cirrhosis.',
+  realSource: 'Wikipedia, “Chris Rose (journalist)”; Christian Science Monitor (2007); Fort Worth Weekly; Rose (2007), 1 Dead in Attic.',
+  /* Shown when Chris leaves the city, and on the fate screen under "Can you come back?" */
   leaving: [
-    { t: 'Your sister’s spare room is meant for a few nights, not weeks', kind: 'game' },
-    { t: 'Your mail and pension go to an address that is under water', kind: 'game' },
-    { t: 'Every week away costs money: gas, food, the dog', kind: 'game' }
+    { t: 'Your family is safe, but nobody knows when you can go home', kind: 'game' },
+    { t: 'Every week away costs money: gas, food, a place to stay', kind: 'game' },
+    { t: 'Your editor wants you back in the city', kind: 'game' }
   ],
   returning: [
-    { t: 'The city keeps residents out for weeks. You cannot even see the house', kind: 'game' },
-    { t: 'The house must be gutted to the studs', kind: 'real' },
-    { t: 'Insurance pays $53,000. The repairs cost $188,000', kind: 'real' },
-    { t: 'Your grant is based on the house’s high pre-storm value', kind: 'real' }
+    { t: 'Your house Uptown made it through the storm', kind: 'real' },
+    { t: 'Your wife and children stay in Maryland for the fall so the kids can go to school', kind: 'real' },
+    { t: 'Every day you write about the dead, the ruins and the people who are gone', kind: 'game' },
+    { t: 'Anxiety and depression in the months after the storm', kind: 'real' }
   ],
-  returnFact: 'The average Lakeview owner got about 83 % of what rebuilding needed. About 37 % of Lower Ninth households were back after ten years.',
-  /* null = not documented for this round; only documented rounds count for "matches what really happened" */
-  realPath: [null, null, null, 'l4_rebuild'],
-  realRows: ['Not reported', 'Floodwalls break. Lakeview floods to the eaves', 'Guts her house. Insurance pays $53,000', 'Road Home grant $135,000. Rebuilt by April 2007'],
+  returnFact: 'In October 2006 Chris Rose wrote about taking anti-depressants in a column called “Hell and Back”.',
+  /* null = not documented for this round */
+  realPath: ['r1_leave', null, 'r3_school', 'r4_report'],
+  realRows: ['Drives with his wife and three children to Mississippi', 'Not reported', 'House Uptown is dry. His family moves to Maryland for the school year', 'Goes back alone to report for the paper'],
   realStats: [
-    { label: 'Insurance payout', value: '$53,000' },
-    { label: 'Road Home valued her house at', value: '$320,000, repairs at $188,000' },
-    { label: 'Road Home grant', value: '$135,000, applied in fall 2006' },
-    { label: 'Rebuilt', value: 'Completely, by April 2007' },
-    { label: 'Average Lakeview owner', value: 'Got about 83 % of what rebuilding needed' }
+    { label: 'Evacuated', value: 'To Mississippi, with his wife and three children' },
+    { label: 'His house', value: 'Uptown, made it through the storm' },
+    { label: 'His family', value: 'Moved to Chevy Chase, Maryland, for the fall of 2005' },
+    { label: 'His book', value: '“1 Dead in Attic”, a New York Times bestseller' },
+    { label: 'October 2006', value: 'Column “Hell and Back”: anxiety, depression, anti-depressants' },
+    { label: 'Later', value: 'Separated; left the paper in 2009; in 2025 disclosed end-stage cirrhosis' }
   ],
   rounds: [
     { '*': {
-      sit: 'A hurricane may hit on Monday. Your car has a full tank.',
-      hear: ['TV: “Expect heavy traffic this weekend”', 'Neighbour: “Ivan was a false alarm, I’m staying”', 'Your sister: “Come now, before the roads fill up”'],
-      card: { t: 'The highway out takes eight hours instead of one.', kind: 'game' },
+      sit: 'A hurricane may hit on Monday. You have a car, a house Uptown and three children.',
+      hear: ['TV: “Expect heavy traffic this weekend”', 'Neighbour: “Ivan was a false alarm, I’m staying”', 'Your editor: “We need people here when it hits”'],
+      card: { t: 'Your editor asks who will stay in the city to cover the storm.', kind: 'game' },
       choices: [
-        { id: 'l1_drive', surprise: { t: 'The first two gas stations on the highway are sold out. You wait an hour in line for fuel.', kind: 'game', wait: 1 }, t: 'Drive to your sister in Baton Rouge', cost: 40, loc: 'out', strength: -1, wait: 8, c: 'Eight hours in traffic, but you get out.' },
-        { id: 'l1_wait', pull: { lens: 'class', t: 'Around 1.2 million people left the region before landfall, mostly by car, so those who leave late meet the worst traffic.', kind: 'real' }, t: 'Wait for an official order', loc: 'home', c: 'When the order comes, the roads out are jammed. You decide to stay one more night. You still have your car.' },
-        { id: 'l1_board', pull: { lens: 'class', t: 'Most households with a car left before the storm. Staying was a minority choice, and a risky one.', kind: 'real' }, t: 'Board up and stay', cost: 200, food: 3, loc: 'home', c: 'Plywood on the windows, food for days.' }
+        { id: 'r1_leave', t: 'Drive with your wife and children to Mississippi', cost: 60, loc: 'out', strength: -1, wait: 8,
+          surprise: { t: 'The highway out is jammed. The drive takes most of the night with three tired children in the back.', kind: 'game' },
+          c: 'You get out. The car is packed with the kids, some clothes and whatever fits.' },
+        { id: 'r1_cover', t: 'Send your family away and stay to cover the storm', cost: 60, loc: 'home', c: 'Your wife drives the children out. You stay in the house Uptown with a notebook and a radio.' },
+        { id: 'r1_wait', t: 'Wait for an official order', loc: 'home', c: 'When the order comes, the roads out are jammed. You decide to stay one more night. You still have your car.' }
       ]
     } },
     {
-      _card: { t: 'Your dog is with you. Many motels and shelters do not take pets.', kind: 'game', mods: [{ choice: 'l2_motel', cost: 60, note: 'Pet fee' }] },
       out: {
-        sit: 'You watch the storm on TV at your sister’s house.',
+        card: { t: 'Every motel along the highway is booked out.', kind: 'game' },
+        sit: 'You are with your family in Mississippi. The storm is coming ashore here too.',
         hear: [{ t: 'TV: “New Orleans dodged the bullet”', false: 'Misleading. Levees and floodwalls were already breaking. By Tuesday 80 % of the city was under water.' }],
         choices: [
-          { id: 'l2_sister', t: 'Stay with your sister', cost: 60, loc: 'out', c: 'Crowded, but safe. You pay for gas, food and dog food.' },
-          { id: 'l2_motel', surprise: { t: 'The first motels are booked out. The one that takes dogs is an hour further away.', kind: 'game', strength: -1 }, pull: { lens: 'class', t: 'A motel gives you privacy, but it costs money that most people did not have.', kind: 'game' }, t: 'Book a motel to give your sister space', cost: 420, loc: 'out', c: 'A week in a motel that takes dogs. You can afford it.' }
+          { id: 'r2_stay', t: 'Stay where you are with the family', loc: 'out', strength: -1, c: 'A long night of wind and rain. The children do not sleep.' },
+          { id: 'r2_inland', t: 'Drive further inland, away from the coast', cost: 80, loc: 'out', wait: 5, c: 'More hours in the car, but you are out of the worst of it.' }
         ]
       },
       home: {
-        sit: 'The 17th Street Canal breaks. Lakeview floods to the rooftops.',
-        hear: ['Neighbours shouting'],
+        card: { t: 'The power goes out before dawn.', kind: 'game' },
+        sit: 'Your house Uptown is on higher ground. The wind is violent. You hear that water is rising in other parts of the city.',
+        hear: ['Battery radio: “Levee breaks reported”'],
         choices: [
-          { id: 'l2_roof', pull: { lens: 'structural', t: 'In Lakeview the water rose over hours, not minutes. Boats and helicopters reached many roofs, but not for days.', kind: 'game' }, t: 'Climb onto the roof with your dog right now', loc: 'roof', strength: -1, img: 'flood', c: 'You wait for a boat or a helicopter.' },
-          { id: 'l2_supplies', t: 'Carry food and water upstairs first, then climb out', loc: 'roof', food: 1, strength: -2, c: 'You save some supplies, but the water is at your chest when you climb onto the roof.' },
-          { id: 'l2_drive', t: 'Drive out now', lock: 'Too late. The storm has closed the roads and the water is rising', lockKind: 'game' }
+          { id: 'r2_house', t: 'Stay in the house and wait out the storm', loc: 'home', strength: -1, c: 'Branches crash onto the roof. By noon the wind drops. Your street is dry.' },
+          { id: 'r2_paper', t: 'Go to the newspaper building to work', loc: 'home', strength: -1, wait: 6, c: 'You write by flashlight. The reports coming in are worse every hour.' }
         ]
       }
     },
     {
       out: {
-        card: { t: 'Your insurer’s phone line is busy all day.', kind: 'game' },
-        sit: 'Your house is under water.',
-        hear: ['TV: “Looting in New Orleans”', 'One news photo calls a young Black man wading with food “looting”. Another calls a white couple doing the same “finding” food'],
+        card: { t: 'Your children ask when they can go home and back to school.', kind: 'game' },
+        sit: 'You hear that your house Uptown made it through. Large parts of the city are under water.',
+        hear: ['TV: “Looting in New Orleans”'],
         choices: [
-          { id: 'l3_insurer', t: 'Call your insurer', loc: 'out', c: 'After a day on hold, you file a claim from your sister’s house.' },
-          { id: 'l3_drive', pull: { lens: 'structural', t: 'Residents were kept out of the city for weeks, so this trip ends at a checkpoint.', kind: 'real' }, t: 'Try to drive back in', cost: 40, loc: 'out', wait: 6, c: 'The city is closed. Checkpoints keep everyone out.' }
+          { id: 'r3_school', t: 'Move the family to friends far away so the kids can go to school', cost: 300, loc: 'out',
+            surprise: { t: 'A school has room for the children, but now your family is split between two states.', kind: 'game' },
+            c: 'Your wife and children settle in far from home. They are safe. You are on your own.' },
+          { id: 'r3_motel', t: 'Keep the family together in a motel and wait', cost: 420, loc: 'out', wait: 24, c: 'One room, five people, the TV always on. Nobody knows when the city will open again.' }
         ]
       },
-      roof: {
-        card: { t: 'You have had no clean water since Monday.', kind: 'game', strength: -1 },
-        sit: 'On the roof in the heat.',
-        hear: [],
+      home: {
+        card: { t: 'Your phone has no signal. Your family does not know if you are alive.', kind: 'game' },
+        sit: 'Your house is dry, but the city around you is under water. No power, no clean water.',
+        hear: [{ t: 'TV: “Snipers shooting at rescue helicopters”', false: 'Turned out false.' }],
         choices: [
-          { id: 'l3_rwait', pull: { lens: 'structural', t: 'Boats passed full. Helicopter crews took the people they could reach first.', kind: 'game' }, t: 'Keep waiting', loc: 'roof', wait: 24, img: 'helicopter', c: 'A boat passes, full.' },
-          { id: 'l3_rwave', t: 'Wave a towel at every boat and helicopter', loc: 'roof', strength: -1, wait: 24, c: 'One boat crew sees you. They are full and write down your address.' }
+          { id: 'r3_drive', t: 'Drive out to find your family', loc: 'out', cost: 60, wait: 6, c: 'You find a way out on the high roads. Hours later you hold your children again.' },
+          { id: 'r3_write', t: 'Stay and write about what you see', loc: 'home', strength: -1, c: 'You walk the dry streets and talk to the people who stayed. You write it all down.' }
         ]
       }
     },
     {
       out: {
-        card: { t: 'You see your street under water on national TV. The mortgage on the house is still due.', kind: 'game' },
-        sit: 'You are safe and insured. What now?',
+        card: { t: 'You see your city under water on national TV.', kind: 'game' },
+        sit: 'Your family is safe. The paper needs reporters in the city.',
         hear: [],
         choices: [
-          { id: 'l4_rebuild', t: 'Plan to rebuild', end: 'l_rebuild' },
-          { id: 'l4_move', pull: { lens: 'structural', t: 'Insurance and a grant tied to home value made rebuilding the common choice in Lakeview.', kind: 'real' }, t: 'Move somewhere else', end: 'l_move' }
+          { id: 'r4_report', t: 'Go back alone to report on the city', loc: 'home', wait: 6, end: 'r_report' },
+          { id: 'r4_away', t: 'Stay with your family away from the city', loc: 'out', end: 'r_away' }
         ]
       },
-      roof: {
-        card: { t: 'Day four. Your dog has not eaten for two days.', kind: 'game' },
-        sit: 'Day four on the roof.',
+      home: {
+        card: { t: 'You have not slept properly for days. Everything you see goes into your notebook.', kind: 'game', strength: -1 },
+        sit: 'You are one of the few people left in the empty city with a dry house.',
         hear: [],
         choices: [
-          { id: 'l4_signal', pull: { lens: 'structural', t: 'Helicopter crews eventually reach the roof. Your insurance still pays for the house.', kind: 'game' }, t: 'Signal a helicopter', end: 'l_rescued' },
-          { id: 'l4_boat', t: 'Go with a neighbour’s small boat to the highway', loc: 'out', wait: 8, end: 'l_boat' }
+          { id: 'r4_stayrep', t: 'Keep reporting from the empty city', loc: 'home', end: 'r_report' },
+          { id: 'r4_join', t: 'Drive out to join your family', loc: 'out', cost: 60, end: 'r_away' }
         ]
       }
     }
@@ -752,12 +756,10 @@ endings: {
   k_wait:    { t: 'The buses only come days later.', where: 'Still in the city' },
   k_vehicle: { t: 'You drive out. One young man, Jabbar Gibson, really did this: he took a school bus with about 70 people to Houston. Officials at first hesitated to let him in.', where: 'Houston, about 560 km from home', img: 'buses' },
   k_out:     { t: 'You are safe, but your home is gone. Only about 37 % of Lower Ninth households came back within ten years.', where: 'Another city, far from home' },
-  l_rebuild: { t: 'Insurance and a grant based on your home’s value help you rebuild. About 90 % of households citywide came back. It still takes months of mould removal, adjusters and paperwork. In the Lower Ninth the funding gap was about $31,000 larger per home.', where: 'Baton Rouge, about 130 km from home' },
-  l_move:    { t: 'You start over somewhere else, with insurance money to do it.', where: 'A new city' },
+  r_report:  { t: 'You go back alone. Your house is dry, but every day you write about the dead, the ruins and the people who are gone. On a house you see a search team’s mark: “1 dead in attic”.', where: 'Your dry house Uptown, your family far away', noMoney: true },
+  r_away:    { t: 'You stay with your family, away from the city. Your house is dry and waits for you. You watch your city on TV and feel you should be there.', where: 'Out of the city, with your family' },
   late_bus:  { t: 'You leave on one of the last buses. The Superdome and the Convention Center are only empty on Saturday, five days after landfall.', where: 'Houston, about 560 km from home', img: 'astrodome' },
   h_ask:     { t: 'They have no water to give and no medic to send. You go back to Ethel and wait.', where: 'Convention Center' },
-  l_boat:    { t: 'The boat brings you to the highway. From there a bus takes you out of the city. Your insurance still pays for the house.', where: 'Out of the city' },
-  l_rescued: { t: 'A helicopter crew lifts you off the roof. Your insurance still pays for the house.', where: 'Lifted out by helicopter', img: 'rescue' }
 },
 
 /* Lines added to every ending, depending on what is left */
