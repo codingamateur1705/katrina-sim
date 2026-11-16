@@ -105,10 +105,11 @@ media: {
    happened = "What happened in the city" (projector, after deciding)
    ticker = breaking news line at the top of the round on the phones
    water = how high the water stands in the header photo (percent), storm = rain over the photo
+   countdown = small label over the photo, radio = extra line for players who packed a battery radio
    --------------------------------------------------------------------- */
 rounds: [
   {
-    n: 1, when: 'Friday evening, 26 August', short: '26 Aug', days: 3, nights: 2,
+    n: 1, countdown: 'About 60 hours to landfall', when: 'Friday evening, 26 August', short: '26 Aug', days: 3, nights: 2,
     ask: 'Imagine it is Friday evening, 26 August. What do you do over the weekend?',
     media: 'satVideo', knowMedia: 'sat', happenedMedia: 'dome',
     ticker: [
@@ -122,7 +123,7 @@ rounds: [
     notes: 'Open point: the House report (p. 109) gives the time of Sunday’s mandatory order. Most timelines (Senate report, National Geographic, FactCheck.org) say 9.30, one says 11, so the slide says “Sunday morning” and “about 20 hours”.'
   },
   {
-    n: 2, water: 14, storm: true, when: 'Monday, 29 August, before dawn', short: '29 Aug', days: 1, nights: 1,
+    n: 2, countdown: 'About 3 hours to landfall', radio: 'Battery radio: “Landfall expected around dawn. Stay off the roads.”', water: 14, storm: true, when: 'Monday, 29 August, before dawn', short: '29 Aug', days: 1, nights: 1,
     dome: ['About 10,000 to 12,000 people are inside when the storm hits', 'The wind tears holes in the roof. Rain pours in', 'The power fails. No air conditioning in the August heat', 'You were told to bring your own food for days'],
     ask: 'It is Monday, 29 August, before dawn. The storm is about to come ashore. What do you do?',
     media: 'flood', knowMedia: 'flood', happenedMedia: 'levee', sound: true,
@@ -137,7 +138,7 @@ rounds: [
     notes: 'Sources: Knabb et al. (2005, pp. 3, 9) for landfall and surge; USACE IPET (2006) for the breaches.'
   },
   {
-    n: 3, water: 38, when: 'Tuesday, 30 August', short: '30 Aug', days: 2, nights: 2,
+    n: 3, countdown: 'One day after landfall', radio: 'Battery radio: “Boats and helicopters are pulling people off roofs. Buses are promised.”', water: 38, when: 'Tuesday, 30 August', short: '30 Aug', days: 2, nights: 2,
     dome: ['The toilets overflow. The smell is everywhere', 'Water and food come in small, irregular handouts', 'People sleep on concrete floors and plastic seats', 'Nobody tells you when or where the buses will come', 'Rumours of violence spread through the crowd'],
     ask: 'It is Tuesday, 30 August. What do you do now?',
     media: 'cgVideo', knowMedia: 'roofRescue', happenedMedia: 'rescue',
@@ -153,7 +154,7 @@ rounds: [
     notes: 'Sources: Knabb et al. (2005, p. 9); Senate (2006, pp. 67–74); House (2006, pp. 120–121). Death figures from our deck (Sommers et al. 2006; Horowitz 2020).'
   },
   {
-    n: 4, water: 30, when: 'Thursday 1 to Saturday 3 September', short: '1 to 3 Sep', days: 3, nights: 2,
+    n: 4, countdown: 'Three to five days after landfall', radio: 'Battery radio: “Buses have started leaving the Superdome.”', water: 30, when: 'Thursday 1 to Saturday 3 September', short: '1 to 3 Sep', days: 3, nights: 2,
     dome: ['23,000 people are inside. No food, water or medical care', 'The lines for the buses last for hours in the heat', 'People near you are sick, old or in wheelchairs, with no care'],
     ask: 'It is Thursday, 1 September. What do you do?',
     media: 'cc', knowMedia: 'cc', happenedMedia: 'soldiers',
@@ -189,7 +190,7 @@ mayor: {
   },
   debrief: 'Your decisions affected about 100,000 people without cars. Which of your limits were set long before the storm began?',
   realWhy: ['He could not force anyone to leave', 'City lawyers feared lawsuits if businesses were closed', 'Last year everyone fled Hurricane Ivan, and it missed the city', 'No shelter outside the city would take people'],
-  name: 'The Mayor', fullName: 'Ray Nagin', firstName: 'the Mayor', sub: 'Ray Nagin, decides for the city',
+  name: 'The Mayor', fullName: 'Ray Nagin', firstName: 'the Mayor', sub: 'Ray Nagin, Black, decides for the city',
   color: '#1F5F35', seat: 'Front left', composite: false,
   intro: 'You are the mayor of New Orleans, in office since 2002 and a former cable TV executive. Only you can order a mandatory evacuation, and you run the city’s emergency plan.',
   fixedChips: [{ t: '372 buses' }, { t: '~100 drivers' }, { t: '0 shelters outside', bad: true }],
@@ -261,6 +262,7 @@ mayor: {
           c: 'Stores are guarded, but fewer boats are out rescuing people.' },
         { id: 'm3_rescue', pull: { lens: 'structural', t: 'Rescue continues, but the crowds still need buses, and only FEMA (Federal Emergency Management Agency) can send them. Your calls go unanswered, so the demand ends up in public.', kind: 'game' }, t: 'Keep everyone on rescue', img: 'rescue',
           c: 'More people are pulled off roofs, but the rumours keep spreading.' },
+          { id: 'm3_boats', t: 'Call on churches and volunteers with private boats to join the rescue', c: 'Private boats from across Louisiana start pulling people out. There are still far too few.' },
         { id: 'm3_demand', surprise: { t: 'Every time you call, the buses are “on their way”.', kind: 'game', strength: -1 }, t: 'Publicly demand federal buses', img: 'buses',
           c: 'Federal officials promise 500 buses. They do not come for days.' },
           { id: 'm3_citybus', t: 'Send city buses to drive people out', lock: 'Many city and school buses stand in flooded lots, and most drivers have left', lockKind: 'game' }
@@ -295,6 +297,14 @@ herbert: {
   },
   debrief: 'Was staying with Ethel a choice, or the only option you had?',
   realWhy: ['He judged it too dangerous to move his mother', 'No car that could carry her wheelchair', 'No relatives outside the city', 'A police officer told him help would come in an hour or two'],
+  bag: [
+    { id: 'feed', icon: '💊', t: 'Extra feeding supplies for Ethel', note: 'Protects Ethel once', fx: { shieldEthel: 1 } },
+    { id: 'water', icon: '💧', t: 'Bottled water', note: '+1 day of food and water', fx: { food: 1 } },
+    { id: 'radio', icon: '📻', t: 'Battery radio', note: 'News when the power is gone', fx: { radio: true } },
+    { id: 'cash', icon: '💵', t: 'Cash hidden in a sock', note: '+$20', fx: { money: 20 } },
+    { id: 'papers', icon: '📄', t: 'Ethel’s medical papers', note: 'Doctors can see what she needs', fx: { fate: 'You kept Ethel’s medical papers. Anyone who helps can see what she needs.' } },
+    { id: 'fan', icon: '🪭', t: 'A hand fan and a wet towel', note: 'Protects your strength once', fx: { shieldStrength: 1 } }
+  ],
   name: 'Herbert Freeman Jr.', firstName: 'Herbert Freeman Jr.', sub: 'Black, cares for his mother Ethel, 91',
   color: '#1F5F35', seat: 'Front right', composite: false,
   intro: 'You live with your mother Ethel and care for her every day. She is 91, blind, has broken both hips and is fed through a tube.',
@@ -390,6 +400,7 @@ herbert: {
         choices: [
           { id: 'h3_wait', surprise: { t: 'Someone says the buses will stop at another corner. You push Ethel there. Nothing comes.', kind: 'game', strength: -1 }, t: 'Wait outside as you were told', loc: 'cc', ethel: -1, strength: -1, wait: 24, c: 'Hours pass in the heat. No buses come.' },
           { id: 'h3_doc', pull: { lens: 'structural', t: 'There is no medical care in the crowd to find. Everyone is looking for the same help.', kind: 'game' }, t: 'Look for a doctor in the crowd', loc: 'cc', strength: -1, c: 'There is no medical care to find.' },
+          { id: 'h3_share', t: 'Share your food and water with a family next to you', loc: 'cc', food: -1, c: 'A mother with two small children thanks you. They have had nothing since Monday. People around you start sharing too.' },
           { id: 'h3_cleave', t: 'Walk out of the city with Ethel', lock: 'Ethel cannot walk, and nobody tells you where to go', lockKind: 'game' }
         ]
       },
@@ -450,6 +461,14 @@ kim: {
   },
   debrief: 'When you were left waiting or turned away, who made that decision?',
   realWhy: ['The rental company refused her a car', 'No car of her own, little money until payday', 'All her family lived in the Ninth Ward', 'After two days with no help, they went to the Navy base for food and water'],
+  bag: [
+    { id: 'water', icon: '💧', t: 'Bottled water', note: '+1 day of food and water', fx: { food: 1 } },
+    { id: 'radio', icon: '📻', t: 'Battery radio', note: 'News when the power is gone', fx: { radio: true } },
+    { id: 'cash', icon: '💵', t: 'The last cash in the house', note: '+$10', fx: { money: 10 } },
+    { id: 'camera', icon: '📹', t: 'A cheap camcorder', note: 'Record what happens', fx: { fate: 'Your camcorder recorded what happened around you.' } },
+    { id: 'papers', icon: '📄', t: 'Your ID and papers in a plastic bag', note: 'Needed to apply for help later', fx: { fate: 'You kept your ID and papers dry. Applying for help later is easier.' } },
+    { id: 'aid', icon: '🩹', t: 'A small first-aid kit', note: 'Protects your strength once', fx: { shieldStrength: 1 } }
+  ],
   name: 'Kimberly Roberts, 24', firstName: 'Kimberly Roberts', sub: 'Black, Lower Ninth Ward, no car',
   color: '#1F5F35', seat: 'Back left', composite: false,
   intro: 'You live in the Lower Ninth Ward with your husband Scott and want to be a rapper. Your car was stolen two weeks ago. It is the end of the month and payday is days away.',
@@ -549,6 +568,7 @@ kim: {
         choices: [
           { id: 'k3_wait', pull: { lens: 'structural', t: 'Nobody knows you are here. Boats and helicopters reach other streets first.', kind: 'real' }, t: 'Wait for rescue', loc: 'house', wait: 48, c: 'Two days pass. No boat, no helicopter.' },
           { id: 'k3_hsheet', t: 'Hang a sheet from the window and shout to passing boats', loc: 'house', wait: 12, c: 'A boat slows down. It is full. They say they will send someone.' },
+          { id: 'k3_help', t: 'Pull an elderly neighbour out of the water and share what you have', loc: 'house', food: -1, strength: -1, c: 'She has been in the water since Monday. Now there are three of you waiting, and she tells you stories of Hurricane Betsy.' },
           { id: 'k3_wade', pull: { lens: 'class', t: 'Chest-deep, contaminated water with a cut foot is how many people got infections.', kind: 'game' }, t: 'Wade to the highway overpass', loc: 'house', strength: -1, wait: 24, minStrength: 3, weakLock: 'Your cut foot and no strength left. You cannot wade through chest-deep water', c: 'Dirty water up to your chest. Others are already waiting there.' },
           { id: 'k3_hleave', t: 'Get out of the city', lock: 'Water up to your chest all around. No boat, no car', lockKind: 'game' }
         ]
@@ -591,7 +611,8 @@ kim: {
         choices: [
           { id: 'k4_navy', t: 'Walk to the Navy base', strength: -1, end: 'k_navy' },
           { id: 'k4_wait', pull: { lens: 'structural', t: 'Buses reach the Convention Center only on Friday. Waiting in the heat costs more than it gains.', kind: 'game' }, t: 'Wait for the buses', wait: 48, end: 'k_wait' },
-          { id: 'k4_bus', surprise: { t: 'The first bus you try has no keys. The second has half a tank.', kind: 'game', wait: 2 }, pull: { lens: 'class', t: 'This really happened, once. Almost everyone else waited. One man, Jabbar Gibson, had the nerve and the keys.', kind: 'real' }, t: 'Take an abandoned school bus and drive out', minStrength: 2, weakLock: 'You are too exhausted to drive a heavy bus through flooded streets', loc: 'out', end: 'k_vehicle' }
+          { id: 'k4_bus', surprise: { t: 'The first bus you try has no keys. The second has half a tank.', kind: 'game', wait: 2 }, pull: { lens: 'class', t: 'This really happened, once. Almost everyone else waited. One man, Jabbar Gibson, had the nerve and the keys.', kind: 'real' }, t: 'Take an abandoned school bus and drive out', minStrength: 2, weakLock: 'You are too exhausted to drive a heavy bus through flooded streets', loc: 'out', end: 'k_vehicle' },
+          { id: 'k4_raft', t: 'Build a raft from doors and barrels with your neighbours', strength: -1, minStrength: 2, weakLock: 'Too weak to paddle through the water', end: 'k_raft' }
         ]
       },
       roof: {
@@ -639,6 +660,14 @@ rose: {
     ]
   },
   realWhy: ['He had a car and could take his family away in time', 'His house Uptown made it through the storm', 'His children needed a school, so the family moved to Maryland for the fall', 'His job was to report on the city'],
+  bag: [
+    { id: 'water', icon: '💧', t: 'Bottled water', note: '+1 day of food and water', fx: { food: 1 } },
+    { id: 'radio', icon: '📻', t: 'Battery radio', note: 'News when the power is gone', fx: { radio: true } },
+    { id: 'notes', icon: '📓', t: 'Notebook and laptop', note: 'Your work goes with you', fx: { fate: 'Your notes from these days become columns that many people read.' } },
+    { id: 'papers', icon: '📄', t: 'Family documents and insurance papers', note: 'Needed for claims later', fx: { fate: 'You kept the family documents. Claims and paperwork later are easier.' } },
+    { id: 'school', icon: '🎒', t: 'The children’s school records', note: 'Helps them start at a new school', fx: { fate: 'The children’s school records help them start at a new school.' } },
+    { id: 'aid', icon: '🩹', t: 'A first-aid kit', note: 'Protects your strength once', fx: { shieldStrength: 1 } }
+  ],
   name: 'Chris Rose', firstName: 'Chris Rose', sub: 'White, newspaper columnist, Uptown',
   color: '#1F5F35', seat: 'Back right', composite: false,
   intro: 'You are Chris Rose, a columnist at The Times-Picayune. You live Uptown with your wife and your three children. Before Katrina you mostly write light pieces about celebrities and entertainment.',
@@ -717,7 +746,7 @@ rose: {
       out: {
         card: { t: 'Your children ask when they can go home and back to school.', kind: 'game' },
         sit: 'You hear that your house Uptown made it through. Large parts of the city are under water.',
-        hear: ['TV: “Looting in New Orleans”'],
+        hear: ['TV: “Looting in New Orleans”', 'News photos: a young Black man wading with food is “looting”; a white couple doing the same is “finding” food'],
         choices: [
           { id: 'r3_school', t: 'Move the family to friends far away so the kids can go to school', cost: 300, loc: 'out',
             surprise: { t: 'A school has room for the children, but now your family is split between two states.', kind: 'game' },
@@ -733,7 +762,8 @@ rose: {
         choices: [
           { id: 'r3_drive', t: 'Drive out to find your family', loc: 'out', cost: 60, wait: 6, c: 'You find a way out on the high roads. Hours later you hold your children again.' },
           { id: 'r3_write', t: 'Stay and write about what you see', loc: 'home', strength: -1, c: 'You walk the dry streets and talk to the people who stayed. You write it all down.' },
-          { id: 'r3_flood', t: 'Go into the flooded neighbourhoods to report', loc: 'home', strength: -2, minStrength: 3, weakLock: 'You are too exhausted to wade through the flood', surprise: { t: 'You cut your leg on something under the water. There is no clean water to wash it.', kind: 'game', strength: -1 }, c: 'You wade through dark, oily water to reach people on porches and roofs. The stories are worse than anything you have written.' }
+          { id: 'r3_flood', t: 'Go into the flooded neighbourhoods to report', loc: 'home', strength: -2, minStrength: 3, weakLock: 'You are too exhausted to wade through the flood', surprise: { t: 'You cut your leg on something under the water. There is no clean water to wash it.', kind: 'game', strength: -1 }, c: 'You wade through dark, oily water to reach people on porches and roofs. The stories are worse than anything you have written.' },
+          { id: 'r3_help', t: 'Drive an elderly couple who stayed to a dry road where buses stop', cost: 30, loc: 'home', strength: -1, wait: 6, c: 'They thank you again and again. They do not know where they will sleep tonight.' }
         ]
       }
     },
@@ -783,6 +813,7 @@ endings: {
   r_report:  { t: 'You go back alone. Your house is dry, but every day you write about the dead, the ruins and the people who are gone. On a house you see a search team’s mark: “1 dead in attic”.', where: 'Your dry house Uptown, your family far away', noMoney: true },
   r_risk:    { t: 'You report from the flooded neighbourhoods. You see bodies, ruined houses and people who waited for days. The water makes you sick, and you barely sleep. On a house you see a search team’s mark: “1 dead in attic”. Your family is far away.', where: 'The flooded city, your family far away', noMoney: true },
   r_away:    { t: 'You stay with your family, away from the city. Your house is dry and waits for you. You watch your city on TV and feel you should be there.', where: 'Out of the city, with your family' },
+  k_raft:    { t: 'With two doors and some plastic barrels you get yourselves and two neighbours to the highway. After another long wait in the sun, a bus takes you all out of the city.', where: 'Out of the city' },
   late_bus:  { t: 'You leave on one of the last buses. The Superdome and the Convention Center are only empty on Saturday, five days after landfall.', where: 'Houston, about 560 km from home', img: 'astrodome' },
   h_ask:     { t: 'They have no water to give and no medic to send. You go back to Ethel and wait.', where: 'Convention Center' },
 },

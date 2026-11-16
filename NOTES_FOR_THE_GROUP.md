@@ -320,3 +320,27 @@ The fourth person is now **Chris Rose**, columnist at The Times-Picayune, Uptown
 - Mayor, round 4: now says the first buses are only just leaving the Superdome, matching the round facts.
 - Herbert: Ethel has been in her wheelchair at the Convention Center "for two days", Tuesday to Thursday.
 - Kimberly: "Another day on the roof", which fits both ways of getting there.
+
+## 15. Update: more interactive, still realistic
+
+- **Pack one bag** (person screen, Herbert, Kimberly, Chris Rose): six items, choose three. A fourth shakes and is refused. All items are game details with small, realistic effects:
+  - Water: +1 day of food and water.
+  - Cash: Herbert +$20, Kimberly +$10.
+  - Ethel's extra feeding supplies: protect her once.
+  - Fan and towel, or first-aid kit: protect your strength once.
+  - Battery radio: an extra news line in rounds 2 to 4, when phones and power are gone. Without it you hear less.
+  - Papers, camcorder, notebook, school records: one extra line at the end, for example "You kept your ID and papers dry. Applying for help later is easier."
+  - The bag shows as a chip during the game.
+- **"What you hear"** is now a message feed with a small icon per source (TV, radio, police radio, neighbours, editor, rumour, officer).
+- **Countdown** over the photo: "About 60 hours to landfall" (round 1), "About 3 hours to landfall" (round 2), "One day after landfall", "Three to five days after landfall".
+- **People helping each other** (game details, so no one is only a victim):
+  - Herbert shares food and water with a mother and two children at the Convention Center.
+  - Kimberly pulls an elderly neighbour out of the water.
+  - Kimberly and her neighbours build a raft from doors and barrels (new ending "k_raft").
+  - Chris Rose drives an elderly couple to a dry road where buses stop.
+  - The Mayor calls on churches and volunteers with private boats.
+- **Tone check:**
+  - All four subtitles now name race in the same way ("Ray Nagin, Black, decides for the city").
+  - The rumours of violence stay marked as false at the end.
+  - Chris Rose's round 3 feed adds the documented "looting" vs "finding" photo captions from your deck (slide 28, Sommers et al. 2006) next to the TV line, so the media frame is shown, not repeated.
+  - No text describes anyone by character traits; every limit comes from money, a car, health, information or official decisions.
