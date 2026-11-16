@@ -323,14 +323,7 @@ The fourth person is now **Chris Rose**, columnist at The Times-Picayune, Uptown
 
 ## 15. Update: more interactive, still realistic
 
-- **Pack one bag** (person screen, Herbert, Kimberly, Chris Rose): six items, choose three. A fourth shakes and is refused. All items are game details with small, realistic effects:
-  - Water: +1 day of food and water.
-  - Cash: Herbert +$20, Kimberly +$10.
-  - Ethel's extra feeding supplies: protect her once.
-  - Fan and towel, or first-aid kit: protect your strength once.
-  - Battery radio: an extra news line in rounds 2 to 4, when phones and power are gone. Without it you hear less.
-  - Papers, camcorder, notebook, school records: one extra line at the end, for example "You kept your ID and papers dry. Applying for help later is easier."
-  - The bag shows as a chip during the game.
+- ~~Pack one bag~~ **Removed** (group decision): the bag-packing step on the person screen, its effects and the battery-radio lines are gone.
 - **"What you hear"** is now a message feed with a small icon per source (TV, radio, police radio, neighbours, editor, rumour, officer).
 - **Countdown** over the photo: "About 60 hours to landfall" (round 1), "About 3 hours to landfall" (round 2), "One day after landfall", "Three to five days after landfall".
 - **People helping each other** (game details, so no one is only a victim):
@@ -357,3 +350,10 @@ To check:
 - Added context not in the earlier texts: Nagin was re-elected in 2006 and left office in 2010; "Trouble the Water" won the Sundance Grand Jury Prize (2008); "1 Dead in Attic" was reissued by Simon & Schuster in 2007.
 
 - **Fix in "After Katrina", Herbert:** the headline said he sued "the city, the state and FEMA", but the text and sources only cover the U.S. government and the state, and the source lists a 2009 appeal the text left out. The headline now reads "Sued the U.S. government and the state over his mother’s death. The courts dismissed the cases", and the text adds that the federal appeals court confirmed the dismissal in 2009. Please check this against Freeman v. United States (5th Cir. 2009).
+
+## 16. Update: bag removed, Nagin "After Katrina" balanced
+
+- The "Pack one bag" step is removed from the person screen, with all its effects (extra water, cash, protection for Ethel or strength, battery-radio news lines, extra lines at the end).
+- Nagin's "After Katrina" keeps the 2014 corruption conviction and now also says what he did for the rebuilding. New headline: "Re-elected in 2006 to lead the rebuilding. Convicted of corruption in 2014". New facts, **please verify**:
+  - In September 2005 he set up the Bring New Orleans Back Commission to plan the rebuilding.
+  - In the runoff of 20 May 2006 he was re-elected with about 52 percent against Mitch Landrieu.

@@ -52,9 +52,6 @@ function push() { hist.push(clone(S)); }
 function applyEffects(o, log) {
   var st = S.st, p = P();
   if (o.food && p.track.food) { st.food = Math.max(0, st.food + o.food); log && log.push((o.food > 0 ? '+' : '') + o.food + ' days of food'); }
-  var sh = st.shield || {};
-  if (o.ethel < 0 && sh.ethel > 0 && p.track.ethel) { sh.ethel--; log && log.push('Your packed supplies help Ethel'); o = Object.assign({}, o, { ethel: 0 }); }
-  if (o.strength < 0 && sh.strength > 0) { sh.strength--; log && log.push('Your packed kit helps'); o = Object.assign({}, o, { strength: o.strength + 1 }); }
   if (o.ethel && p.track.ethel) { var b = st.ethel; st.ethel = clamp(st.ethel + o.ethel, 0, 3); if (st.ethel < b && log) log.push('Ethel: ' + D.ethelLabels[st.ethel]); if (st.ethel === 0 && b > 0) addBurden('Ethel is in critical condition'); }
   if (o.strength) { var s0 = st.strength; st.strength = clamp(st.strength + o.strength, 0, 5); if (st.strength !== s0 && log) log.push('Strength: ' + D.strengthLabels[st.strength]); }
 }
@@ -65,18 +62,6 @@ function addBurden(t) {
 }
 function seeRumours(list) {
   (list || []).forEach(function (h) { if (typeof h === 'object' && h.false) S.st.seenFalse[h.t] = h.false; });
-}
-function bagItems() { var p = P(); return (p.bag || []).filter(function (x) { return S.st.bag.indexOf(x.id) >= 0; }); }
-function hasRadio() { return bagItems().some(function (x) { return x.fx.radio; }); }
-function packBag() {
-  var st = S.st;
-  bagItems().forEach(function (x) {
-    var f = x.fx;
-    if (f.food) st.food += f.food;
-    if (f.money) st.money += f.money;
-    if (f.shieldEthel) st.shield.ethel = (st.shield.ethel || 0) + f.shieldEthel;
-    if (f.shieldStrength) st.shield.strength = (st.shield.strength || 0) + f.shieldStrength;
-  });
 }
 function roundEnd(i) {
   var st = S.st, p = P(), L = D.locations[st.loc] || {}, R = D.rounds[i];
@@ -92,7 +77,6 @@ function roundEnd(i) {
 function enterRound(i) {
   push();
   if (i > 0) roundEnd(i - 1);
-  if (i === 0) packBag();
   S.r = i; S.phase = 'round';
   S.st.sceneLoc = S.st.loc;
   var sc = scene();
@@ -154,7 +138,7 @@ function finish() { push(); roundEnd(D.rounds.length - 1); S.phase = 'end'; go()
 function choose(k) {
   var p = D.people[k];
   hist = []; timers = {}; lastChips = {};
-  S = { who: k, phase: 'intro', r: -1, st: Object.assign({ money: 0, food: 0, ethel: 3, strength: 5, picks: [], labels: [], log: [], pulls: [], burdens: [], bag: [], shield: {}, end: null, seenFalse: {}, stats: { hungry: 0, nights: 0, wait: 0 } }, clone(p.start)) };
+  S = { who: k, phase: 'intro', r: -1, st: Object.assign({ money: 0, food: 0, ethel: 3, strength: 5, picks: [], labels: [], log: [], pulls: [], burdens: [], end: null, seenFalse: {}, stats: { hungry: 0, nights: 0, wait: 0 } }, clone(p.start)) };
   S.st.sceneLoc = S.st.loc;
   go();
 }
@@ -202,7 +186,6 @@ function chips() {
   add('strength', 'Strength: ' + D.strengthLabels[st.strength], st.strength <= 1, '<span class="meter" aria-hidden="true">' + m + '</span>');
   if (p.track.ethel) add('ethel', 'Ethel ' + D.ethelLabels[st.ethel], st.ethel <= 1);
   if (p.carChip) add('car', p.carChip.t, p.carChip.bad);
-  if (S.phase !== 'intro' && S.st.bag && S.st.bag.length) add('bag', 'Bag ' + bagItems().map(function (x) { return x.icon; }).join(' '), false);
   if (S.phase !== 'intro') add('loc', locLabel(S.phase === 'round' ? S.st.sceneLoc : S.st.loc), false);
   return '<div class="chips">' + out.join('') + '</div>';
 }
@@ -251,12 +234,6 @@ function bubble(line) {
   for (var i = 0; i < SRC.length; i++) if (SRC[i][0].test(line)) { ic = SRC[i][1]; break; }
   return '<div class="bub"><span class="bi" aria-hidden="true">' + ic + '</span><div>' + (src ? '<b>' + esc(src) + '</b>' : '') + '<span>' + esc(body) + '</span></div></div>';
 }
-function bagHtml() {
-  var p = P(); if (!p.bag) return '';
-  var n = S.st.bag.length;
-  return '<div class="bagbox"><h4>Pack one bag <span id="bagn">' + n + ' of 3</span></h4><p>You can only carry three things. Choose together.</p><div class="bagg">' +
-    p.bag.map(function (x) { var on = S.st.bag.indexOf(x.id) >= 0; return '<button class="bitem' + (on ? ' on' : '') + '" data-bag="' + x.id + '" aria-pressed="' + on + '"><span class="bic">' + x.icon + '</span><b>' + esc(x.t) + '</b><small>' + esc(x.note) + '</small></button>'; }).join('') + '</div></div>';
-}
 function leaveHtml() {
   var p = P(); if (!p.leaving) return '';
   return '<div class="leave"><span class="what">Leaving is not the end</span><ul>' + p.leaving.map(function (x) { return '<li>' + fill(x.t) + '</li>'; }).join('') + '</ul></div>';
@@ -289,7 +266,7 @@ function renderIntro() {
   app.innerHTML = topbar('Your person', p.composite ? 'Composite person' : '') +
     '<div class="wrap"><ol class="how">' + (D.meta.how || []).map(function (h, i) { return '<li><b>' + (i + 1) + '</b>' + esc(h) + '</li>'; }).join('') + '</ol><div class="card">' + profileHtml() + chips() +
     '<div class="intro-text">' + esc(p.intro) + '</div>' +
-    '<div class="pad"><h4>Your constraints</h4><ul class="lim">' + lim + '</ul></div>' + bagHtml() +
+    '<div class="pad"><h4>Your constraints</h4><ul class="lim">' + lim + '</ul></div>' +
     '<p class="note">' + esc(D.meta.gameValues) + ' Every round you spend in the city uses up a day of food. Heat, waiting and water cost strength.</p></div>' +
     '</div>' +
     nav('<button class="btn ghost" id="b-back">‹ Change person</button>', '<button class="btn grow" id="b-next">Start round 1 ›</button>');
@@ -297,7 +274,7 @@ function renderIntro() {
 function renderRound() {
   var p = P(), R = D.rounds[S.r], sc = scene(), st = S.st;
   var done = st.picks.length > S.r, pk = done ? st.picks[S.r] : null, lg = done ? st.log[S.r] : null;
-  var lines = (sc.s.hear || []).map(txt); if (R.radio && hasRadio()) lines.push(R.radio);
+  var lines = (sc.s.hear || []).map(txt);
   var hear = lines.length ? '<div class="feed"><h4>What you hear</h4>' + lines.map(bubble).join('') + '</div>' : '';
   var card = '';
   if (sc.card) {
@@ -337,7 +314,6 @@ function endingText() {
   if (p.track.money && !e.noMoney) x.push(fill(st.money < 150 ? L.moneyLow : st.money < 1000 ? L.moneyMid : L.moneyHigh));
   if (p.track.food && (st.food <= 0 || st.stats.hungry > 0)) x.push(esc(L.hungry));
   if (st.strength <= 1) x.push(esc(L.weak));
-  bagItems().forEach(function (it) { if (it.fx.fate) x.push(esc(it.fx.fate)); });
   if (p.track.ethel) x.push(esc(st.end === 'h_wait' && st.loc === 'cc' ? L.ethelDeath : L.ethel[st.ethel]));
   return x;
 }
@@ -407,7 +383,6 @@ document.addEventListener('click', function (ev) {
 app.addEventListener('click', function (ev) {
   var b = ev.target.closest('button'); if (!b || b.disabled) return;
   if (b.dataset.who) return choose(b.dataset.who);
-  if (b.dataset.bag) { var bg = S.st.bag, ix = bg.indexOf(b.dataset.bag); if (ix >= 0) bg.splice(ix, 1); else if (bg.length < 3) bg.push(b.dataset.bag); else { knock(b); return; } b.classList.toggle('on', bg.indexOf(b.dataset.bag) >= 0); b.setAttribute('aria-pressed', bg.indexOf(b.dataset.bag) >= 0); var bn = document.getElementById('bagn'); if (bn) bn.textContent = bg.length + ' of 3'; vib(10); return; }
   if (b.dataset.id) { if (b.classList.contains('locked')) return knock(b); return pick(b.dataset.id); }
   if (b.dataset.felt) { S.st.felt[S.r] = +b.dataset.felt; b.parentNode.querySelectorAll('.sbtn').forEach(function (x) { x.classList.toggle('on', x === b); }); return; }
   if (b.id === 'b-back') { if (S.phase === 'intro') return reset(); return back(); }

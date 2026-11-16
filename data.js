@@ -105,7 +105,7 @@ media: {
    happened = "What happened in the city" (projector, after deciding)
    ticker = breaking news line at the top of the round on the phones
    water = how high the water stands in the header photo (percent), storm = rain over the photo
-   countdown = small label over the photo, radio = extra line for players who packed a battery radio
+   countdown = small label over the photo
    --------------------------------------------------------------------- */
 rounds: [
   {
@@ -123,7 +123,7 @@ rounds: [
     notes: 'Open point: the House report (p. 109) gives the time of Sunday’s mandatory order. Most timelines (Senate report, National Geographic, FactCheck.org) say 9.30, one says 11, so the slide says “Sunday morning” and “about 20 hours”.'
   },
   {
-    n: 2, countdown: 'About 3 hours to landfall', radio: 'Battery radio: “Landfall expected around dawn. Stay off the roads.”', water: 14, storm: true, when: 'Monday, 29 August, before dawn', short: '29 Aug', days: 1, nights: 1,
+    n: 2, countdown: 'About 3 hours to landfall', water: 14, storm: true, when: 'Monday, 29 August, before dawn', short: '29 Aug', days: 1, nights: 1,
     dome: ['About 10,000 to 12,000 people are inside when the storm hits', 'The wind tears holes in the roof. Rain pours in', 'The power fails. No air conditioning in the August heat', 'You were told to bring your own food for days'],
     ask: 'It is Monday, 29 August, before dawn. The storm is about to come ashore. What do you do?',
     media: 'flood', knowMedia: 'flood', happenedMedia: 'levee', sound: true,
@@ -138,7 +138,7 @@ rounds: [
     notes: 'Sources: Knabb et al. (2005, pp. 3, 9) for landfall and surge; USACE IPET (2006) for the breaches.'
   },
   {
-    n: 3, countdown: 'One day after landfall', radio: 'Battery radio: “Boats and helicopters are pulling people off roofs. Buses are promised.”', water: 38, when: 'Tuesday, 30 August', short: '30 Aug', days: 2, nights: 2,
+    n: 3, countdown: 'One day after landfall', water: 38, when: 'Tuesday, 30 August', short: '30 Aug', days: 2, nights: 2,
     dome: ['The toilets overflow. The smell is everywhere', 'Water and food come in small, irregular handouts', 'People sleep on concrete floors and plastic seats', 'Nobody tells you when or where the buses will come', 'Rumours of violence spread through the crowd'],
     ask: 'It is Tuesday, 30 August. What do you do now?',
     media: 'cgVideo', knowMedia: 'roofRescue', happenedMedia: 'rescue',
@@ -154,7 +154,7 @@ rounds: [
     notes: 'Sources: Knabb et al. (2005, p. 9); Senate (2006, pp. 67–74); House (2006, pp. 120–121). Death figures from our deck (Sommers et al. 2006; Horowitz 2020).'
   },
   {
-    n: 4, countdown: 'Three to five days after landfall', radio: 'Battery radio: “Buses have started leaving the Superdome.”', water: 30, when: 'Thursday 1 to Saturday 3 September', short: '1 to 3 Sep', days: 3, nights: 2,
+    n: 4, countdown: 'Three to five days after landfall', water: 30, when: 'Thursday 1 to Saturday 3 September', short: '1 to 3 Sep', days: 3, nights: 2,
     dome: ['23,000 people are inside. No food, water or medical care', 'The lines for the buses last for hours in the heat', 'People near you are sick, old or in wheelchairs, with no care'],
     ask: 'It is Thursday, 1 September. What do you do?',
     media: 'cc', knowMedia: 'cc', happenedMedia: 'soldiers',
@@ -219,9 +219,9 @@ mayor: {
   realRows: ['Voluntary first, mandatory 20 hours before landfall', 'Asks state and FEMA (Federal Emergency Management Agency) for help, radios down', 'Thousands at the Convention Center, no supplies', 'Angry radio appeal for help'],
   /* After Katrina: shown on the fate screen and on the projector */
   after: {
-    headline: 'Convicted of corruption in 2014, sentenced to 10 years in prison',
-    context: 'Nagin was re-elected in 2006 and left office in 2010. In 2014 a federal jury convicted him of taking bribes and favours from businessmen who wanted city contracts, some of them during the rebuilding after Katrina. He was sentenced to 10 years in federal prison.',
-    source: 'U.S. Department of Justice (2014); Associated Press (2014).'
+    headline: 'Re-elected in 2006 to lead the rebuilding. Convicted of corruption in 2014',
+    context: 'In September 2005 he set up the Bring New Orleans Back Commission to plan the rebuilding of the city. In May 2006 voters re-elected him with about 52 percent, against Mitch Landrieu, and he led the city through the first years of rebuilding until 2010. In 2014 a federal jury convicted him of taking bribes and favours from businessmen who wanted city contracts, some of them during the rebuilding after Katrina. He was sentenced to 10 years in federal prison.',
+    source: 'Bring New Orleans Back Commission (2006); Louisiana Secretary of State, election results (20 May 2006); U.S. Department of Justice (2014); Associated Press (2014).'
   },
   realStats: [
     { label: 'Mandatory order', value: 'about 20 hours before landfall' },
@@ -303,14 +303,6 @@ herbert: {
   },
   debrief: 'Was staying with Ethel a choice, or the only option you had?',
   realWhy: ['He judged it too dangerous to move his mother', 'No car that could carry her wheelchair', 'No relatives outside the city', 'A police officer told him help would come in an hour or two'],
-  bag: [
-    { id: 'feed', icon: '💊', t: 'Extra feeding supplies for Ethel', note: 'Protects Ethel once', fx: { shieldEthel: 1 } },
-    { id: 'water', icon: '💧', t: 'Bottled water', note: '+1 day of food and water', fx: { food: 1 } },
-    { id: 'radio', icon: '📻', t: 'Battery radio', note: 'News when the power is gone', fx: { radio: true } },
-    { id: 'cash', icon: '💵', t: 'Cash hidden in a sock', note: '+$20', fx: { money: 20 } },
-    { id: 'papers', icon: '📄', t: 'Ethel’s medical papers', note: 'Doctors can see what she needs', fx: { fate: 'You kept Ethel’s medical papers. Anyone who helps can see what she needs.' } },
-    { id: 'fan', icon: '🪭', t: 'A hand fan and a wet towel', note: 'Protects your strength once', fx: { shieldStrength: 1 } }
-  ],
   name: 'Herbert Freeman Jr.', firstName: 'Herbert Freeman Jr.', sub: 'Black, cares for his mother Ethel, 91',
   color: '#1F5F35', seat: 'Front right', composite: false,
   intro: 'You live with your mother Ethel and care for her every day. She is 91, blind, has broken both hips and is fed through a tube.',
@@ -472,14 +464,6 @@ kim: {
   },
   debrief: 'When you were left waiting or turned away, who made that decision?',
   realWhy: ['The rental company refused her a car', 'No car of her own, little money until payday', 'All her family lived in the Ninth Ward', 'After two days with no help, they went to the Navy base for food and water'],
-  bag: [
-    { id: 'water', icon: '💧', t: 'Bottled water', note: '+1 day of food and water', fx: { food: 1 } },
-    { id: 'radio', icon: '📻', t: 'Battery radio', note: 'News when the power is gone', fx: { radio: true } },
-    { id: 'cash', icon: '💵', t: 'The last cash in the house', note: '+$10', fx: { money: 10 } },
-    { id: 'camera', icon: '📹', t: 'A cheap camcorder', note: 'Record what happens', fx: { fate: 'Your camcorder recorded what happened around you.' } },
-    { id: 'papers', icon: '📄', t: 'Your ID and papers in a plastic bag', note: 'Needed to apply for help later', fx: { fate: 'You kept your ID and papers dry. Applying for help later is easier.' } },
-    { id: 'aid', icon: '🩹', t: 'A small first-aid kit', note: 'Protects your strength once', fx: { shieldStrength: 1 } }
-  ],
   name: 'Kimberly Roberts, 24', firstName: 'Kimberly Roberts', sub: 'Black, Lower Ninth Ward, no car',
   color: '#1F5F35', seat: 'Back left', composite: false,
   intro: 'You live in the Lower Ninth Ward with your husband Scott and want to be a rapper. Your car was stolen two weeks ago. It is the end of the month and payday is days away.',
@@ -676,14 +660,6 @@ rose: {
     ]
   },
   realWhy: ['He had a car and could take his family away in time', 'His house Uptown made it through the storm', 'His children needed a school, so the family moved to Maryland for the fall', 'His job was to report on the city'],
-  bag: [
-    { id: 'water', icon: '💧', t: 'Bottled water', note: '+1 day of food and water', fx: { food: 1 } },
-    { id: 'radio', icon: '📻', t: 'Battery radio', note: 'News when the power is gone', fx: { radio: true } },
-    { id: 'notes', icon: '📓', t: 'Notebook and laptop', note: 'Your work goes with you', fx: { fate: 'Your notes from these days become columns that many people read.' } },
-    { id: 'papers', icon: '📄', t: 'Family documents and insurance papers', note: 'Needed for claims later', fx: { fate: 'You kept the family documents. Claims and paperwork later are easier.' } },
-    { id: 'school', icon: '🎒', t: 'The children’s school records', note: 'Helps them start at a new school', fx: { fate: 'The children’s school records help them start at a new school.' } },
-    { id: 'aid', icon: '🩹', t: 'A first-aid kit', note: 'Protects your strength once', fx: { shieldStrength: 1 } }
-  ],
   name: 'Chris Rose', firstName: 'Chris Rose', sub: 'White, newspaper columnist, Uptown',
   color: '#1F5F35', seat: 'Back right', composite: false,
   intro: 'You are Chris Rose, a columnist at The Times-Picayune. You live Uptown with your wife and your three children. Before Katrina you mostly write light pieces about celebrities and entertainment.',
