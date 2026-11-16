@@ -206,3 +206,19 @@ Source: Richard A. Webster, Jeff Adelson, David Hammer and Sophie Chou (12 Decem
 **Projector:** a new "Talk in your group" slide before the closing question, with the same four questions. The notes suggest about 5 minutes, then each group reads its sentence.
 
 **No verdicts:** the questions ask what limited the choices, not whether something was racist. The research question stays for the presentation.
+
+## 10. Update: new timeline, matching the deck's Timeline I to VI slides
+
+| Round | Time | What the players know | What happened in the city (projector) |
+|---|---|---|---|
+| 1 | Friday evening, 26 Aug | Katrina crossed South Florida on Thursday as a Cat 1, now over the Gulf; state of emergency in Louisiana and Mississippi; Ivan last year | Sat: federal emergency, contraflow from 4 p.m., only a voluntary evacuation. Sun: Cat 5, first mandatory evacuation, Superdome "refuge of last resort". More than a million leave Louisiana, more than 70,000 stay |
+| 2 | Monday, 29 Aug, before dawn (before the 6:10 landfall) | Cat 5 on Sunday; mandatory evacuation; more than 70,000 still in the city | 6:10 a.m. landfall at Buras as a Cat 3, surge up to 8.5 m; canal breaches; about 50 breaches |
+| 3 | Tuesday, 30 Aug | About 80 % under water, up to 6 m deep; Convention Center opens as a second refuge | Rooftop rescues; Wed: Superdome from 10–12,000 to about 23,000; FEMA's 500 buses do not come; rumours |
+| 4 | Thursday 1 to Saturday 3 Sep | About 23,000 in the Superdome, about 19,000 at the Convention Center; Superdome bus evacuation only just beginning | Gretna bridge; Algiers Point; WWL radio; Sat 3 Sep: Superdome and Convention Center fully evacuated, five days after landfall |
+
+All new facts come from your timeline slides (Knabb et al. 2005; Senate 2006, pp. 67–74; House 2006, pp. 110–121). Also changed to fit:
+- **Mayor, round 1:** "about 60 hours" to landfall (Friday evening to Monday 6:10). The choices now say "now" and "first … later" instead of "today" and "tomorrow".
+- **Superdome in round 3:** "The first buses to Houston leave on Wednesday" became "You wait. The buses only start on Thursday" (deck: bus evacuation begins Thursday 1 Sep). This resolves fact check 4.
+- **Superdome size:** now "about 10,000 to 12,000 people" at landfall (deck: House 2006). This resolves fact check 9.
+- **Round 1 ticker:** "Forecasters expect landfall on the Gulf Coast on Monday" is not on your slides. Please check it against Knabb et al. (2005) or delete it in `data.js`.
+- **Round 4:** "Friday · supply convoys arrive" is replaced by your "Saturday 3 Sep: fully evacuated". If you want both, add the Friday line back in `happened`.

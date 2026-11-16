@@ -19,7 +19,7 @@ window.KATRINA = {
 
 meta: {
   title: 'Katrina: Four People, One Storm',
-  eyebrow: 'Hurricane Katrina · 27 August to 2 September 2005',
+  eyebrow: 'Hurricane Katrina · 26 August to 3 September 2005',
   instruction: 'Your group plays one person through the whole disaster. Pick the person you were given.',
   gameValues: 'Money, food and strength are game values, set to fit each person’s situation. They are not historical figures.',
   timerSeconds: 120,
@@ -110,67 +110,67 @@ media: {
    --------------------------------------------------------------------- */
 rounds: [
   {
-    n: 1, when: 'Saturday and Sunday, 27 to 28 August', short: '27 to 28 Aug', days: 2, nights: 1,
+    n: 1, when: 'Friday evening, 26 August', short: '26 Aug', days: 3, nights: 2,
     guess: { q: 'How many people do you think stayed in the city?', options: ['Under 10,000', 'About 30,000', 'More than 70,000'], answer: 2 },
-    ask: 'Imagine it is Saturday, 27 August, noon. What do you do over the weekend?',
+    ask: 'Imagine it is Friday evening, 26 August. What do you do over the weekend?',
     media: 'satVideo', knowMedia: 'sat', happenedMedia: 'dome',
     ticker: [
-      { t: 'Katrina is a Category 3 in the Gulf' },
-      { t: 'Forecast: landfall on Monday morning' },
-      { t: 'TV: “It could still turn, like Ivan last year”' },
-      { t: 'Traffic is already heavy on I-10' }
+      { t: 'Katrina crossed South Florida on Thursday as a Category 1 hurricane' },
+      { t: 'State of emergency in Louisiana and Mississippi' },
+      { t: 'Forecasters expect landfall on the Gulf Coast on Monday' },
+      { t: 'TV: “It could still turn, like Ivan last year”' }
     ],
-    know: ['Katrina is a Category 3 in the Gulf', 'Forecast: landfall on Monday morning', 'Last year everyone fled Hurricane Ivan, and it missed the city'],
-    happened: ['Saturday · only a voluntary evacuation', 'Sunday · Katrina reaches Category 5', 'Sunday morning · the first mandatory evacuation, about 20 hours before landfall', 'Buses run only to the Superdome. More than 70,000 people stay'],
+    know: ['Katrina crossed South Florida on Thursday as a Category 1 and is now over the Gulf', 'Louisiana and Mississippi declare a state of emergency', 'Last year everyone fled Hurricane Ivan, and it missed the city'],
+    happened: ['Saturday · federal emergency for Louisiana. Highway contraflow out of the city starts at 4 p.m.', 'Saturday · only a voluntary evacuation in New Orleans', 'Sunday · Katrina reaches Category 5. First mandatory evacuation. The Superdome opens as “refuge of last resort”', 'More than a million people leave Louisiana. More than 70,000 stay in New Orleans'],
     notes: 'Open point: the House report (p. 109) gives the time of Sunday’s mandatory order. Most timelines (Senate report, National Geographic, FactCheck.org) say 9.30, one says 11, so the slide says “Sunday morning” and “about 20 hours”.'
   },
   {
-    n: 2, when: 'Monday, 29 August', short: '29 Aug', days: 1, nights: 1,
+    n: 2, when: 'Monday, 29 August, before dawn', short: '29 Aug', days: 1, nights: 1,
     guess: { q: 'How much of the city do you think will be under water by Tuesday?', options: ['A few low streets', 'About half', 'About 80 %'], answer: 2 },
-    dome: ['About 10,000 people are inside when the storm hits', 'The wind tears holes in the roof. Rain pours in', 'The power fails. No air conditioning in the August heat', 'You were told to bring your own food for days'],
-    ask: 'It is Monday, 29 August, early morning. The storm is coming ashore. What do you do?',
+    dome: ['About 10,000 to 12,000 people are inside when the storm hits', 'The wind tears holes in the roof. Rain pours in', 'The power fails. No air conditioning in the August heat', 'You were told to bring your own food for days'],
+    ask: 'It is Monday, 29 August, before dawn. The storm is about to come ashore. What do you do?',
     media: 'flood', knowMedia: 'flood', happenedMedia: 'levee', sound: true,
     ticker: [
-      { t: 'Katrina comes ashore around dawn' },
-      { t: 'Power fails across the city' },
-      { t: 'Thousands in the Superdome, many more at home' },
+      { t: 'Katrina reached Category 5 on Sunday' },
+      { t: 'Mandatory evacuation. The Superdome is the “refuge of last resort”' },
+      { t: 'Landfall expected around dawn' },
       { t: 'TV: “New Orleans dodged the bullet”', false: 'Misleading. Levees and floodwalls were already breaking. By Tuesday 80 % of the city was under water.' }
     ],
-    know: ['The storm comes ashore around dawn', 'Power fails across the city', 'Thousands are in the Superdome, many more at home'],
-    happened: ['Landfall at dawn as a Category 3', 'The Industrial Canal floodwall breaks. The Lower Ninth floods fast', 'The 17th Street and London Avenue canals break. Lakeview and Gentilly flood', 'About 50 breaches. Some floodwalls fail below their design height'],
-    notes: 'Source for the breaches: USACE IPET (2006).'
+    know: ['Katrina reached Category 5 on Sunday and is about to come ashore', 'The first mandatory evacuation was ordered on Sunday. The Superdome is the “refuge of last resort”', 'More than 70,000 people are still in New Orleans'],
+    happened: ['6:10 a.m. · landfall at Buras, Louisiana, as a Category 3. Storm surge up to 8.5 m on the Mississippi coast', 'The Industrial Canal floodwall breaks. The Lower Ninth floods fast', 'The 17th Street and London Avenue canals break. Lakeview and Gentilly flood', 'About 50 breaches. Some floodwalls fail below their design height'],
+    notes: 'Sources: Knabb et al. (2005, pp. 3, 9) for landfall and surge; USACE IPET (2006) for the breaches.'
   },
   {
-    n: 3, when: 'Tuesday and Wednesday, 30 to 31 August', short: '30 to 31 Aug', days: 2, nights: 2,
+    n: 3, when: 'Tuesday, 30 August', short: '30 Aug', days: 2, nights: 2,
     guess: { q: 'How long until the promised federal buses come?', options: ['A few hours', 'About a day', 'Several days'], answer: 2 },
     dome: ['The toilets overflow. The smell is everywhere', 'Water and food come in small, irregular handouts', 'People sleep on concrete floors and plastic seats', 'Nobody tells you when or where the buses will come', 'Rumours of violence spread through the crowd'],
     ask: 'It is Tuesday, 30 August. What do you do now?',
     media: 'cgVideo', knowMedia: 'roofRescue', happenedMedia: 'rescue',
     ticker: [
-      { t: '80 % of the city is under water' },
-      { t: 'No power, no phones, no clean water' },
+      { t: 'About 80 % of the city is under water, up to 6 m deep' },
+      { t: 'The Convention Center opens as a second refuge' },
       { t: 'TV: “Snipers shooting at rescue helicopters”', false: 'Turned out false.' },
       { t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 6 inside the Superdome, 4 at the Convention Center.' }
     ],
-    know: ['80 % of the city is under water', 'No power, no phones, no clean water', 'Thousands wait on roofs, in attics and in shelters'],
-    happened: ['Boats and helicopters pull thousands off roofs', 'Thousands gather at the Convention Center, never an official shelter', 'FEMA promises 500 buses. They do not come for days', 'TV spreads rumours of snipers, rapes and murders'],
-    notes: 'Death figures for the Superdome and Convention Center are taken from our deck (slide 28: Sommers et al. 2006; Horowitz 2020).'
+    know: ['About 80 % of the city is under water, up to 6 m deep', 'No power, no phones, no clean water', 'The Convention Center opens as a second refuge. Thousands wait on roofs and in attics'],
+    happened: ['Boats and helicopters pull thousands off roofs', 'Wednesday · the Superdome grows from 10–12,000 people at landfall to about 23,000', 'FEMA promises 500 buses. They do not come for days', 'TV spreads rumours of snipers, rapes and murders'],
+    notes: 'Sources: Knabb et al. (2005, p. 9); Senate (2006, pp. 67–74); House (2006, pp. 120–121). Death figures from our deck (Sommers et al. 2006; Horowitz 2020).'
   },
   {
-    n: 4, when: 'Thursday and Friday, 1 to 2 September', short: '1 to 2 Sep', days: 2, nights: 2,
+    n: 4, when: 'Thursday 1 to Saturday 3 September', short: '1 to 3 Sep', days: 3, nights: 2,
     guess: { q: 'What happens to people who try to walk out over the bridge to Gretna?', options: ['They reach safety', 'Police turn them back', 'The bridge is under water'], answer: 1 },
     dome: ['23,000 people are inside. No food, water or medical care', 'The lines for the buses last for hours in the heat', 'People near you are sick, old or in wheelchairs, with no care'],
     ask: 'It is Thursday, 1 September. What do you do?',
     media: 'cc', knowMedia: 'cc', happenedMedia: 'soldiers',
     ticker: [
-      { t: '23,000 people in the Superdome, 19,000 at the Convention Center' },
-      { t: 'No food, water or medical care' },
+      { t: 'About 23,000 people in the Superdome, about 19,000 at the Convention Center' },
+      { t: 'Bus evacuation of the Superdome begins' },
       { t: 'At the Convention Center the promised buses still have not come' },
       { t: 'Governor Blanco: the troops “know how to shoot and kill”' }
     ],
-    know: ['23,000 people in the Superdome, 19,000 at the Convention Center', 'No food, water or medical care', 'At the Convention Center the promised buses still have not come'],
-    happened: ['Gretna police block the bridge out of the city', 'White vigilantes shoot Black men walking to safety at Algiers Point', 'The mayor on WWL radio says federal officials “don’t have a clue”', 'Friday · supply convoys and buses finally arrive'],
-    notes: 'Sources: Horowitz (2020), ch. 4; WWL radio interview, 1 September 2005.'
+    know: ['About 23,000 people in the Superdome, about 19,000 wait at the Convention Center', 'No food, water or medical care', 'The bus evacuation of the Superdome is only just beginning'],
+    happened: ['Thursday · Gretna police block the bridge out of the city', 'White vigilantes shoot Black men walking to safety at Algiers Point', 'The mayor on WWL radio says federal officials “don’t have a clue”', 'Saturday 3 Sep · Superdome and Convention Center fully evacuated, five days after landfall'],
+    notes: 'Sources: Senate (2006, pp. 67–74); House (2006, p. 118); Horowitz (2020), ch. 4; WWL radio interview, 1 September 2005.'
   }
 ],
 
@@ -222,15 +222,15 @@ mayor: {
   ],
   rounds: [
     { '*': {
-      sit: 'Katrina is a Category 3 in the Gulf, and forecasters expect it to grow. Landfall is about 42 hours away.',
+      sit: 'Katrina is over the Gulf and growing. Landfall could come on Monday, about 60 hours from now.',
       hear: ['Hotels and businesses: “A false alarm costs us millions.”', 'City lawyers: “Closing businesses could get the city sued.”', 'Ivan last year: hours of traffic, then nothing'],
       card: { t: 'A hotel association calls. They ask you to wait before you close the city.', kind: 'game' },
       choices: [
-        { id: 'm1_mand_dome', pull: { lens: 'structural', t: 'The state plan told you to wait until about 30 hours before landfall, and your lawyers warned of lawsuits from closed businesses. Ordering now means breaking both.', kind: 'real', strength: -1 }, t: 'Mandatory evacuation today, buses to the Superdome', img: 'domeLine', legacy: 'You gave people a full extra day, but residents without cars still had only the Superdome.',
-          c: 'People get a full extra day. Plaquemines and St. Charles did this a day earlier, on Saturday. But your 100,000 residents without cars still have no way out of the city.' },
-        { id: 'm1_vol', t: 'Voluntary today, mandatory tomorrow, buses to the Superdome', img: 'dome', legacy: 'Your order came when landfall was less than a day away.',
+        { id: 'm1_mand_dome', pull: { lens: 'structural', t: 'The state plan told you to wait until about 30 hours before landfall, and your lawyers warned of lawsuits from closed businesses. Ordering now means breaking both.', kind: 'real', strength: -1 }, t: 'Mandatory evacuation now, buses to the Superdome', img: 'domeLine', legacy: 'You gave people a full extra day, but residents without cars still had only the Superdome.',
+          c: 'People get more time to leave. Plaquemines and St. Charles did this a day earlier, on Saturday. But your 100,000 residents without cars still have no way out of the city.' },
+        { id: 'm1_vol', t: 'Voluntary first, mandatory later, buses to the Superdome', img: 'dome', legacy: 'Your order came when landfall was less than a day away.',
           c: 'Many leave, many do not take it seriously. When the order comes, landfall is less than a day away.' },
-        { id: 'm1_buses_out', surprise: { t: 'Half of the drivers you call have already left the city with their families.', kind: 'game', strength: -1 }, pull: { lens: 'structural', t: 'The city plan sent carless residents to the Superdome, not out of the region. No shelter outside had agreed to take them, so the buses have nowhere to go.', kind: 'game' }, t: 'Mandatory today, buses out of the city', img: 'busEvac', legacy: 'A few bus trips left. Most people without cars were still in the city.',
+        { id: 'm1_buses_out', surprise: { t: 'Half of the drivers you call have already left the city with their families.', kind: 'game', strength: -1 }, pull: { lens: 'structural', t: 'The city plan sent carless residents to the Superdome, not out of the region. No shelter outside had agreed to take them, so the buses have nowhere to go.', kind: 'game' }, t: 'Mandatory now, buses out of the city', img: 'busEvac', legacy: 'A few bus trips left. Most people without cars were still in the city.',
           c: 'About 100 drivers means about 4,000 seats per trip, and no shelter outside will take people. A few trips leave before the wind closes the roads.' },
         { id: 'm1_wait', pull: { t: 'By Sunday morning the hurricane center is forecasting an 18 to 22 foot surge and the President is pressing for a mandatory order. Waiting any longer is not an option anyone will accept.', kind: 'real' }, t: 'Wait for the next forecast', legacy: 'You lost a whole day the city never got back.',
           c: 'By Sunday morning Katrina is a Category 5. You have lost a whole day.' }
@@ -356,7 +356,7 @@ herbert: {
         ]
       },
       dome: {
-        sit: 'Wind tears holes in the Superdome roof. The power fails. About 10,000 people are inside.',
+        sit: 'Wind tears holes in the Superdome roof. The power fails. About 10,000 to 12,000 people are inside.',
         hear: ['People around you: “The water is coming into the city”'],
         choices: [
           { id: 'h2_dstay', surprise: { t: 'A section of the roof tears open above your seats. You move Ethel in the dark.', kind: 'game', strength: -1 }, pull: { lens: 'structural', t: 'The Dome is already crowded and hot. Ethel cannot be given a proper bed or her pump.', kind: 'game' }, t: 'Stay inside with Ethel', loc: 'dome', c: 'Heat and darkness. The toilets stop working.' },
@@ -389,7 +389,7 @@ herbert: {
         sit: 'Day three in the Superdome. Heat, broken toilets, too little water.',
         hear: [{ t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 6 inside the Superdome, 4 at the Convention Center.' }],
         choices: [
-          { id: 'h3_dstay', surprise: { t: 'The water handout runs out before you reach the front of the line.', kind: 'game', food: -1 }, pull: { lens: 'structural', t: 'Superdome evacuees were bused out from Wednesday evening, but the lines were long and the buses slow.', kind: 'real' }, t: 'Stay and wait for buses', loc: 'dome', ethel: -1, wait: 24, img: 'domeWater', c: 'The first buses to Houston start to leave on Wednesday.' },
+          { id: 'h3_dstay', surprise: { t: 'The water handout runs out before you reach the front of the line.', kind: 'game', food: -1 }, pull: { lens: 'structural', t: 'The bus evacuation of the Superdome only began on Thursday, and the lines were long.', kind: 'real' }, t: 'Stay and wait for buses', loc: 'dome', ethel: -1, wait: 24, img: 'domeWater', c: 'You wait. The buses only start on Thursday.' },
           { id: 'h3_tocc', pull: { lens: 'structural', t: 'The Convention Center was never prepared as a shelter and nothing is waiting there.', kind: 'game' }, t: 'Leave for the Convention Center', loc: 'cc', ethel: -1, strength: -1, img: 'cc', c: 'It is no better there.' },
           { id: 'h3_dleave', t: 'Get on the first bus out', lock: 'Booked out. The first buses fill up long before you reach the doors', lockKind: 'game' }
         ]
@@ -550,7 +550,7 @@ kim: {
         sit: 'Day three in the Superdome.',
         hear: [{ t: 'TV: “Rapes and murders in the Superdome”', false: 'Turned out false. Recorded dead: 6 inside the Superdome, 4 at the Convention Center.' }],
         choices: [
-          { id: 'k3_dstay', surprise: { t: 'The water handout runs out before you reach the front of the line.', kind: 'game', food: -1 }, t: 'Stay and wait for buses', loc: 'dome', wait: 48, img: 'domeWater', c: 'The first buses to Houston leave on Wednesday.' },
+          { id: 'k3_dstay', surprise: { t: 'The water handout runs out before you reach the front of the line.', kind: 'game', food: -1 }, t: 'Stay and wait for buses', loc: 'dome', wait: 48, img: 'domeWater', c: 'You wait. The buses only start on Thursday.' },
           { id: 'k3_dleave', t: 'Get on the first bus out', lock: 'Booked out. The first buses fill up long before you reach the doors', lockKind: 'game' }
         ]
       },
@@ -660,7 +660,7 @@ lake: {
   rounds: [
     { '*': {
       sit: 'A hurricane may hit on Monday. Your car has a full tank.',
-      hear: ['TV: “Traffic is already heavy on I-10”', 'Neighbour: “Ivan was a false alarm, I’m staying”', 'Your sister: “Come now, before the roads fill up”'],
+      hear: ['TV: “Expect heavy traffic this weekend”', 'Neighbour: “Ivan was a false alarm, I’m staying”', 'Your sister: “Come now, before the roads fill up”'],
       card: { t: 'The highway out takes eight hours instead of one.', kind: 'game' },
       choices: [
         { id: 'l1_drive', surprise: { t: 'The first two gas stations on the highway are sold out. You wait an hour in line for fuel.', kind: 'game', wait: 1 }, t: 'Drive to your sister in Baton Rouge', cost: 40, loc: 'out', strength: -1, wait: 8, c: 'Eight hours in traffic, but you get out.' },
