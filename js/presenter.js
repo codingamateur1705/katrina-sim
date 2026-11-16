@@ -22,8 +22,8 @@ D.rounds.forEach(function (R) {
   var head = '<div class="eyebrow">Round ' + R.n + ' · ' + esc(R.when) + '</div><h2>' + esc(R.ask) + '</h2>';
   slides.push({ timer: true, notes: (R.n === 1 ? 'Each group has ' + D.meta.timerSeconds + ' seconds. Press T or click the timer to start it. ' : 'Press T to start the ' + D.meta.timerSeconds + ' seconds. ') + (R.notes || ''), html:
     bg(R.knowMedia, R.n === 1) + '<div class="content">' + head + '<div class="box"><h3>What you know</h3><ul>' + R.know.map(function (k) { return '<li>' + esc(k) + '</li>'; }).join('') + '</ul></div></div>' });
-  slides.push({ notes: R.notes || '', html:
-    bg(R.happenedMedia, false) + '<div class="content"><div class="eyebrow">Round ' + R.n + ' · ' + esc(R.short) + '</div><h2>What happened in the city</h2><div class="box red"><h3>' + esc(R.when) + '</h3><ul>' + R.happened.map(function (k) { return '<li>' + esc(k) + '</li>'; }).join('') + '</ul></div></div>' });
+  slides.push({ notes: 'Ask: who guessed right? Then the groups read what happened to their person. ' + (R.notes || ''), html:
+    bg(R.happenedMedia, false) + '<div class="content"><div class="eyebrow">Round ' + R.n + ' · ' + esc(R.short) + '</div><h2>What happened in the city</h2>' + (R.guess ? '<div class="gq">The guess: ' + esc(R.guess.q) + ' <b>' + esc(R.guess.options[R.guess.answer]) + '</b></div>' : '') + '<div class="box red"><h3>' + esc(R.when) + '</h3><ul>' + R.happened.map(function (k) { return '<li>' + esc(k) + '</li>'; }).join('') + '</ul></div></div>' });
 });
 
 /* real people table */
@@ -36,6 +36,11 @@ slides.push({ cls: 'tab', notes: 'Groups now open “Your fate” on their phone
   '<div class="content"><h2>What our four people really did</h2><table><thead><tr><th style="width:17%"></th>' +
   D.rounds.map(function (R) { return '<th>Round ' + R.n + ' · ' + esc(R.short) + '</th>'; }).join('') + '</tr></thead><tbody>' + rows + '</tbody></table>' +
   '<div class="src">Sources. House (2006), pp. 109 to 113; Senate (2006), p. 250; WWL (2005); AP via NBC News (2005, 2006); Lessin and Deal (2008); Horowitz (2020), ch. 4 and 5. Webster, Adelson, Hammer and Chou (2022), ProPublica, on Rita Legrand.</div></div>' });
+
+/* debrief */
+slides.push({ cls: 'tab', notes: 'About 5 minutes. Groups open the Discuss tab on their phones, talk, and write one sentence. Then each group shows it with “Show to the class” and reads it out. No right answer: the presentation discusses the research question afterwards.', html:
+  '<div class="content"><h2>Talk in your group</h2><ol class="dql">' + D.student.debrief.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('') + '</ol>' +
+  '<div class="box" style="background:#F1ECE2;border-left-color:#1F5F35;max-width:none;color:#1E1E1E"><h3 style="color:#1F5F35">Then, one sentence per group</h3><ul><li>' + esc(D.student.answerAsk) + '</li></ul></div></div>' });
 
 /* closing */
 slides.push({ cls: 'close', notes: '', html: '<div class="content"><div class="eyebrow" style="color:#f6d3d5">Same storm, four fates</div><h1>' + esc(D.meta.question) + '</h1><div class="src">' + esc(D.meta.sources) + '</div></div>' });

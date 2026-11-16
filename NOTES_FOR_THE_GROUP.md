@@ -184,3 +184,25 @@ Source: Richard A. Webster, Jeff Adelson, David Hammer and Sophie Chou (12 Decem
 - **Herbert Freeman Jr.:** the file in `img/` is Alamy's watermarked preview (image 2PCMPE4), so it is not used and is excluded from the website. Download the licensed, unwatermarked file from your Alamy account, save it as `img/portrait-freeman.jpg`, and it can be added the same way.
 - **Herbert Freeman Jr.:** now uses the licensed photo you supplied (`portrait-freeman.jpeg`, cropped to his face as `portrait-herbert.jpg`). The watermarked preview is no longer used. Credit line still to be added.
 - **Rita Legrand, original source checked:** https://www.propublica.org/article/how-louisiana-road-home-program-shortchanged-poor-residents (ProPublica, 11 December 2022). All figures in the game match it ($53,000 insurance, value $320,000, repairs $188,000, grant $135,000, rebuilt by April 2007). The article has one photo of her ("Rita Legrand lives on Louis XIV Street in the Lakeview area of New Orleans", Chris Granger / The Times-Picayune | The New Orleans Advocate). ProPublica states that its photos cannot be republished without specific permission, so it is not used. To use it, ask The Times-Picayune | The Advocate for permission or license it, then save it as `img/portrait-rita.jpg`.
+
+## 9. Update: students take part actively, and a debrief at the end
+
+**In every round** (after the choice, before the main screen):
+- "Why did your group choose this?" Tap all that fit: Safety, Money, Family and people, Health, What we heard, No time to think, No real choice.
+- "How much choice did you really have?" Scale from None to Full.
+- "Guess before you look at the main screen": one question with three answers, checked on the projector ("The guess: … answer"). The questions and answers come only from the round facts:
+  - Round 1: how many stayed → more than 70,000.
+  - Round 2: how much under water by Tuesday → about 80 %.
+  - Round 3: how long until the federal buses → several days.
+  - Round 4: walking over the bridge to Gretna → police turn them back.
+- **Group roles** on the person screen: reader, timekeeper, challenger. Every round reminds the challenger to argue for an option the group is not going to pick.
+
+**At the end**, four tabs instead of one long page:
+1. **Your fate:** path, ending, everything you had to deal with.
+2. **Look back:** a bar chart of how much choice the group felt in each round. Then, round by round: what you chose, your reasons, how many options were closed and why, the sudden change, your guess against the answer, and what happened in the city meanwhile.
+3. **What really happened:** the real story, "How hard was it?", "Can you come back?", and the rumours that turned out false.
+4. **Discuss:** four questions for every group plus one for the person, then "In one sentence: what decided your path?". The answer is saved only on the phone. "Show to the class" shows it full screen to read out.
+
+**Projector:** a new "Talk in your group" slide before the closing question, with the same four questions. The notes suggest about 5 minutes, then each group reads its sentence.
+
+**No verdicts:** the questions ask what limited the choices, not whether something was racist. The research question stays for the presentation.

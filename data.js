@@ -31,6 +31,25 @@ meta: {
   sources: 'Sources. U.S. House of Representatives (2006), A Failure of Initiative, pp. 106 to 114. U.S. Senate (2006), A Nation Still Unprepared, pp. 249 to 250. Associated Press via NBC News (2005, 2006) on Ethel Freeman. Lessin and Deal (2008), Trouble the Water. Horowitz (2020), Katrina, A History, chapters 4 and 5. USACE IPET (2006). Houston Chronicle (2005) on Jabbar Gibson. Money, food and strength are game values. Webster, Adelson, Hammer and Chou (2022), ProPublica, on Rita Legrand.'
 },
 
+/* Student interaction: reasons, felt choice, group roles, debrief questions (no verdicts) */
+student: {
+  roles: 'Before you start, pick three roles in your group: a reader (reads the screen aloud), a timekeeper (watches the 2 minutes) and a challenger (argues for a different option every round).',
+  reasonsAsk: 'Why did your group choose this?',
+  reasons: ['Safety', 'Money', 'Family and people', 'Health', 'What we heard', 'No time to think', 'No real choice'],
+  feltAsk: 'How much choice did you really have?',
+  felt: ['None', 'Little', 'Some', 'Much', 'Full'],
+  debrief: [
+    'Which decision felt like a real choice, and which one was made for you?',
+    'What would you have needed to choose differently: money, a car, health, information, or someone’s help?',
+    'Where did your information come from? What did you believe that turned out false?',
+    'Compare with another group: where were your options different from theirs?'
+  ],
+  answerAsk: 'In one sentence: what decided your path?',
+  answerHint: 'Write it together. You may be asked to read it to the class.',
+  guessAsk: 'Guess before you look at the main screen',
+  challenger: 'Challenger: argue for one option you are not going to pick, then decide together.'
+},
+
 /* Labels for tags shown next to constraints, cards and locked reasons */
 lens: { intentional: 'Intentional racism', structural: 'Structural racism', class: 'Classism' },
 
@@ -92,6 +111,7 @@ media: {
 rounds: [
   {
     n: 1, when: 'Saturday and Sunday, 27 to 28 August', short: '27 to 28 Aug', days: 2, nights: 1,
+    guess: { q: 'How many people do you think stayed in the city?', options: ['Under 10,000', 'About 30,000', 'More than 70,000'], answer: 2 },
     ask: 'Imagine it is Saturday, 27 August, noon. What do you do over the weekend?',
     media: 'satVideo', knowMedia: 'sat', happenedMedia: 'dome',
     ticker: [
@@ -106,6 +126,7 @@ rounds: [
   },
   {
     n: 2, when: 'Monday, 29 August', short: '29 Aug', days: 1, nights: 1,
+    guess: { q: 'How much of the city do you think will be under water by Tuesday?', options: ['A few low streets', 'About half', 'About 80 %'], answer: 2 },
     dome: ['About 10,000 people are inside when the storm hits', 'The wind tears holes in the roof. Rain pours in', 'The power fails. No air conditioning in the August heat', 'You were told to bring your own food for days'],
     ask: 'It is Monday, 29 August, early morning. The storm is coming ashore. What do you do?',
     media: 'flood', knowMedia: 'flood', happenedMedia: 'levee', sound: true,
@@ -121,6 +142,7 @@ rounds: [
   },
   {
     n: 3, when: 'Tuesday and Wednesday, 30 to 31 August', short: '30 to 31 Aug', days: 2, nights: 2,
+    guess: { q: 'How long until the promised federal buses come?', options: ['A few hours', 'About a day', 'Several days'], answer: 2 },
     dome: ['The toilets overflow. The smell is everywhere', 'Water and food come in small, irregular handouts', 'People sleep on concrete floors and plastic seats', 'Nobody tells you when or where the buses will come', 'Rumours of violence spread through the crowd'],
     ask: 'It is Tuesday, 30 August. What do you do now?',
     media: 'cgVideo', knowMedia: 'roofRescue', happenedMedia: 'rescue',
@@ -136,6 +158,7 @@ rounds: [
   },
   {
     n: 4, when: 'Thursday and Friday, 1 to 2 September', short: '1 to 2 Sep', days: 2, nights: 2,
+    guess: { q: 'What happens to people who try to walk out over the bridge to Gretna?', options: ['They reach safety', 'Police turn them back', 'The bridge is under water'], answer: 1 },
     dome: ['23,000 people are inside. No food, water or medical care', 'The lines for the buses last for hours in the heat', 'People near you are sick, old or in wheelchairs, with no care'],
     ask: 'It is Thursday, 1 September. What do you do?',
     media: 'cc', knowMedia: 'cc', happenedMedia: 'soldiers',
@@ -169,6 +192,7 @@ mayor: {
       { label: 'Job this week', value: 'Run the city’s emergency plan' }
     ]
   },
+  debrief: 'Your decisions affected about 100,000 people without cars. Which of your limits were set long before the storm began?',
   name: 'The Mayor', fullName: 'Ray Nagin', firstName: 'the Mayor', sub: 'Ray Nagin, decides for the city',
   color: '#1F5F35', seat: 'Front left', composite: false,
   intro: 'You are the mayor of New Orleans, in office since 2002 and a former cable TV executive. Only you can order a mandatory evacuation, and you run the city’s emergency plan.',
@@ -264,6 +288,7 @@ herbert: {
       { label: 'Every day', value: 'You care for her yourself' }
     ]
   },
+  debrief: 'Was staying with Ethel a choice, or the only option you had?',
   name: 'Herbert Freeman Jr.', firstName: 'Herbert Freeman Jr.', sub: 'Black, cares for his mother Ethel, 91',
   color: '#1F5F35', seat: 'Front right', composite: false,
   intro: 'You live with your mother Ethel and care for her every day. She is 91, blind, has broken both hips and is fed through a tube.',
@@ -413,6 +438,7 @@ kim: {
       { label: 'Right now', value: 'Car stolen two weeks ago. Payday is days away' }
     ]
   },
+  debrief: 'When you were left waiting or turned away, who made that decision?',
   name: 'Kimberly Roberts, 24', firstName: 'Kimberly Roberts', sub: 'Black, Lower Ninth Ward, no car',
   color: '#1F5F35', seat: 'Back left', composite: false,
   intro: 'You live in the Lower Ninth Ward with your husband Scott and want to be a rapper. Your car was stolen two weeks ago. It is the end of the month and payday is days away.',
@@ -590,6 +616,7 @@ lake: {
       { label: 'Neighbourhood', value: 'Mostly white, higher house values than the Lower Ninth' }
     ]
   },
+  debrief: 'Which of your advantages did you notice during the game, and which only at the end?',
   name: 'Rita Legrand', firstName: 'Rita Legrand', sub: 'Retiree in Lakeview, insured homeowner',
   color: '#1F5F35', seat: 'Back right', composite: false,
   intro: 'You are Rita Legrand, a retiree in Lakeview, a mostly white neighbourhood near the 17th Street Canal. You own a modest ranch house and you have insurance. In the game you also have a car with a full tank and some savings.',
