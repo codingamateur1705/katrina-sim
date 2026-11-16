@@ -23,6 +23,7 @@ meta: {
   instruction: 'Your group plays one person through the whole disaster. Pick the person you were given.',
   gameValues: 'Money, food and strength are game values, set to fit each person’s situation. They are not historical figures.',
   timerSeconds: 120,
+  how: ['Read your situation', 'Decide together within 2 minutes', 'Then look at the main screen'],
   timeUp: 'Time is up. In reality there was no time to think either.',
   waitBox: 'Now look at the main screen. What happened in the city.',
   question: 'Who really had a choice? Was it money, health, a car, or the colour of their skin?',

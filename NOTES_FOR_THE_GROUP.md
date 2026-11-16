@@ -253,3 +253,5 @@ New endings: `late_bus` (uses your slide: Superdome and Convention Center empty 
 - Closed options show a lock. Tapping one shakes it. Look back counts how often the group tapped a closed option.
 - Screens fade in step by step; the sudden change drops in after the result; money, food and strength chips flash when they change. All motion is off for people who have "reduce motion" set on their phone.
 - Projector: slides fade, photos zoom slowly, bullets appear one after another.
+
+- **Second pass:** a three-step "how it works" strip on the person screen (texts in `meta.how` in `data.js`), the ending as a dark headline with its consequences listed below, and the difficulties counter pops when it grows.

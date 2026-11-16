@@ -139,3 +139,19 @@ ol.path li::before{content:"";position:absolute;left:-20px;top:14px;width:12px;h
   .top h1{font-size:15.5px}
   .tpill .s{font-size:15px;min-width:34px}
 }
+
+/* how it works, ending layout, growing difficulties */
+.how{list-style:none;margin:0 0 12px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.how li{background:#fff;border-radius:10px;padding:10px 8px;font-size:13.5px;font-weight:600;text-align:center;box-shadow:var(--shadow);line-height:1.25}
+.how li b{display:flex;width:24px;height:24px;border-radius:50%;background:var(--dg);color:#fff;align-items:center;justify-content:center;margin:0 auto 5px;font-size:13px}
+.end{font-weight:400;font-size:17px}
+.endh{margin:0;background:#1E1E1E;color:#fff;border-radius:10px;padding:14px 16px;font-size:21px;font-weight:700;line-height:1.3;border-left:6px solid var(--r)}
+.endl{margin:10px 0 0;padding-left:20px}
+.endl li{margin:5px 0}
+@media (prefers-reduced-motion:no-preference){
+  .burden.grew summary b{animation:pop .5s .3s both}
+  #app.enter .how li{animation:up .4s var(--ease) both}
+  #app.enter .how li:nth-child(2){animation-delay:.08s}
+  #app.enter .how li:nth-child(3){animation-delay:.16s}
+  #app.enter .endh{animation:up .5s .15s var(--ease) both}
+}

@@ -220,7 +220,8 @@ function burdenHtml(open) {
   if (!b.length) return '';
   var items = b.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
   if (open) return '<div class="pad"><h4>Everything you had to deal with · ' + b.length + '</h4><ul class="burdens">' + items + '</ul></div>';
-  return '<details class="burden"><summary>Your difficulties so far <b>' + b.length + '</b></summary><ul class="burdens">' + items + '</ul></details>';
+  var grew = lastChips.burden != null && lastChips.burden < b.length; lastChips.burden = b.length;
+  return '<details class="burden' + (grew ? ' grew' : '') + '"><summary>Your difficulties so far <b>' + b.length + '</b></summary><ul class="burdens">' + items + '</ul></details>';
 }
 function domeHtml() {
   var R = D.rounds[S.r];
@@ -262,7 +263,7 @@ function renderIntro() {
   var p = P();
   var lim = p.constraints.map(function (c) { return '<li><span>' + esc(c.t) + '</span>' + tag(c.kind) + '</li>'; }).join('');
   app.innerHTML = topbar('Your person', p.composite ? 'Composite person' : '') +
-    '<div class="wrap"><div class="card">' + profileHtml() + chips() +
+    '<div class="wrap"><ol class="how">' + (D.meta.how || []).map(function (h, i) { return '<li><b>' + (i + 1) + '</b>' + esc(h) + '</li>'; }).join('') + '</ol><div class="card">' + profileHtml() + chips() +
     '<div class="intro-text">' + esc(p.intro) + '</div>' +
     '<div class="pad"><h4>Your constraints</h4><ul class="lim">' + lim + '</ul></div>' +
     '<p class="note">' + esc(D.meta.gameValues) + ' Every round you spend in the city uses up a day of food. Heat, waiting and water cost strength.</p></div>' +
@@ -306,13 +307,17 @@ function endingText() {
     var first = p.rounds[0]['*'].choices.filter(function (c) { return c.id === st.picks[0]; })[0];
     if (first && first.legacy) x.push(esc(first.legacy));
     if (st.strength <= 2) x.push(esc(L.mayorWeak));
-    return x.join(' ');
+    return x;
   }
   if (p.track.money) x.push(fill(st.money < 150 ? L.moneyLow : st.money < 1000 ? L.moneyMid : L.moneyHigh));
   if (p.track.food && (st.food <= 0 || st.stats.hungry > 0)) x.push(esc(L.hungry));
   if (st.strength <= 1) x.push(esc(L.weak));
   if (p.track.ethel) x.push(esc(st.end === 'h_wait' && st.loc === 'cc' ? L.ethelDeath : L.ethel[st.ethel]));
-  return x.join(' ');
+  return x;
+}
+function endingHtml() {
+  var x = endingText();
+  return '<p class="endh">' + x[0] + '</p>' + (x.length > 1 ? '<ul class="endl">' + x.slice(1).map(function (l) { return '<li>' + l + '</li>'; }).join('') + '</ul>' : '');
 }
 var TABS = [['fate', 'Your fate'], ['look', 'Look back'], ['real', 'What really happened'], ['talk', 'Discuss']];
 function loadAnswer() { try { return localStorage.getItem('katrina-answer-' + S.who) || ''; } catch (e) { return ''; } }
@@ -331,7 +336,7 @@ function endFate() {
   var hits = p.realPath.filter(function (v, i) { return v && st.picks[i] === v; }).length;
   var path = st.labels.map(function (l, i) { return '<li><b>Round ' + (i + 1) + '</b><span>' + esc(l) + '</span>' + (p.realPath[i] && st.picks[i] === p.realPath[i] ? '<span class="m">= real</span>' : '') + '</li>'; }).join('');
   return '<div class="pad"><h4>Your path</h4><ol class="path">' + path + '</ol></div>' +
-    '<div class="pad"><h4>Your ending</h4><div class="end">' + endingText() + '</div>' +
+    '<div class="pad"><h4>Your ending</h4><div class="end">' + endingHtml() + '</div>' +
     (e.img ? '<div class="endimg">' + figure(e.img) + '</div>' : '') +
     '<span class="match ' + (same ? 'yes' : 'no') + '">' + (same ? (partial ? 'Your path matches what is documented' : 'Your path matches what really happened') : 'Your path differs from what really happened' + (hits ? ' (same in ' + hits + ' of ' + known + ' documented rounds)' : '')) + '</span></div>' +
     burdenHtml(true);
