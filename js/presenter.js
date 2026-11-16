@@ -37,11 +37,6 @@ slides.push({ cls: 'tab', notes: 'Groups now open “Your fate” on their phone
   D.rounds.map(function (R) { return '<th>Round ' + R.n + ' · ' + esc(R.short) + '</th>'; }).join('') + '</tr></thead><tbody>' + rows + '</tbody></table>' +
   '<div class="src">Sources. House (2006), pp. 109 to 113; Senate (2006), p. 250; WWL (2005); AP via NBC News (2005, 2006); Lessin and Deal (2008); Horowitz (2020), ch. 4 and 5. Wikipedia, Chris Rose (journalist); Christian Science Monitor (2007).</div></div>' });
 
-/* debrief */
-slides.push({ cls: 'tab', notes: 'About 5 minutes. Groups open the Discuss tab on their phones, talk, and write one sentence. Then each group shows it with “Show to the class” and reads it out. No right answer: the presentation discusses the research question afterwards.', html:
-  '<div class="content"><h2>Talk in your group</h2><ol class="dql">' + D.student.debrief.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('') + '</ol>' +
-  '<div class="box" style="background:#F1ECE2;border-left-color:#1F5F35;max-width:none;color:#1E1E1E"><h3 style="color:#1F5F35">Then, one sentence per group</h3><ul><li>' + esc(D.student.answerAsk) + '</li></ul></div></div>' });
-
 /* closing */
 slides.push({ cls: 'close', notes: '', html: '<div class="content"><div class="eyebrow" style="color:#f6d3d5">Same storm, four fates</div><h1>' + esc(D.meta.question) + '</h1><div class="src">' + esc(D.meta.sources) + '</div></div>' });
 

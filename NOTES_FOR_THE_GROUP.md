@@ -276,3 +276,21 @@ The fourth person is now **Chris Rose**, columnist at The Times-Picayune, Uptown
 - **Photo:** `portrait-rose-sq.jpg` is cropped from your file; the credit line still says "Photo licensed by the group". `portrait-legrand.webp` stays on your computer but is not published.
 - **Legrand material:** her text and figures were removed from the game; section 6 of these notes keeps the source in case you want her back.
 - **Presenter table row** for round 2: "Not reported".
+
+## 13. Update: end screen without discussion, more constraints
+
+- **End screen** is now one page, in this order:
+  1. What really happened to the person, with sources.
+  2. "Why [name] may have decided this": four points, taken only from the documented constraints of each real person (`realWhy` in `data.js`).
+  3. "Your path and the real path", round by round.
+  4. Your ending, then "How hard was it?" and "Can you come back?".
+  5. "Everything you had to deal with" (folded), and the rumours that turned out false.
+  6. The closing question.
+- **Removed:** the Discuss tab with its questions, the one-sentence answer, "Show to the class", the "How much choice did you really have?" scale, and the projector's "Talk in your group" slide.
+- **More constraints** on the person screen (game details, shown in the normal list):
+  - Mayor: every hour you wait leaves less time for people without cars; on a weekend many bus drivers have already left with their families.
+  - Herbert: Ethel's feeding supplies need a fridge and power; you are the only one who can lift her.
+  - Kimberly: no bank card, only cash; the bus station is far across town.
+  - Chris Rose: three children to feed, calm and keep in school; the paper expects a column every day.
+- **Start screen** now says: "These are real people. At the end you see what really happened to them. Only money, food and strength are game values."
+- **Photo captions** "Photo licensed by the group" were removed; the photos stay. CREDITS.md still lists them.

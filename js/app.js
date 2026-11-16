@@ -134,7 +134,7 @@ function back() {
   S = hist.pop();
   go();
 }
-function finish() { push(); roundEnd(D.rounds.length - 1); S.phase = 'end'; S.tab = 'fate'; go(); }
+function finish() { push(); roundEnd(D.rounds.length - 1); S.phase = 'end'; go(); }
 function choose(k) {
   var p = D.people[k];
   hist = []; timers = {}; lastChips = {};
@@ -228,11 +228,6 @@ function domeHtml() {
   if (S.st.sceneLoc !== 'dome' || !R.dome) return '';
   return '<div class="dome"><span class="what">Inside the Superdome</span><ul>' + R.dome.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>';
 }
-function askHtml() {
-  var Q = D.student, f = S.st.felt[S.r];
-  return '<div class="ask"><h4>' + esc(Q.feltAsk) + '</h4><div class="scale">' +
-    Q.felt.map(function (l, i) { return '<button class="sbtn' + (f === i ? ' on' : '') + '" data-felt="' + i + '"><b>' + i + '</b>' + esc(l) + '</button>'; }).join('') + '</div></div>';
-}
 function leaveHtml() {
   var p = P(); if (!p.leaving) return '';
   return '<div class="leave"><span class="what">Leaving is not the end</span><ul>' + p.leaving.map(function (x) { return '<li>' + fill(x.t) + '</li>'; }).join('') + '</ul></div>';
@@ -291,7 +286,7 @@ function renderRound() {
     (lg.surprise ? '<div class="surprise"><span class="what">Sudden change · nobody could plan for this</span>' + fill(lg.surprise) + '</div>' : '') +
     (lg.delta.length ? '<div class="delta">' + lg.delta.map(function (d) { return '<span' + (/^\+/.test(d) ? ' class="up"' : '') + '>' + esc(d) + '</span>'; }).join('') + '</div>' : '') +
     (lg.pull ? '<div class="pull"><span class="what">Reality check' + '' + '</span>' + fill(lg.pull.t) + '</div>' : '') +
-    (lg.leaving ? leaveHtml() : '') + (lg.img ? figure(lg.img) : '') + '</div>' + askHtml() + '<div class="wait">' + esc(D.meta.waitBox) + '</div>' : '';
+    (lg.leaving ? leaveHtml() : '') + (lg.img ? figure(lg.img) : '') + '</div>' + '<div class="wait">' + esc(D.meta.waitBox) + '</div>' : '';
   var last = S.r === D.rounds.length - 1;
   app.innerHTML = topbar(p.name, 'Round ' + R.n + ' of ' + D.rounds.length + (p.composite ? ' · Composite' : '')) + tickerHtml(R) + heroHtml(R) +
     '<div class="wrap"><div class="card">' + chips() + burdenHtml(false) + '<div class="sit">' + fill(sc.s.sit) + '</div>' + domeHtml() + hear + card + timer +
@@ -319,44 +314,22 @@ function endingHtml() {
   var x = endingText();
   return '<p class="endh">' + x[0] + '</p>' + (x.length > 1 ? '<ul class="endl">' + x.slice(1).map(function (l) { return '<li>' + l + '</li>'; }).join('') + '</ul>' : '');
 }
-var TABS = [['fate', 'Your fate'], ['look', 'Look back'], ['real', 'What really happened'], ['talk', 'Discuss']];
-function loadAnswer() { try { return localStorage.getItem('katrina-answer-' + S.who) || ''; } catch (e) { return ''; } }
-function saveAnswer(v) { S.st.answer = v; try { localStorage.setItem('katrina-answer-' + S.who, v); } catch (e) {} }
-function feltChart() {
-  var Q = D.student, st = S.st;
-  return '<div class="felt">' + D.rounds.map(function (R, i) {
-    var f = st.felt[i], h = f == null ? 0 : (f + 1) * 20;
-    return '<div class="fcol"><div class="fbar"><i style="height:' + h + '%"></i></div><b>' + (f == null ? '–' : esc(Q.felt[f])) + '</b><small>Round ' + R.n + '</small></div>';
-  }).join('') + '</div>';
+function miniHead() {
+  var p = P(), pr = p.profile || {}, m = pr.portrait ? media(pr.portrait) : null;
+  return '<div class="mini" style="background:' + p.color + '">' + (m ? '<img src="' + esc(m.src) + '" alt="">' : '<span class="mi">' + esc(pr.initials || '') + '</span>') + '<div><b>' + esc(p.name) + '</b><small>' + esc(p.sub) + '</small></div></div>';
 }
-function endFate() {
-  var p = P(), st = S.st, e = D.endings[st.end] || {};
+function renderEnd() {
+  var p = P(), st = S.st, e = D.endings[st.end] || {}, who = p.firstName || p.name;
   var known = p.realPath.filter(function (v) { return v; }).length, partial = known < p.realPath.length;
   var same = p.realPath.every(function (v, i) { return !v || st.picks[i] === v; });
   var hits = p.realPath.filter(function (v, i) { return v && st.picks[i] === v; }).length;
-  var path = st.labels.map(function (l, i) { return '<li><b>Round ' + (i + 1) + '</b><span>' + esc(l) + '</span>' + (p.realPath[i] && st.picks[i] === p.realPath[i] ? '<span class="m">= real</span>' : '') + '</li>'; }).join('');
-  return '<div class="pad"><h4>Your path</h4><ol class="path">' + path + '</ol></div>' +
-    '<div class="pad"><h4>Your ending</h4><div class="end">' + endingHtml() + '</div>' +
-    (e.img ? '<div class="endimg">' + figure(e.img) + '</div>' : '') +
-    '<span class="match ' + (same ? 'yes' : 'no') + '">' + (same ? (partial ? 'Your path matches what is documented' : 'Your path matches what really happened') : 'Your path differs from what really happened' + (hits ? ' (same in ' + hits + ' of ' + known + ' documented rounds)' : '')) + '</span></div>' +
-    burdenHtml(true);
-}
-function endLook() {
-  var st = S.st, Q = D.student;
-  var rows = st.labels.map(function (l, i) {
-    var R = D.rounds[i], lg = st.log[i] || {}, rs = st.reasons[i] || [], f = st.felt[i];
-    var closed = (lg.closed || []).map(function (c) { return '<li>' + esc(c.t) + ' <em>' + esc(c.why) + '</em></li>'; }).join('');
-    return '<div class="lb"><div class="lbh">Round ' + R.n + ' · ' + esc(R.short) + '</div>' +
-      '<p class="lbc">You chose: <b>' + esc(l) + '</b></p>' +
-      '<p class="lbm">Choice you felt: ' + (f == null ? '–' : esc(Q.felt[f])) + '</p>' +
-      (closed ? '<div class="lbx"><span>Closed to you (' + (lg.closed.length) + ' of ' + lg.total + ')</span><ul>' + closed + '</ul></div>' : '<div class="lbx"><span>Every option was open to you this round</span></div>') +
-      (lg.surprise ? '<div class="lbs">Sudden change: ' + fill(lg.surprise) + '</div>' : '') +
-      '<div class="lbk"><span>Meanwhile in the city</span><ul>' + R.happened.slice(0, 2).map(function (h) { return '<li>' + esc(h) + '</li>'; }).join('') + '</ul></div></div>';
+  var why = (p.realWhy || []).map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('');
+  var cmp = st.labels.map(function (l, i) {
+    var R = D.rounds[i], hit = p.realPath[i] && st.picks[i] === p.realPath[i];
+    return '<div class="cmp' + (hit ? ' hit' : '') + '"><div class="ch">Round ' + R.n + ' · ' + esc(R.short) + '</div>' +
+      '<div class="cy"><span>You</span>' + esc(l) + '</div><div class="cr"><span>' + esc(S.who === 'mayor' ? 'Nagin' : who.split(' ')[0]) + '</span>' + esc(p.realRows[i] || '–') + '</div></div>';
   }).join('');
-  return '<div class="pad"><h4>How much choice did you feel?</h4>' + feltChart() + (st.knocks ? '<p class="knocks">You tapped a closed option <b>' + st.knocks + '</b> ' + (st.knocks === 1 ? 'time' : 'times') + '. It stayed closed.</p>' : '') + '</div><div class="pad"><h4>Your decisions, round by round</h4>' + rows + '</div>';
-}
-function endReal() {
-  var p = P(), st = S.st, e = D.endings[st.end] || {}, g = [];
+  var g = [];
   if (S.who === 'mayor') {
     g.push(['Nights with little sleep', st.stats.nights]);
     g.push(['Strength at the end', D.strengthLabels[st.strength]]);
@@ -372,39 +345,20 @@ function endReal() {
   var mine = g.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('');
   var real = p.realStats.map(function (r) { return '<dt>' + esc(r.label) + '</dt><dd>' + esc(r.value) + '</dd>'; }).join('');
   var rum = Object.keys(st.seenFalse).map(function (k) { return '<li><span class="tag rumour">Rumour</span> <q>' + esc(k.replace(/^[^:]+:\s*/, '').replace(/[“”]/g, '')) + '</q><div>' + esc(st.seenFalse[k]) + '</div></li>'; }).join('');
-  var pulls = st.pulls.map(function (x) { return '<li><b>Round ' + (x.r + 1) + '</b><span>' + fill(x.t) + '</span></li>'; }).join('');
-  return '<div class="pad"><h4>What really happened to ' + esc(p.firstName || p.name) + '</h4></div><div class="realbox">' + esc(p.real) + (p.realSource ? '<small class="rsrc">' + esc(p.realSource) + '</small>' : '') + '</div>' +
+  var b = st.burdens || [];
+  app.innerHTML = topbar('Your fate', p.name) +
+    '<div class="wrap"><div class="card">' + miniHead() + chips() +
+    '<div class="pad"><h4>What really happened to ' + esc(who) + '</h4></div><div class="realbox">' + esc(p.real) + (p.realSource ? '<small class="rsrc">' + esc(p.realSource) + '</small>' : '') + '</div>' +
+    (why ? '<div class="pad"><h4>Why ' + esc(who) + ' may have decided this</h4><ul class="why">' + why + '</ul></div>' : '') +
+    '<div class="pad"><h4>Your path and the real path</h4>' + cmp + '</div>' +
+    '<div class="pad"><h4>Your ending</h4><div class="end">' + endingHtml() + '</div>' + (e.img ? '<div class="endimg">' + figure(e.img) + '</div>' : '') +
+    '<span class="match ' + (same ? 'yes' : 'no') + '">' + (same ? (partial ? 'Your path matches what is documented' : 'Your path matches what really happened') : 'Your path differs from what really happened' + (hits ? ' (same in ' + hits + ' of ' + known + ' documented rounds)' : '')) + '</span></div>' +
     '<div class="pad"><h4>How hard was it?</h4><div class="hard"><div class="col"><h4>In your game</h4><dl>' + mine + '</dl></div><div class="col"><h4>In reality</h4><dl>' + real + '</dl></div></div></div>' +
     (p.returning ? '<div class="pad"><h4>Can you come back?</h4><ul class="burdens back">' + p.returning.map(function (x) { return '<li>' + fill(x.t) + '</li>'; }).join('') + '</ul>' + (p.returnFact ? '<p class="retfact">' + esc(p.returnFact) + '</p>' : '') + '</div>' : '') +
-    (pulls ? '<div class="pad"><h4>What pushed against your choices</h4><ul class="pulls">' + pulls + '</ul></div>' : '') +
-    (rum ? '<div class="pad"><h4>What you heard that turned out false</h4><ul class="rumours">' + rum + '</ul></div>' : '');
-}
-function endTalk() {
-  var p = P(), Q = D.student, qs = Q.debrief.concat(p.debrief ? [p.debrief] : []);
-  var ans = S.st.answer != null ? S.st.answer : loadAnswer();
-  return '<div class="pad"><h4>Talk in your group</h4><ol class="dq">' + qs.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('') + '</ol></div>' +
-    '<div class="pad"><h4>' + esc(Q.answerAsk) + '</h4><textarea id="answer" rows="3" maxlength="240" placeholder="Our path was decided by …">' + esc(ans) + '</textarea><p class="note" style="padding:4px 0 0">' + esc(Q.answerHint) + ' Saved only on this device.</p>' +
-    '<button class="btn" id="b-show">Show to the class</button></div>' +
-    '<div class="q">' + esc(D.meta.question) + '</div><p class="sources" style="padding:0 16px 16px">' + esc(D.meta.sources) + '</p>';
-}
-function miniHead() {
-  var p = P(), pr = p.profile || {}, m = pr.portrait ? media(pr.portrait) : null;
-  return '<div class="mini" style="background:' + p.color + '">' + (m ? '<img src="' + esc(m.src) + '" alt="">' : '<span class="mi">' + esc(pr.initials || '') + '</span>') + '<div><b>' + esc(p.name) + '</b><small>' + esc(p.sub) + '</small></div></div>';
-}
-function renderEnd() {
-  var p = P(), tab = S.tab || 'fate', k = TABS.map(function (x) { return x[0]; }).indexOf(tab);
-  var tabs = '<div class="tabs" role="tablist">' + TABS.map(function (x, i) { return '<button role="tab" data-tab="' + x[0] + '" class="' + (x[0] === tab ? 'on' : '') + '" aria-selected="' + (x[0] === tab) + '"><b>' + (i + 1) + '</b>' + esc(x[1]) + '</button>'; }).join('') + '</div>';
-  var body = tab === 'look' ? endLook() : tab === 'real' ? endReal() : tab === 'talk' ? endTalk() : endFate();
-  var last = k === TABS.length - 1;
-  app.innerHTML = topbar('Your fate', p.name) +
-    '<div class="wrap"><div class="card">' + miniHead() + chips() + tabs + body + '</div></div>' +
-    nav('<button class="btn ghost" id="b-back">‹ Back</button>', last ? '<button class="btn grow" id="b-again">Play again</button>' : '<button class="btn grow" id="b-tab" data-next="' + TABS[k + 1][0] + '">' + esc(TABS[k + 1][1]) + ' ›</button>');
-}
-function showToClass() {
-  var p = P(), ans = (S.st.answer != null ? S.st.answer : loadAnswer()).trim();
-  var o = document.createElement('div'); o.className = 'overlay'; o.setAttribute('role', 'dialog');
-  o.innerHTML = '<div class="ov"><span class="what">' + esc(p.name) + '</span><p>' + esc(ans || '(No answer written yet)') + '</p>' + feltChart() + '<button class="btn" id="b-close">Close</button></div>';
-  document.body.appendChild(o);
+    (b.length ? '<div class="pad"><details class="burden all"><summary>Everything you had to deal with <b>' + b.length + '</b></summary><ul class="burdens">' + b.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></details></div>' : '') +
+    (rum ? '<div class="pad"><h4>What you heard that turned out false</h4><ul class="rumours">' + rum + '</ul></div>' : '') +
+    '</div><div class="q">' + esc(D.meta.question) + '</div><p class="sources">' + esc(D.meta.sources) + '</p></div>' +
+    nav('<button class="btn ghost" id="b-back">‹ Back</button>', '<button class="btn grow" id="b-again">Play again</button>');
 }
 function render() {
   stopTimer();
@@ -417,18 +371,12 @@ function render() {
 
 /* ---------- events ---------- */
 document.addEventListener('click', function (ev) {
-  if (ev.target.id === 'b-close') { var o = document.querySelector('.overlay'); if (o) o.remove(); return; }
 });
-app.addEventListener('input', function (ev) { if (ev.target.id === 'answer') saveAnswer(ev.target.value); });
 app.addEventListener('click', function (ev) {
   var b = ev.target.closest('button'); if (!b || b.disabled) return;
   if (b.dataset.who) return choose(b.dataset.who);
   if (b.dataset.id) { if (b.classList.contains('locked')) return knock(b); return pick(b.dataset.id); }
   if (b.dataset.felt) { S.st.felt[S.r] = +b.dataset.felt; b.parentNode.querySelectorAll('.sbtn').forEach(function (x) { x.classList.toggle('on', x === b); }); return; }
-  if (b.dataset.tab) { S.tab = b.dataset.tab; go(); return; }
-  if (b.id === 'b-tab') { S.tab = b.dataset.next; go(); return; }
-  if (b.id === 'b-show') return showToClass();
-  if (b.id === 'b-back' && S.phase === 'end' && S.tab && S.tab !== 'fate') { S.tab = TABS[Math.max(0, TABS.map(function (x) { return x[0]; }).indexOf(S.tab) - 1)][0]; go(); return; }
   if (b.id === 'b-back') { if (S.phase === 'intro') return reset(); return back(); }
   if (b.id === 'b-next') { if (S.phase === 'intro') return enterRound(0); if (S.r === D.rounds.length - 1) return finish(); return enterRound(S.r + 1); }
   if (b.id === 'b-again') return reset();

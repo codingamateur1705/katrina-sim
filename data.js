@@ -187,6 +187,7 @@ mayor: {
     ]
   },
   debrief: 'Your decisions affected about 100,000 people without cars. Which of your limits were set long before the storm began?',
+  realWhy: ['He could not force anyone to leave', 'City lawyers feared lawsuits if businesses were closed', 'Last year everyone fled Hurricane Ivan, and it missed the city', 'No shelter outside the city would take people'],
   name: 'The Mayor', fullName: 'Ray Nagin', firstName: 'the Mayor', sub: 'Ray Nagin, decides for the city',
   color: '#1F5F35', seat: 'Front left', composite: false,
   intro: 'You are the mayor of New Orleans, in office since 2002 and a former cable TV executive. Only you can order a mandatory evacuation, and you run the city’s emergency plan.',
@@ -200,6 +201,8 @@ mayor: {
     { t: 'No shelter outside the city will take people', kind: 'real' },
     { t: 'Closing the city costs businesses millions, and your lawyers fear lawsuits', kind: 'real' },
     { t: 'Last year everyone fled Hurricane Ivan, and it missed the city', kind: 'real' },
+    { t: 'Every hour you wait leaves less time for people without cars', kind: 'game' },
+    { t: 'On a weekend many bus drivers have already left with their own families', kind: 'game' },
     { t: 'It is the end of the month. Many residents have no money left for gas', kind: 'real' },
     { t: 'In July 2004 the Hurricane Pam exercise expected 100,000 people without cars', kind: 'real' },
     { t: 'The state plan says to wait until about 30 hours before landfall before ordering a mandatory evacuation', kind: 'real' },
@@ -283,6 +286,7 @@ herbert: {
     ]
   },
   debrief: 'Was staying with Ethel a choice, or the only option you had?',
+  realWhy: ['He judged it too dangerous to move his mother', 'No car that could carry her wheelchair', 'No relatives outside the city', 'A police officer told him help would come in an hour or two'],
   name: 'Herbert Freeman Jr.', firstName: 'Herbert Freeman Jr.', sub: 'Black, cares for his mother Ethel, 91',
   color: '#1F5F35', seat: 'Front right', composite: false,
   intro: 'You live with your mother Ethel and care for her every day. She is 91, blind, has broken both hips and is fed through a tube.',
@@ -294,6 +298,8 @@ herbert: {
     { t: 'Ethel cannot sit in a car for hours', kind: 'real' },
     { t: 'No car that can carry her wheelchair', kind: 'real' },
     { t: 'No relatives outside the city', kind: 'real' },
+    { t: 'Ethel’s feeding supplies need a fridge and power', kind: 'game' },
+    { t: 'You are the only one who can lift her', kind: 'game' },
     { t: '$150 to last the rest of the month', kind: 'game' },
     { t: 'Ethel’s feeding supplies last 2 days', kind: 'game' },
     { t: 'Ethel’s feeding pump needs electricity', kind: 'game' },
@@ -435,6 +441,7 @@ kim: {
     ]
   },
   debrief: 'When you were left waiting or turned away, who made that decision?',
+  realWhy: ['The rental company refused her a car', 'No car of her own, little money until payday', 'All her family lived in the Ninth Ward', 'After two days with no help, they went to the Navy base for food and water'],
   name: 'Kimberly Roberts, 24', firstName: 'Kimberly Roberts', sub: 'Black, Lower Ninth Ward, no car',
   color: '#1F5F35', seat: 'Back left', composite: false,
   intro: 'You live in the Lower Ninth Ward with your husband Scott and want to be a rapper. Your car was stolen two weeks ago. It is the end of the month and payday is days away.',
@@ -445,6 +452,8 @@ kim: {
     { t: 'No car. Yours was stolen two weeks ago', kind: 'real' },
     { t: '$60 until payday, no credit card', kind: 'game' },
     { t: 'All your family lives in the Ninth Ward', kind: 'real' },
+    { t: 'You have no bank card, only cash', kind: 'game' },
+    { t: 'The bus station is far across town', kind: 'game' },
     { t: 'Food at home for 1 day', kind: 'game' },
     { t: 'Your phone has no credit left', kind: 'game' },
     { t: 'Your neighbourhood is 98 % Black and bordered by water on three sides', kind: 'real' },
@@ -621,6 +630,7 @@ rose: {
       { label: 'Before', value: 'You mostly write light pieces about celebrities and entertainment' }
     ]
   },
+  realWhy: ['He had a car and could take his family away in time', 'His house Uptown made it through the storm', 'His children needed a school, so the family moved to Maryland for the fall', 'His job was to report on the city'],
   name: 'Chris Rose', firstName: 'Chris Rose', sub: 'White, newspaper columnist, Uptown',
   color: '#1F5F35', seat: 'Back right', composite: false,
   intro: 'You are Chris Rose, a columnist at The Times-Picayune. You live Uptown with your wife and your three children. Before Katrina you mostly write light pieces about celebrities and entertainment.',
@@ -630,6 +640,8 @@ rose: {
   constraints: [
     { t: 'You have a wife and three children', kind: 'real' },
     { t: 'Your job is to write about the city', kind: 'real' },
+    { t: 'Three children need to be fed, kept calm and kept in school', kind: 'game' },
+    { t: 'Your paper expects a column from you every day', kind: 'game' },
     { t: 'Your house is Uptown, on higher ground than much of the city', kind: 'game' },
     { t: 'You have a car, some savings and a steady job', kind: 'game' },
     { t: 'Your editor needs people to cover the storm', kind: 'game' }
